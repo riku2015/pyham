@@ -29,8 +29,8 @@ class HtmlWindow(wx.html.HtmlWindow):
 class AboutBox(wx.Dialog):
     def __init__(self):
         wx.Dialog.__init__(self, None, -1, "About",
-			# For wx 2.8:
-				# style=wx.DEFAULT_DIALOG_STYLE|wx.THICK_FRAME|wx.RESIZE_BORDER|wx.TAB_TRAVERSAL)
+		# For wx 2.8:
+		# style=wx.DEFAULT_DIALOG_STYLE|wx.THICK_FRAME|wx.RESIZE_BORDER|wx.TAB_TRAVERSAL)
             style=wx.DEFAULT_DIALOG_STYLE|wx.TAB_TRAVERSAL|wx.RESIZE_BORDER)
         hwin = HtmlWindow(self, -1, size=(400,200))
         vers = {}
@@ -97,12 +97,14 @@ top.Show()
 app.MainLoop()
 
 # TODO:
-# - Tangetti-nappi
-# - Record-toiminnot, file save/load (.wav, .mp3 etc.)
-# - Verkkohumppa
-# - Huonevalinta
-# - Auto reconnect -rasti
-# - serveri, portti -tekstikentat ja esivalinnat-valinta
-# - Mic + speaker volume
+# - Button to talk (ptt)
+# - File recorder/player (.wav, .mp3 etc.)
+# - Networking
+# - Room/Channel selection
+# - Checkbox for Auto reconnect
+# - Textfields for Server, Port and setting presets.
+# - Mic and speaker volume button, VU meters, scope graph, spectrogram
+# - VoIP protocol
 # - eQSO protocol
 # - Echolink protocol
+# - GUI with wxFormBuilder
