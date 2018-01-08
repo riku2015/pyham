@@ -62,6 +62,8 @@ class MyFrame1 ( wx.Frame ):
 		gSizer6 = wx.GridSizer( 0, 1, 0, 0 )
 		
 		self.m_buttonPTT = wx.Button( self, wx.ID_ANY, u"PTT", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_buttonPTT.SetFont( wx.Font( 16, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
 		gSizer6.Add( self.m_buttonPTT, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		gSizerVU = wx.GridSizer( 0, 1, 0, 0 )
