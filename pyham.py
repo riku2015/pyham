@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# pyradio ver. 0.001
+# pyham ver. 0.001
 programName = "pyham"
 programVersion = "0.001"
 
