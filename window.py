@@ -19,9 +19,13 @@ class MyFrame1 ( wx.Frame ):
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 517,466 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		# self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
-		gSizer3 = wx.GridSizer( 2, 1, 0, 0 )
+		gSizer3 = wx.GridSizer( 3, 1, 0, 0 )
+		
+		self.m_listbook1 = wx.Listbook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LB_DEFAULT )
+		
+		gSizer3.Add( self.m_listbook1, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		bSizer1 = wx.BoxSizer( wx.VERTICAL )
 		
