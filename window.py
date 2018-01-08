@@ -17,7 +17,7 @@ import wx.xrc
 class MyFrame1 ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 517,509 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 702,509 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -33,24 +33,34 @@ class MyFrame1 ( wx.Frame ):
 		
 		gSizer1 = wx.GridSizer( 0, 2, 0, 0 )
 		
+		self.m_staticText3 = wx.StaticText( self, wx.ID_ANY, u"Preset", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText3.Wrap( -1 )
+		gSizer1.Add( self.m_staticText3, 0, wx.ALL, 5 )
+		
+		m_comboBox1Choices = []
+		self.m_comboBox1 = wx.ComboBox( self, wx.ID_ANY, u"eqso.titanix.net", wx.DefaultPosition, wx.DefaultSize, m_comboBox1Choices, 0 )
+		gSizer1.Add( self.m_comboBox1, 0, wx.ALL|wx.EXPAND, 5 )
+		
 		self.m_staticText1 = wx.StaticText( self, wx.ID_ANY, u"Server", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText1.Wrap( -1 )
 		gSizer1.Add( self.m_staticText1, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		gSizer1.Add( self.m_textCtrl1, 0, wx.ALL, 5 )
+		self.m_textCtrl1 = wx.TextCtrl( self, wx.ID_ANY, u"eqso.titanix.net", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gSizer1.Add( self.m_textCtrl1, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_staticText2 = wx.StaticText( self, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText2.Wrap( -1 )
 		gSizer1.Add( self.m_staticText2, 0, wx.ALL, 5 )
 		
-		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		gSizer1.Add( self.m_textCtrl2, 0, wx.ALL, 5 )
+		self.m_textCtrl2 = wx.TextCtrl( self, wx.ID_ANY, u"5000", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gSizer1.Add( self.m_textCtrl2, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_buttonConnect = wx.Button( self, wx.ID_ANY, u"Connect", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gSizer1.Add( self.m_buttonConnect, 0, wx.ALL, 5 )
 		
 		self.m_buttonDisconnect = wx.Button( self, wx.ID_ANY, u"Disconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_buttonDisconnect.Enable( False )
+		
 		gSizer1.Add( self.m_buttonDisconnect, 0, wx.ALL, 5 )
 		
 		self.m_checkBox1 = wx.CheckBox( self, wx.ID_ANY, u"Reconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -109,14 +119,6 @@ class MyFrame1 ( wx.Frame ):
 		
 		gSizer8 = wx.GridSizer( 0, 1, 0, 0 )
 		
-		self.m_staticText3 = wx.StaticText( self, wx.ID_ANY, u"Preset", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText3.Wrap( -1 )
-		gSizer8.Add( self.m_staticText3, 0, wx.ALL, 5 )
-		
-		m_listBox1Choices = []
-		self.m_listBox1 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox1Choices, 0 )
-		gSizer8.Add( self.m_listBox1, 0, wx.ALL|wx.EXPAND, 5 )
-		
 		self.m_staticText4 = wx.StaticText( self, wx.ID_ANY, u"City / Comment", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText4.Wrap( -1 )
 		gSizer8.Add( self.m_staticText4, 0, wx.ALL, 5 )
@@ -128,9 +130,9 @@ class MyFrame1 ( wx.Frame ):
 		self.m_staticText7.Wrap( -1 )
 		gSizer8.Add( self.m_staticText7, 0, wx.ALL, 5 )
 		
-		m_listBox2Choices = []
-		self.m_listBox2 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox2Choices, 0 )
-		gSizer8.Add( self.m_listBox2, 0, wx.ALL|wx.EXPAND, 5 )
+		m_comboBox2Choices = []
+		self.m_comboBox2 = wx.ComboBox( self, wx.ID_ANY, u"FINLAND", wx.DefaultPosition, wx.DefaultSize, m_comboBox2Choices, 0 )
+		gSizer8.Add( self.m_comboBox2, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_button11 = wx.Button( self, wx.ID_ANY, u"Send", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gSizer8.Add( self.m_button11, 0, wx.ALL, 5 )
@@ -143,8 +145,16 @@ class MyFrame1 ( wx.Frame ):
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.m_buttonConnect.Bind( wx.EVT_BUTTON, self.buttonConnectClicked )
 	
 	def __del__( self ):
 		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def buttonConnectClicked( self, event ):
+		event.Skip()
 	
 
