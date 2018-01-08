@@ -1,4 +1,5 @@
 # pyham
 HAM Radio with Python
-.
-testi commit
+
+How to run:
+python pyham.py

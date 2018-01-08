@@ -17,19 +17,19 @@ import wx.xrc
 class MyFrame1 ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 517,466 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 517,509 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
 		gSizer3 = wx.GridSizer( 3, 1, 0, 0 )
 		
-		self.m_listbook1 = wx.Listbook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LB_DEFAULT )
-		
-		gSizer3.Add( self.m_listbook1, 1, wx.ALL|wx.EXPAND, 5 )
+		m_listBox3Choices = []
+		self.m_listBox3 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox3Choices, 0 )
+		gSizer3.Add( self.m_listBox3, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		bSizer1 = wx.BoxSizer( wx.VERTICAL )
 		
-		gSizer2 = wx.GridSizer( 0, 2, 0, 0 )
+		gSizer2 = wx.GridSizer( 1, 2, 0, 0 )
 		
 		gSizer1 = wx.GridSizer( 0, 2, 0, 0 )
 		
@@ -66,27 +66,32 @@ class MyFrame1 ( wx.Frame ):
 		
 		gSizerVU = wx.GridSizer( 0, 1, 0, 0 )
 		
+		gSizer7 = wx.GridSizer( 3, 2, 0, 0 )
+		
 		self.m_staticText8 = wx.StaticText( self, wx.ID_ANY, u"Speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText8.Wrap( -1 )
-		gSizerVU.Add( self.m_staticText8, 0, wx.ALL, 5 )
-		
-		self.m_gauge11 = wx.Gauge( self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
-		self.m_gauge11.SetValue( 50 ) 
-		gSizerVU.Add( self.m_gauge11, 0, wx.ALL|wx.EXPAND, 5 )
-		
-		self.m_slider1 = wx.Slider( self, wx.ID_ANY, 50, 0, 100, wx.DefaultPosition, wx.Size( -1,-1 ), wx.SL_HORIZONTAL )
-		gSizerVU.Add( self.m_slider1, 0, wx.ALL|wx.EXPAND, 5 )
+		gSizer7.Add( self.m_staticText8, 0, wx.ALL, 5 )
 		
 		self.m_staticText9 = wx.StaticText( self, wx.ID_ANY, u"Mic", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText9.Wrap( -1 )
-		gSizerVU.Add( self.m_staticText9, 0, wx.ALL, 5 )
+		gSizer7.Add( self.m_staticText9, 0, wx.ALL, 5 )
+		
+		self.m_gauge11 = wx.Gauge( self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+		self.m_gauge11.SetValue( 50 ) 
+		gSizer7.Add( self.m_gauge11, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_gauge1 = wx.Gauge( self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
 		self.m_gauge1.SetValue( 50 ) 
-		gSizerVU.Add( self.m_gauge1, 0, wx.ALL|wx.EXPAND, 5 )
+		gSizer7.Add( self.m_gauge1, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_slider1 = wx.Slider( self, wx.ID_ANY, 50, 0, 100, wx.DefaultPosition, wx.Size( -1,-1 ), wx.SL_HORIZONTAL )
+		gSizer7.Add( self.m_slider1, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_slider2 = wx.Slider( self, wx.ID_ANY, 50, 0, 100, wx.DefaultPosition, wx.DefaultSize, wx.SL_HORIZONTAL )
-		gSizerVU.Add( self.m_slider2, 0, wx.ALL|wx.EXPAND, 5 )
+		gSizer7.Add( self.m_slider2, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		gSizerVU.Add( gSizer7, 1, wx.EXPAND, 5 )
 		
 		
 		gSizer6.Add( gSizerVU, 1, wx.EXPAND, 5 )
@@ -136,20 +141,6 @@ class MyFrame1 ( wx.Frame ):
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
-	
-	def __del__( self ):
-		pass
-	
-
-###########################################################################
-## Class MyMenuBar3
-###########################################################################
-
-class MyMenuBar3 ( wx.MenuBar ):
-	
-	def __init__( self ):
-		wx.MenuBar.__init__ ( self, style = 0 )
-		
 	
 	def __del__( self ):
 		pass
