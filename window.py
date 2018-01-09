@@ -19,7 +19,7 @@ class MyFrame1 ( wx.Frame ):
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"pyham", pos = wx.DefaultPosition, size = wx.Size( 702,509 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
 		gSizer3 = wx.GridSizer( 3, 1, 0, 0 )
 		
@@ -148,6 +148,7 @@ class MyFrame1 ( wx.Frame ):
 		
 		# Connect Events
 		self.m_buttonConnect.Bind( wx.EVT_BUTTON, self.buttonConnectClicked )
+		self.m_buttonPTT.Bind( wx.EVT_BUTTON, self.ptt_push )
 	
 	def __del__( self ):
 		pass
@@ -155,6 +156,9 @@ class MyFrame1 ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def buttonConnectClicked( self, event ):
+		event.Skip()
+	
+	def ptt_push( self, event ):
 		event.Skip()
 	
 

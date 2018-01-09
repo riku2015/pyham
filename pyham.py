@@ -16,8 +16,21 @@ from window import MyFrame1
 	# from tests import AboutBox
 	# from tests import Frame
 
+class MainFrame(MyFrame1):
+    #constructor
+    def __init__(self,parent):
+        #initialize parent class
+        MyFrame1.__init__(self,parent)
+ 
+    def ptt_push(self,event):
+        try:
+			print >>sys.stderr, "ptt painettu"
+        except Exception:
+            print 'error'
+
+	
 app = wx.App(False)   # Error messages go to popup window
-main = MyFrame1(parent=None)
+main = MainFrame(None)
 main.Show()
 app.MainLoop()
 
