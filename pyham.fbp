@@ -42,7 +42,7 @@
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
             <property name="minimum_size"></property>
-            <property name="name">MyFrame1</property>
+            <property name="name">FrameMain</property>
             <property name="pos"></property>
             <property name="size">702,509</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
@@ -516,7 +516,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">m_textCtrl1</property>
+                                                <property name="name">m_textCtrlServer</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -690,7 +690,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">m_textCtrl2</property>
+                                                <property name="name">m_textCtrlPort</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -803,7 +803,7 @@
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
-                                                <event name="OnButtonClick">buttonConnectClicked</event>
+                                                <event name="OnButtonClick">click_connect</event>
                                                 <event name="OnChar"></event>
                                                 <event name="OnEnterWindow"></event>
                                                 <event name="OnEraseBackground"></event>
@@ -891,7 +891,7 @@
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
-                                                <event name="OnButtonClick"></event>
+                                                <event name="OnButtonClick">click_disconnect</event>
                                                 <event name="OnChar"></event>
                                                 <event name="OnEnterWindow"></event>
                                                 <event name="OnEraseBackground"></event>
@@ -958,7 +958,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">m_checkBox1</property>
+                                                <property name="name">m_checkBoxReconnect</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -1081,7 +1081,7 @@
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
-                                                <event name="OnButtonClick">ptt_push</event>
+                                                <event name="OnButtonClick">click_ptt</event>
                                                 <event name="OnChar"></event>
                                                 <event name="OnEnterWindow"></event>
                                                 <event name="OnEraseBackground"></event>
@@ -1171,7 +1171,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_staticText8</property>
+                                                                <property name="name">m_staticTextSpeaker</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -1254,7 +1254,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_staticText9</property>
+                                                                <property name="name">m_staticTextMic</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -1336,7 +1336,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_gauge11</property>
+                                                                <property name="name">m_gaugeSpeaker</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -1423,7 +1423,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_gauge1</property>
+                                                                <property name="name">m_gaugeMic</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -1512,7 +1512,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_slider1</property>
+                                                                <property name="name">m_sliderSpeaker</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -1620,7 +1620,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_slider2</property>
+                                                                <property name="name">m_sliderMic</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
