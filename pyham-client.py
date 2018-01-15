@@ -12,9 +12,16 @@ import pyaudio
 #import sounddevice as sd
 
 from pyham import log
+from pyham import EqsoServerConnection
+
 from window_client import FrameMain
 
 filename_settings = "pyham-client.conf"		# For saving presets etc.
+
+#server_connection = None
+server_name = "frn.titanix.net"
+server_port = 10024
+#server_protocol = "echolink"	# TODO: Named constants
 
 def config_read():
 	log("Loading config file.")
@@ -64,9 +71,14 @@ class Mainwindow(FrameMain):
 
 	def click_connect(self,event):
 		try:
-			log("Connect to server.")
-			# If successfull, disable connect button and enable disconnect button.
-			# Play sound test:
+			# Connect to server
+			server_connection = EqsoServerConnection()
+			server_connection.connect(server_name, server_port)
+
+			# If successfull, disable connect button and enable disconnect button:
+			# TODO
+		
+			# If successfull, play sound:
 			CHUNK = 1024
 			wave_test = wave.open("sound.wav", 'rb')
 			audio_test = pyaudio.PyAudio()
@@ -84,6 +96,7 @@ class Mainwindow(FrameMain):
 	def click_disconnect(self,event):
 		try:
 			log("Disconnect from server.")
+			server_connection.disconnect()		# katkaise (ei kylla toimi..)
 			# Enable connect button and disable disconnect button.
 		except Exception:
 			log('error')
