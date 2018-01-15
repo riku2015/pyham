@@ -14,7 +14,7 @@ class HtmlWindow(wx.html.HtmlWindow):
 
     def OnLinkClicked(self, link):
         wx.LaunchDefaultBrowser(link.GetHref())
-        
+
 class AboutBox(wx.Dialog):
     def __init__(self):
         wx.Dialog.__init__(self, None, -1, "About",
@@ -48,21 +48,21 @@ class Frame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnAbout, m_about)
         menuBar.Append(menu, "&Help")
         self.SetMenuBar(menuBar)
-        
+
         self.statusbar = self.CreateStatusBar()
 
         panel = wx.Panel(self)
         box = wx.BoxSizer(wx.VERTICAL)
-        
+
         m_text = wx.StaticText(panel, -1, "Hello World!")
         m_text.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
         m_text.SetSize(m_text.GetBestSize())
         box.Add(m_text, 0, wx.ALL, 10)
-        
+
         m_close = wx.Button(panel, wx.ID_CLOSE, "Close")
         m_close.Bind(wx.EVT_BUTTON, self.OnClose)
         box.Add(m_close, 0, wx.ALL, 10)
-        
+
         panel.SetSizer(box)
         panel.Layout()
 
@@ -84,3 +84,7 @@ class Frame(wx.Frame):
 # app = wx.App(redirect=True)   # Error messages go to popup window
 # top1 = Frame(programName)
 # top1.Show()
+
+# from tests import HtmlWindow
+# from tests import AboutBox
+# from tests import Frame
