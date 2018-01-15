@@ -3,7 +3,7 @@
 # pyham client program
 
 programName = "pyham client"
-programVersion = "0.001"
+programVersion = "0.002"
 
 import wx, wx.html
 import sys
@@ -11,7 +11,14 @@ import wave
 import pyaudio
 #import sounddevice as sd
 
+from pyham import log
 from window_client import FrameMain
+
+filename_settings = "pyham-client.conf"		# For saving presets etc.
+
+def config_read():
+	log("Loading config file.")
+	# TODO: return or set values in variables
 
 class Mainwindow(FrameMain):
 	# constructor
@@ -21,43 +28,43 @@ class Mainwindow(FrameMain):
 
 	def push_ptt(self,event):
 		try:
-			print >>sys.stderr, "PTT button pushed down, recording audio to server..."
+			log("PTT button pushed down, recording audio to server...")
 			# Set PTT button color to red
 		except Exception:
-			print 'error'
+			log('error')
 
 	def release_ptt(self,event):
 		try:
-			print >>sys.stderr, "PTT button released, end recording to server."
+			log("PTT button released, end recording to server.")
 			# Set PTT button color to green
 			# Roger beep
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_load(self,event):
 		try:
 			# Load preset
-			print 'Load preset.'
+			log('Load preset.')
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_delete(self,event):
 		try:
 			# Delete preset
-			print 'Delete preset.'
+			log('Delete preset.')
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_save(self,event):
 		try:
 			# Save preset
-			print 'Save preset.'
+			log('Save preset.')
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_connect(self,event):
 		try:
-			print >>sys.stderr, "Connect to server."
+			log("Connect to server.")
 			# If successfull, disable connect button and enable disconnect button.
 			# Play sound test:
 			CHUNK = 1024
@@ -72,20 +79,20 @@ class Mainwindow(FrameMain):
 			stream_test.close()
 			audio_test.terminate()
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_disconnect(self,event):
 		try:
-			print >>sys.stderr, "Disconnect from server."
+			log("Disconnect from server.")
 			# Enable connect button and disable disconnect button.
 		except Exception:
-			print 'error'
+			log('error')
 
 	def click_send(self,event):
 		try:
-			print >>sys.stderr, "Send to server."
+			log("Send to server.")
 		except Exception:
-			print 'error'
+			log('error')
 
 # Create wxwidgets application:
 app = wx.App(False)
@@ -101,9 +108,12 @@ app.MainLoop()
 # TODO:
 # - File recorder/player (.wav, .mp3 etc.)
 # - Networking
+# - Selection for input and output devices (Mic1, Mic2 etc.)
 # - Scope graph, spectrogram
 # - VoIP protocol
 # - eQSO protocol
 # - Echolink protocol
+# - pyham protocol
 # - Space key as PTT button without character repeating loop
 # - Translate to different languages / Loalization
+# - PTT push and release with keyboard
