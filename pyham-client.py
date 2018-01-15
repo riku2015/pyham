@@ -11,7 +11,7 @@ import wave
 import pyaudio
 #import sounddevice as sd
 
-from window import FrameMain
+from window_client import FrameMain
 
 class Mainwindow(FrameMain):
 	# constructor
@@ -106,3 +106,4 @@ app.MainLoop()
 # - eQSO protocol
 # - Echolink protocol
 # - Space key as PTT button without character repeating loop
+# - Translate to different languages / Loalization
