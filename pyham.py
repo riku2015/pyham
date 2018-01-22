@@ -7,7 +7,12 @@ import time
 from datetime import datetime
 
 def log(text):
+	# TODO: Where to log: stdout, stderr, file...
 	print >>sys.stderr, "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
+
+#class Config():
+#	def load():
+#	def save():
 
 class EqsoServerConnection:
 	def __init__(self):
@@ -19,6 +24,7 @@ class EqsoServerConnection:
 		self.socket.connect((address, port))
 		#self.socket.connect("frn.titanix.net", 10024)
 		log("Connected.")
+		# TODO: Send the whole thing at once (if works):
 		self.socket.send("CT:")							# KIINTEE
 		self.socket.send("<VX>2014003</VX>")			# KIINTEE
 		self.socket.send("<EA>moimoi@moimoi.moi</EA>")	# Toistaseksi annetaan olla KIINTEE
@@ -51,4 +57,20 @@ class EqsoServerConnection:
 		self.socket.send(data)
 
 # TODO:
-# - log file
+# - Protocol classes
+
+# PYHAMP - pyham protocol
+#
+# Protocol for connecting HAM radios trough the Internet.
+# Similar to eqso, echolink and frn.
+#
+# Description:
+# Clients are connected to server.
+# Client sends audio to the server, and the server sends that audio to other clients that are joined to the same room.
+#
+# Features:
+# - Audio
+# - Callsign
+# - Description
+# - Room
+

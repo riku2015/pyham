@@ -43,16 +43,16 @@ class FrameMain ( wx.Frame ):
 		
 		fgSizer2.Add( fgSizer_Roomselect, 1, wx.EXPAND, 5 )
 		
-		m_listBox3Choices = []
-		self.m_listBox3 = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox3Choices, 0 )
-		fgSizer2.Add( self.m_listBox3, 0, wx.EXPAND|wx.ALL, 5 )
+		listBox_UsersChoices = []
+		self.listBox_Users = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, listBox_UsersChoices, 0 )
+		fgSizer2.Add( self.listBox_Users, 0, wx.EXPAND|wx.ALL, 5 )
 		
 		fgSizer_Send = wx.FlexGridSizer( 0, 5, 0, 0 )
 		fgSizer_Send.AddGrowableCol( 3 )
 		fgSizer_Send.SetFlexibleDirection( wx.HORIZONTAL )
 		fgSizer_Send.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticTextCall = wx.StaticText( self, wx.ID_ANY, u"Call", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticTextCall = wx.StaticText( self, wx.ID_ANY, u"Callsign", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticTextCall.Wrap( -1 )
 		fgSizer_Send.Add( self.staticTextCall, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
@@ -61,9 +61,9 @@ class FrameMain ( wx.Frame ):
 		
 		fgSizer_Send.Add( self.textCtrlCall, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.staticText_Comment = wx.StaticText( self, wx.ID_ANY, u"Comment (city)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Comment.Wrap( -1 )
-		fgSizer_Send.Add( self.staticText_Comment, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		self.staticText_Description = wx.StaticText( self, wx.ID_ANY, u"Description", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Description.Wrap( -1 )
+		fgSizer_Send.Add( self.staticText_Description, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_Comment = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.textCtrl_Comment.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
@@ -97,22 +97,30 @@ class FrameMain ( wx.Frame ):
 		fgSizer5.Add( self.staticText_Preset, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		comboBox_PresetChoices = []
-		self.comboBox_Preset = wx.ComboBox( self.panel_Server, wx.ID_ANY, u"eqso.titanix.net", wx.DefaultPosition, wx.DefaultSize, comboBox_PresetChoices, 0 )
+		self.comboBox_Preset = wx.ComboBox( self.panel_Server, wx.ID_ANY, u"frn.titanix.net", wx.DefaultPosition, wx.DefaultSize, comboBox_PresetChoices, 0 )
 		fgSizer5.Add( self.comboBox_Preset, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Server = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Server", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Server.Wrap( -1 )
 		fgSizer5.Add( self.staticText_Server, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_Server = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"eqso.titanix.net", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_Server = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"frn.titanix.net", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer5.Add( self.textCtrl_Server, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Port = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Port.Wrap( -1 )
 		fgSizer5.Add( self.staticText_Port, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_Port = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"5000", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer5.Add( self.textCtrl_Port, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_Port = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"10024", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer5.Add( self.textCtrl_Port, 0, wx.ALL, 5 )
+		
+		self.staticText_Protocol = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Protocol", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Protocol.Wrap( -1 )
+		fgSizer5.Add( self.staticText_Protocol, 0, wx.ALL, 5 )
+		
+		comboBox_ProtocolChoices = []
+		self.comboBox_Protocol = wx.ComboBox( self.panel_Server, wx.ID_ANY, u"FRN", wx.DefaultPosition, wx.DefaultSize, comboBox_ProtocolChoices, 0 )
+		fgSizer5.Add( self.comboBox_Protocol, 0, wx.ALL, 5 )
 		
 		
 		fgSizer16.Add( fgSizer5, 1, wx.EXPAND, 5 )
@@ -215,17 +223,12 @@ class FrameMain ( wx.Frame ):
 		
 		fgSizer_Talk.Add( gSizer1, 1, wx.EXPAND, 5 )
 		
-		bSizer1 = wx.BoxSizer( wx.VERTICAL )
-		
 		self.button_Ptt = wx.Button( self, wx.ID_ANY, u"Push To Talk", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.button_Ptt.SetFont( wx.Font( 16, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		self.button_Ptt.SetForegroundColour( wx.Colour( 0, 0, 0 ) )
 		self.button_Ptt.SetBackgroundColour( wx.Colour( 186, 216, 200 ) )
 		
-		bSizer1.Add( self.button_Ptt, 1, wx.ALL|wx.EXPAND, 5 )
-		
-		
-		fgSizer_Talk.Add( bSizer1, 1, wx.EXPAND, 5 )
+		fgSizer_Talk.Add( self.button_Ptt, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		fgSizer21.Add( fgSizer_Talk, 1, wx.EXPAND, 5 )

@@ -8,7 +8,7 @@ programVersion = "0.001"
 #import sys
 from pyham import log
 
-filename_settings = "pyham-server.conf"
+filename_config = "pyham-server.conf"
 
 def config_read():
 	log("Loading config file.")

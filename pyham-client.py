@@ -5,7 +5,7 @@
 programName = "pyham client"
 programVersion = "0.002"
 
-import wx, wx.html
+import wx
 import sys
 import wave
 import pyaudio
@@ -16,7 +16,7 @@ from pyham import EqsoServerConnection
 
 from window_client import FrameMain
 
-filename_settings = "pyham-client.conf"		# For saving presets etc.
+filename_config = "pyham-client.conf"		# For saving presets etc.
 
 #server_connection = None
 server_name = "frn.titanix.net"
@@ -122,11 +122,11 @@ app.MainLoop()
 # - File recorder/player (.wav, .mp3 etc.)
 # - Networking
 # - Selection for input and output devices (Mic1, Mic2 etc.)
-# - Scope graph, spectrogram
-# - VoIP protocol
+# - Scope graph, spectrum analyzer, spectrogram
 # - eQSO protocol
-# - Echolink protocol
+# - FRN protocol
+# - Echolink protocol (same as SvxLink uses)
 # - pyham protocol
 # - Space key as PTT button without character repeating loop
 # - Translate to different languages / Loalization
-# - PTT push and release with keyboard
+# - Threading
