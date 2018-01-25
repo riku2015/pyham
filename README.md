@@ -2,10 +2,10 @@
 HAM Radio with Python
 
 How to run client:
-python pyham-client.py
+python pyham_client.py
 
 How to run server:
-python pyham-server.py
+python pyham_server.py
 
 This program is under development and no working version is released yet.
 
