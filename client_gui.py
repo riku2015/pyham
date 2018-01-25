@@ -1,31 +1,11 @@
 #!/usr/bin/python
 
-# pyham client program
-
-programName = "pyham client"
-programVersion = "0.002"
-
-import wx
 import sys
 import wave
 import pyaudio
 #import sounddevice as sd
-
 from pyham import log
-from pyham import EqsoServerConnection
-
-from window_client import FrameMain
-
-filename_config = "pyham-client.conf"		# For saving presets etc.
-
-#server_connection = None
-server_name = "frn.titanix.net"
-server_port = 10024
-#server_protocol = "echolink"	# TODO: Named constants
-
-def config_read():
-	log("Loading config file.")
-	# TODO: return or set values in variables
+from client_gui_wx import FrameMain
 
 class Mainwindow(FrameMain):
 	# constructor
@@ -72,7 +52,7 @@ class Mainwindow(FrameMain):
 	def click_connect(self,event):
 		try:
 			# Connect to server
-			server_connection = EqsoServerConnection()
+			server_connection = ClientConnection_Eqso()
 			server_connection.connect(server_name, server_port)
 
 			# If successfull, disable connect button and enable disconnect button:
@@ -106,27 +86,3 @@ class Mainwindow(FrameMain):
 			log("Send to server.")
 		except Exception:
 			log('error')
-
-# Create wxwidgets application:
-app = wx.App(False)
-mainwindow = Mainwindow(parent=None)
-
-# Show main window:
-mainwindow.Show()
-
-# Execute GUI:
-app.MainLoop()
-
-
-# TODO:
-# - File recorder/player (.wav, .mp3 etc.)
-# - Networking
-# - Selection for input and output devices (Mic1, Mic2 etc.)
-# - Scope graph, spectrum analyzer, spectrogram
-# - eQSO protocol
-# - FRN protocol
-# - Echolink protocol (same as SvxLink uses)
-# - pyham protocol
-# - Space key as PTT button without character repeating loop
-# - Translate to different languages / Loalization
-# - Threading
