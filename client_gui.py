@@ -4,7 +4,7 @@ import wx
 import wave
 import pyaudio
 from pyham import log
-from client_gui_wx import FrameMain
+from client_gui_fbp import FrameMain
 
 class Mainwindow(FrameMain):
 	def __init__(self,parent):
