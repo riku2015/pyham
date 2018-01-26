@@ -11,11 +11,11 @@
         <property name="embedded_files_path">res</property>
         <property name="encoding">UTF-8</property>
         <property name="event_generation">connect</property>
-        <property name="file">client_gui_wx</property>
+        <property name="file">client_gui_fbp</property>
         <property name="first_id">1000</property>
         <property name="help_provider">none</property>
         <property name="internationalize">0</property>
-        <property name="name">MyProject1</property>
+        <property name="name">PyhamClient</property>
         <property name="namespace"></property>
         <property name="path">.</property>
         <property name="precompiled_header"></property>
@@ -47,7 +47,7 @@
             <property name="size">620,520</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; forward_declare</property>
-            <property name="title">pyham</property>
+            <property name="title">Pyham Client</property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>
             <property name="window_name">pyham</property>

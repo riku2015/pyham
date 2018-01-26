@@ -5,14 +5,16 @@ from pyham import log, Config, ProtocolPyhamp, ProtocolEqso, ProtocolEcholink, P
 # Server
 # One server can use one or more different protocols at the same time.
 # Same protocol can be used only once in one server.
+#
+# TODO: Data logger
 
 class Server:
 	def __init__(self, filename_config):
 		# Defaults if not given in config file:
-		self.server_name = "mypyhamserver"
+		self.server_name = "myhamserver"
 		self.server_port = 10024
-		self.server_protocol = "FRN"	# TODO: support multiple
-		# self.rooms =
+		self.server_protocol = "FRN"	# TODO: support multiple protocols simultaneously
+		self.rooms = []
 
 		# Read config:
 		config = Config()
@@ -27,7 +29,9 @@ class Server:
 		log("Binding to port " + str(self.server_port) + " as '" + self.server_name + "' using " + self.server_protocol + " protocol.")
 
 	def Run(self):
+		log("Server started.")
 		pass
 
 	def Stop(self):
+		log("Server stopped.")
 		pass

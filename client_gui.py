@@ -1,16 +1,14 @@
 #!/usr/bin/python
 
-import sys
+import wx
 import wave
 import pyaudio
-#import sounddevice as sd
 from pyham import log
 from client_gui_wx import FrameMain
 
 class Mainwindow(FrameMain):
-	# constructor
 	def __init__(self,parent):
-		# initialize parent class
+		# Initialize parent class:
 		FrameMain.__init__(self,parent)
 
 	def push_ptt(self,event):
@@ -38,7 +36,10 @@ class Mainwindow(FrameMain):
 	def click_delete(self,event):
 		try:
 			# Delete preset
-			log('Delete preset.')
+			dialog_delete = wx.MessageDialog(None, 'Delete preset?', 'Confirm delete', wx.YES_NO | wx.ICON_QUESTION)
+			result = dialog_delete.ShowModal()
+			if result == wx.ID_YES:
+				log('Delete preset.')			
 		except Exception:
 			log('error')
 
@@ -52,11 +53,13 @@ class Mainwindow(FrameMain):
 	def click_connect(self,event):
 		try:
 			# Connect to server
-			server_connection = ClientConnection_Eqso()
-			server_connection.connect(server_name, server_port)
+			from tests import ClientConnection_Eqso
+			#server_connection = ClientConnection_Eqso(server_name, server_port)
+			server_connection = ClientConnection_Eqso("frn.titanix.net", 10024)
+			server_connection.connect()
 
 			# If successfull, disable connect button and enable disconnect button:
-			# TODO
+			#
 		
 			# If successfull, play sound:
 			CHUNK = 1024

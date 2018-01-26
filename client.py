@@ -2,8 +2,8 @@
 
 import wx
 
-from pyham import log, Config, ProtocolPyhamp, ProtocolEqso, ProtocolEcholink, ProtocolFrn
-from tests import ClientConnection_Eqso
+from pyham import log, Config
+#from pyham import ProtocolPyhamp, ProtocolEqso, ProtocolEcholink, ProtocolFrn
 from client_gui import Mainwindow
 
 # Defaults if not given in config file:
@@ -13,13 +13,16 @@ server_protocol = "frn"
 
 class Client:
 	def __init__(self, filename_config):
-
 		# Create wxwidgets application:
-		app = wx.App(False)
-		mainwindow = Mainwindow(parent=None)
+		self.app = wx.App(False)
+		self.mainwindow = Mainwindow(parent=None)
 
+	def Run(self):
+		log("Starting client.")
 		# Show main window:
-		mainwindow.Show()
-
+		self.mainwindow.Show()
 		# Execute GUI:
-		app.MainLoop()
+		self.app.MainLoop()
+
+	def Stop(self):
+		log("Client stopped.")

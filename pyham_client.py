@@ -3,6 +3,7 @@
 # pyham client program
 
 # TODO:
+# - Command line parameters
 # - File recorder/player (.wav, .mp3 etc.)
 # - Networking
 # - Selection for input and output devices (Mic1, Mic2 etc.)
@@ -13,15 +14,16 @@
 # - Separate GUI (mandatory?) to .py file(s)
 
 programName = "Pyham Client"
-programVersion = "0.002"
+programVersion = "0.003"
 filename_config = "pyham_client.conf"		# For saving presets etc.
 
 from pyham import log
 from client import Client
 
 # Start client:
-log("Starting client.")
+log("Program started.")
 client = Client(filename_config)
+client.Run()
 
 # Terminate program:
 log("Exit program.")

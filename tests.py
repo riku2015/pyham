@@ -4,6 +4,9 @@
 # It is not meant for testing the runtime environment itself.
 # It should not be imported at all in a final release.
 
+import socket
+from pyham import log
+
 # ClientConnection
 # This class is used within the client program
 
@@ -18,15 +21,20 @@ class ServerConnection:
 	def __init__(self):
 		pass
 
+# ClientConnection_Eqso
+# Network test code
+
 class ClientConnection_Eqso:
-	def __init__(self):
+	def __init__(self, address, port):
+		self.address = address
+		self.port = port
 		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-	def connect(self, address, port):
+	def connect(self):
 		# The default port is 10024
-		log("Connecting to server " + address + " at port " + str(port) + ".")
-		self.socket.connect((address, port))
-		#self.socket.connect("frn.titanix.net", 10024)
+		log("Connecting to server " + self.address + " at port " + str(self.port) + ".")
+		#self.socket.connect((self.address, self.port))
+		self.socket.connect(("frn.titanix.net", 10024))
 		log("Connected.")
 		# TODO: Send the whole thing at once (if works):
 		self.socket.send("CT:")							# KIINTEE

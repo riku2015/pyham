@@ -2,7 +2,6 @@
 
 import sys
 import struct
-import socket
 import time
 from datetime import datetime
 
@@ -12,7 +11,7 @@ from datetime import datetime
 def log(text):
 	# TODO:
 	# - Stash multiple log messages into same timestamp entry
-	# - Logging options: stdout, stderr, file...
+	# - Logging options: stdout, stderr, file, window...
 
 	print >>sys.stderr, "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
 
@@ -30,51 +29,40 @@ class Config():
 # Protocols
 # Clients are connected to server.
 # Client sends audio to the server, and the server sends that audio to other clients that are joined to the same room.
-
-# ProtocolPyhamp
 # Features:
 # - Audio
 # - Callsign
 # - Description
 # - Rooms
 
-class ProtocolPyhamp:
+class Protocol:
+	def __init__(self):
+		pass
+
+# ProtocolPyhamp
+
+class ProtocolPyhamp(Protocol):
 	def __init__(self, port):
 		self.__port = port
 		pass
 
 # ProtocolEqso
-# Features:
-# - Audio
-# - Callsign
-# - Description
-# - Rooms
 
-class ProtocolEqso:
+class ProtocolEqso(Protocol):
 	def __init__(self, port):
 		self.__port = port
 		pass
 
 # ProtocolEcholink
-# Features:
-# - Audio
-# - Callsign
-# - Description
-# - Rooms
 
-class ProtocolEcholink:
+class ProtocolEcholink(Protocol):
 	def __init__(self, port):
 		self.__port = port
 		pass
 
 # ProtocolFrn
-# Features:
-# - Audio
-# - Callsign
-# - Description
-# - Rooms
 
-class ProtocolFrn:
+class ProtocolFrn(Protocol):
 	def __init__(self, port):
 		self.__port = port
 		pass
