@@ -1,15 +1,17 @@
-# pyham
-HAM Radio with Python
 
-How to run client:
+# pyham
+## HAM Radio with Python
+
+### How to run client:
 python pyham_client.py
 
-How to run server:
+### How to run server:
 python pyham_server.py
 
+### About
 This program is under development and no working version is released yet.
 
-Tested on GNU/Linux and Windows versions of wxPython.
+Tested on GNU/Linux and Windows versions of [wxPython](https://www.wxpython.org).
 
 Screenshots:
 
