@@ -10,9 +10,10 @@
 
 programName = "Pyham Server"
 programVersion = "0.003"
+filename_log = "pyham_server.log"
 filename_config = "pyham_server.conf"
 
-from pyham import log
+from log import log
 from server import Server
 
 # Start server:

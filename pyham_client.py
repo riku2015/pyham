@@ -14,14 +14,16 @@
 # - Separate GUI (mandatory?) to .py file(s)
 
 programName = "Pyham Client"
-programVersion = "0.003"
+programVersion = "0.005"
+filename_log = "pyham_client.log"
 filename_config = "pyham_client.conf"		# For saving presets etc.
 
-from pyham import log
+from log import log
 from client import Client
 
 # Start client:
 log("Program started.")
+
 client = Client(filename_config)
 client.Run()
 

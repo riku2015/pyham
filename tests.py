@@ -4,102 +4,68 @@
 # It is not meant for testing the runtime environment itself.
 # It should not be imported at all in a final release.
 
-import socket
-from pyham import log
+from log import log
 
-# ClientConnection
-# This class is used within the client program
+# For each incoming connection, create new ServerConnection
 
-class ClientConnection:
+import pyaudio
+import wave
+
+'''
+p = pyaudio.PyAudio()
+for i in range(p.get_device_count()):
+	print p.get_device_info_by_index(i)
+'''
+
+def get_devices():
+	p = pyaudio.PyAudio()
+	info = p.get_host_api_info_by_index(0)
+	numdevices = info.get('deviceCount')
+	result = ""
+	for i in range(0, numdevices):
+			if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+				result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name')
+	return result
+
+class Test_Audiorecorder:
 	def __init__(self):
-		pass
+		self.audio = pyaudio.PyAudio()
 
-# ServerConnection
-# This class is used within the server program
+	def rec(self):
+		FORMAT = pyaudio.paInt16
+		CHANNELS = 2
+		RATE = 44100
+		CHUNK = 1024
+		RECORD_SECONDS = 5
+		WAVE_OUTPUT_FILENAME = "test.wav"
 
-class ServerConnection:
+		# Start recording
+		stream = self.audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+		log("TEST: Recording for 5 seconds...")
+		frames = []
+
+		for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+			data = stream.read(CHUNK)
+			frames.append(data)
+
+		# Stop recording
+		stream.stop_stream()
+		stream.close()
+		self.audio.terminate()
+
+		log("TEST: Finished recording.")
+
+		# Save to file:
+		waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+		waveFile.setnchannels(CHANNELS)
+		waveFile.setsampwidth(self.audio.get_sample_size(FORMAT))
+		waveFile.setframerate(RATE)
+		waveFile.writeframes(b''.join(frames))
+		waveFile.close()
+
+class Test_Soundlooper:
 	def __init__(self):
-		pass
-
-# ClientConnection_Eqso
-# Network test code
-
-class ClientConnection_Eqso:
-	def __init__(self, address, port):
-		self.address = address
-		self.port = port
-		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-	def connect(self):
-		# The default port is 10024
-		log("Connecting to server " + self.address + " at port " + str(self.port) + ".")
-		#self.socket.connect((self.address, self.port))
-		self.socket.connect(("frn.titanix.net", 10024))
-		log("Connected.")
-		# TODO: Send the whole thing at once (if works):
-		self.socket.send("CT:")							# KIINTEE
-		self.socket.send("<VX>2014003</VX>")			# KIINTEE
-		self.socket.send("<EA>moimoi@moimoi.moi</EA>")	# Toistaseksi annetaan olla KIINTEE
-		self.socket.send("<PW>asdfghjk</PW>")			# Toistaseksi kiintea
-		self.socket.send("<ON>kokeilu</ON>")			# Kutsu tahan
-		self.socket.send("<CL>2</CL>")					# KIINTEE TOISTASEKS
-		self.socket.send("<BC>PC Only</BC>")			# KIINTEE toistaseks
-		self.socket.send("<DS>description</DS>")		# Paikkakunta kommentti ym tama
-		self.socket.send("<NN>Finland</NN>")			# KIINTEE TOISTASEKSI
-		self.socket.send("<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
-		self.socket.send("<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
-		self.socket.send("\n")							# rivinvaihto viimeiseen muuten ei kuittaa sockki
-
-		# odotetaan vastausta serverista, jos vastausta on enemman kun 1 merkki/bitti mika onkaa niin silloin lahettaa RX tilaan
-		# Tama pitaisi korjata, ettkun serveri lahettaa OK niin se on ok..
-		amount_received = 0
-		amount_expected = 1
-
-		while amount_received < amount_expected:
-			data = self.socket.recv(16)
-			amount_received += len(data)
-			log('received "%s"' % data)
-			self.socket.send("\RX0")
-
-	def disconnect(self):
-		self.socket.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
-		log("Disconnected.")
-
-	def send(self, data):
-		self.socket.send(data)
-
-# Scope
-# Graphical scope from sound
-
-class Scope:
-	def __init__(self):
-		pass
-
-	def draw(self, sound_data):
-		# Return pixel array in some sort of wxwidget
-		pass
-
-# Scope
-# Graphical spectrum analyzer from sound
-
-class Spectrum:
-	def __init__(self):
-		pass
-
-	def draw(self, sound_data):
-		# Return pixel array in some sort of wxwidget
-		pass
-
-# Spectrogram
-
-# Soundlooper
-# This test class loads a sound file into server and keeps it looping by cycling the index.
-# If a client connects to the server, it should start streaming and playing from that particular index.
-# The purpose of this test is to investigate how GSM header works in soundfile module.
-
-class Soundlooper:
-	def __init__(self):
-		self.__filename_sound = "music_gsm6.10_11025_mono_16bit.wav"
+		self.__filename_sound = "music_gsm6.10_11025khz_mono_16b.wav"
 		self.__buffer = None	# Store sound data here
 		self.__index = 0		# Current position in buffer to be streamed from
 		# Load sound file to buffer:
@@ -111,3 +77,9 @@ class Soundlooper:
 	def stream():
 		# Send data to client
 		pass
+
+def network_testcode():
+	soundlooper = Soundlooper(self)
+	# Create server
+	# Connect with client
+	# Stream data

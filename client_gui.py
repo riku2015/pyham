@@ -3,35 +3,77 @@
 import wx
 import wave
 import pyaudio
-from pyham import log
-from client_gui_fbp import FrameMain
+from log import log
+from client_gui_fbp import FrameMain, FrameSettings
+from tests import get_devices
+
+class Settingswindow(FrameSettings):
+	def __init__(self,parent):
+		# Initialize parent class:
+		FrameSettings.__init__(self,parent)
+
+	def click_ok( self, event ):
+		# Apply changes
+		# Close window
+		self.Close()
+	
+	def click_save( self, event ):
+		log("Save settings.")
+	
+	def click_cancel( self, event ):
+		# Close window
+		self.Close()
+
+from tests import Test_Audiorecorder
 
 class Mainwindow(FrameMain):
 	def __init__(self,parent):
 		# Initialize parent class:
 		FrameMain.__init__(self,parent)
 
+		# Get available sound devices:
+		#print get_devices()
+		# Put them into comboBoxes:
+		# self.comboBox_Speaker.
+		# self.comboBox_Mic
+
 	def push_ptt(self,event):
 		try:
+			# Set PTT button color to red:
+			self.button_Ptt.SetBackgroundColour(wx.Colour(216, 186, 200))
+			self.button_Ptt.SetLabel("Recording...")
 			log("PTT button pushed down, recording audio to server...")
-			# Set PTT button color to red
+
+			# Record sound:
+			#recorder = Test_Audiorecorder()
+			#recorder.rec()
+
+			# Stream using current protocol:
+			#
+
+			# TODO:
+			# Keep recording and streaming until PTT button released.
+			# Do not get stuck in a loop here. (threading?)
+
 		except Exception:
-			log('error')
+			log('Error')
 
 	def release_ptt(self,event):
 		try:
 			log("PTT button released, end recording to server.")
-			# Set PTT button color to green
+			# Set PTT button color to green:
+			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
+			self.button_Ptt.SetLabel("Push To Talk")
 			# Roger beep
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_load(self,event):
 		try:
 			# Load preset
 			log('Load preset.')
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_delete(self,event):
 		try:
@@ -39,28 +81,25 @@ class Mainwindow(FrameMain):
 			dialog_delete = wx.MessageDialog(None, 'Delete preset?', 'Confirm delete', wx.YES_NO | wx.ICON_QUESTION)
 			result = dialog_delete.ShowModal()
 			if result == wx.ID_YES:
-				log('Delete preset.')			
+				log('Delete preset.')
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_save(self,event):
 		try:
 			# Save preset
 			log('Save preset.')
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_connect(self,event):
 		try:
 			# Connect to server
-			from tests import ClientConnection_Eqso
-			#server_connection = ClientConnection_Eqso(server_name, server_port)
-			server_connection = ClientConnection_Eqso("frn.titanix.net", 10024)
-			server_connection.connect()
 
 			# If successfull, disable connect button and enable disconnect button:
-			#
-		
+			self.button_Connect.Disable()
+			self.button_Disconnect.Enable()
+
 			# If successfull, play sound:
 			CHUNK = 1024
 			wave_test = wave.open("sound.wav", 'rb')
@@ -74,18 +113,32 @@ class Mainwindow(FrameMain):
 			stream_test.close()
 			audio_test.terminate()
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_disconnect(self,event):
 		try:
 			log("Disconnect from server.")
-			server_connection.disconnect()		# katkaise (ei kylla toimi..)
-			# Enable connect button and disable disconnect button.
+			# Enable connect button and disable disconnect button:
+			self.button_Connect.Enable()
+			self.button_Disconnect.Disable()
 		except Exception:
-			log('error')
+			log('Error')
 
 	def click_send(self,event):
 		try:
 			log("Send to server.")
 		except Exception:
-			log('error')
+			log('Error')
+
+	def click_settings(self,event):
+		try:
+			self.settingswindow = Settingswindow(None)
+			self.settingswindow.Show()
+		except Exception:
+			pass
+
+	def volume_speaker( self, event ):
+		log("Speaker volume: " + str(self.slider_Speaker.Value))
+	
+	def volume_mic( self, event ):
+		log("Mic volume: " + str(self.slider_Mic.Value))
