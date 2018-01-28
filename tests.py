@@ -5,9 +5,6 @@
 # It should not be imported at all in a final release.
 
 from log import log
-
-# For each incoming connection, create new ServerConnection
-
 import pyaudio
 import wave
 
@@ -17,7 +14,7 @@ for i in range(p.get_device_count()):
 	print p.get_device_info_by_index(i)
 '''
 
-def get_devices():
+def get_audiodevices():
 	p = pyaudio.PyAudio()
 	info = p.get_host_api_info_by_index(0)
 	numdevices = info.get('deviceCount')
@@ -26,6 +23,19 @@ def get_devices():
 			if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
 				result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name')
 	return result
+
+def play_testsound():
+	CHUNK = 1024
+	wave_test = wave.open("sound.wav", 'rb')
+	audio_test = pyaudio.PyAudio()
+	stream_test = audio_test.open(format=audio_test.get_format_from_width(wave_test.getsampwidth()), channels=wave_test.getnchannels(), rate=wave_test.getframerate(), output=True)
+	data_test = wave_test.readframes(CHUNK)
+	while data_test != '':
+		stream_test.write(data_test)
+		data_test = wave_test.readframes(CHUNK)
+	stream_test.stop_stream()
+	stream_test.close()
+	audio_test.terminate()
 
 class Test_Audiorecorder:
 	def __init__(self):
@@ -77,9 +87,3 @@ class Test_Soundlooper:
 	def stream():
 		# Send data to client
 		pass
-
-def network_testcode():
-	soundlooper = Soundlooper(self)
-	# Create server
-	# Connect with client
-	# Stream data

@@ -1,15 +1,12 @@
 #!/usr/bin/python
 
 import sys
-import time
 from datetime import datetime
-#import struct
+
+# TODO:
+# - Logging options: stdout, stderr, file, window...
 
 def log(text, filename = None):
-	# TODO:
-	# - Stash multiple log messages into same timestamp entry
-	# - Logging options: stdout, stderr, file, window...
-
 	# Format text with timestamp:
 	string = "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
 
@@ -20,3 +17,18 @@ def log(text, filename = None):
 	if filename is not None:
 		with open(filename, "a") as logfile:
 			logfile.write(string + "\n")
+
+'''
+class Log:
+	def __init__(self):
+		self.text = ""
+
+	def log(self, text, singleline = True):
+		if singleline:
+			self.text = "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text + "\n"
+		else:
+			if len(self.text) > 0:
+				self.text = "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
+			else:
+				self.text += text
+'''
