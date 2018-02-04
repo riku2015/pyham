@@ -26,6 +26,8 @@ python pyham_server.py --configfile=path/filename
 
 python pyham_server.py --logfile=path/filename
 
+python pyham_server.py --nogui
+
 #### Screenshots:
 
 ![alt text](http://titanix.net/~japek/pyham-client-0001.png)
