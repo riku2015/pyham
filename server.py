@@ -28,22 +28,22 @@ class Server:
 		# Initialize protocol(s):
 
 		# if config.parameters[frn]
-		self.frn = ServerProtocolFrn("Test server @ ", "localhost", 10024)
+		self.frn = ServerProtocolFrn("Test server", "localhost", 10024)
 		# self.frn = ServerProtocolFrn(config.parameters[frn_name, frn_address, frn_port])
 
 		# if config.parameters[eqso]
-		self.eqso = ServerProtocolEqso("Test server @ localhost", "localhost", 5000)
+		self.eqso = ServerProtocolEqso("Test server", "localhost", 5000)
 		# Eqso protocol is now accepting connections
 
 		# if config.parameters[echolink]
-		self.echolink = ServerProtocolEcholink("Test server @ localhost", "localhost", 5200)
+		self.echolink = ServerProtocolEcholink("Test server", "localhost", 5200)
 		# Echolink protocol is now accepting connections
 
 		# if config.parameters[pyhamp]
-		self.pyhamp = ServerProtocolPyhamp("Test server @ localhost", "localhost", 2000)
+		self.pyhamp = ServerProtocolPyhamp("Test server", "localhost", 2000)
 		# Pyhamp protocol is now accepting connections
 
-		self.test = ServerProtocolTest("Test server @ localhost", "localhost", 3000)
+		self.test = ServerProtocolTest("Test server", "localhost", 3000)
 		# Test protocol is now accepting connections
 
 	def Run(self):
