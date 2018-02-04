@@ -97,15 +97,17 @@ class FrameMain ( wx.Frame ):
 		self.staticText_Allowed.Wrap( -1 )
 		fgSizer_Clients.Add( self.staticText_Allowed, 0, wx.ALL, 5 )
 		
-		self.listCtrl_Allow = wx.ListCtrl( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_ICON )
-		fgSizer_Clients.Add( self.listCtrl_Allow, 0, wx.ALL|wx.EXPAND, 5 )
+		listBox_AllowedChoices = []
+		self.listBox_Allowed = wx.ListBox( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, listBox_AllowedChoices, 0 )
+		fgSizer_Clients.Add( self.listBox_Allowed, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Banned = wx.StaticText( self.m_scrolledWindow2, wx.ID_ANY, u"Banned clients:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Banned.Wrap( -1 )
 		fgSizer_Clients.Add( self.staticText_Banned, 0, wx.ALL, 5 )
 		
-		self.listCtrl_Ban = wx.ListCtrl( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_ICON )
-		fgSizer_Clients.Add( self.listCtrl_Ban, 0, wx.ALL|wx.EXPAND, 5 )
+		m_listBox_BannedChoices = []
+		self.m_listBox_Banned = wx.ListBox( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox_BannedChoices, 0 )
+		fgSizer_Clients.Add( self.m_listBox_Banned, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		fgSizer12 = wx.FlexGridSizer( 0, 4, 0, 0 )
 		fgSizer12.AddGrowableCol( 0 )
@@ -153,14 +155,14 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_EqsoName = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_EqsoName.Wrap( -1 )
-		fgSizer1413.Add( self.staticText_EqsoName, 0, wx.ALL, 5 )
+		fgSizer1413.Add( self.staticText_EqsoName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_EqsoName = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1413.Add( self.textCtrl_EqsoName, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_EqsoPort = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_EqsoPort.Wrap( -1 )
-		fgSizer1413.Add( self.staticText_EqsoPort, 0, wx.ALL, 5 )
+		fgSizer1413.Add( self.staticText_EqsoPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_EqsoPort = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1413.Add( self.textCtrl_EqsoPort, 0, wx.ALL|wx.EXPAND, 5 )
@@ -205,14 +207,14 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_EcholinkName = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_EcholinkName.Wrap( -1 )
-		fgSizer141.Add( self.staticText_EcholinkName, 0, wx.ALL, 5 )
+		fgSizer141.Add( self.staticText_EcholinkName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_EcholinkName = wx.TextCtrl( self.panel_Echolink, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer141.Add( self.textCtrl_EcholinkName, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_EcholinkPort = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_EcholinkPort.Wrap( -1 )
-		fgSizer141.Add( self.staticText_EcholinkPort, 0, wx.ALL, 5 )
+		fgSizer141.Add( self.staticText_EcholinkPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_EcholinkPort = wx.TextCtrl( self.panel_Echolink, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer141.Add( self.textCtrl_EcholinkPort, 0, wx.ALL|wx.EXPAND, 5 )
@@ -257,14 +259,14 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_FrnName = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_FrnName.Wrap( -1 )
-		fgSizer1411.Add( self.staticText_FrnName, 0, wx.ALL, 5 )
+		fgSizer1411.Add( self.staticText_FrnName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_FrnName = wx.TextCtrl( self.panel_Frn, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1411.Add( self.textCtrl_FrnName, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_FrnPort = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_FrnPort.Wrap( -1 )
-		fgSizer1411.Add( self.staticText_FrnPort, 0, wx.ALL, 5 )
+		fgSizer1411.Add( self.staticText_FrnPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_FrnPort = wx.TextCtrl( self.panel_Frn, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1411.Add( self.textCtrl_FrnPort, 0, wx.ALL|wx.EXPAND, 5 )
@@ -309,14 +311,14 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_PyhampName = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_PyhampName.Wrap( -1 )
-		fgSizer1412.Add( self.staticText_PyhampName, 0, wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_PyhampName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_PyhampName = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1412.Add( self.textCtrl_PyhampName, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_PyhampPort = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_PyhampPort.Wrap( -1 )
-		fgSizer1412.Add( self.staticText_PyhampPort, 0, wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_PyhampPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		self.textCtrl_PyhampPort = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1412.Add( self.textCtrl_PyhampPort, 0, wx.ALL|wx.EXPAND, 5 )

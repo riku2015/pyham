@@ -7,6 +7,7 @@ from log import log
 from config import Config
 from server_protocols import *
 from server_gui import Mainwindow
+from testcode import ServerProtocolTest
 
 # Server
 # Server with no user interface
@@ -27,27 +28,31 @@ class Server:
 		# Initialize protocol(s):
 
 		# if config.parameters[frn]
-		self.frn = ServerProtocolFrn("Titanix FRN server", "frn.titanix.net", 10024)
+		self.frn = ServerProtocolFrn("Test server @ ", "localhost", 10024)
 		# self.frn = ServerProtocolFrn(config.parameters[frn_name, frn_address, frn_port])
 
 		# if config.parameters[eqso]
-		self.eqso = ServerProtocolEqso("Suomen eQSO", "eqso.titanix.net", 5000)
+		self.eqso = ServerProtocolEqso("Test server @ localhost", "localhost", 5000)
 		# Eqso protocol is now accepting connections
 
 		# if config.parameters[echolink]
-		self.echolink = ServerProtocolEcholink("localhost echolink", "localhost", 5200)
+		self.echolink = ServerProtocolEcholink("Test server @ localhost", "localhost", 5200)
 		# Echolink protocol is now accepting connections
 
 		# if config.parameters[pyhamp]
-		self.pyhamp = ServerProtocolPyhamp("localhost pyhamp", "localhost", 2000)
+		self.pyhamp = ServerProtocolPyhamp("Test server @ localhost", "localhost", 2000)
 		# Pyhamp protocol is now accepting connections
+
+		self.test = ServerProtocolTest("Test server @ localhost", "localhost", 3000)
+		# Test protocol is now accepting connections
 
 	def Run(self):
 		log("Starting server.")
 		self.frn.run()		# Frn protocol is now accepting connections
-		self.echolink.run()	# Frn protocol is now accepting connections
-		self.eqso.run()		# Frn protocol is now accepting connections
-		self.pyhamp.run()	# Frn protocol is now accepting connections
+		self.echolink.run()	# Echolink protocol is now accepting connections
+		self.eqso.run()		# Eqso protocol is now accepting connections
+		self.pyhamp.run()	# Pyhamp protocol is now accepting connections
+		self.test.run()		# Test protocol is now accepting connections
 
 	def Stop(self):
 		log("Server stopped.")
@@ -66,9 +71,10 @@ class ServerWx(Server):
 	def Run(self):
 		log("Starting server (wx).")
 		self.frn.run()		# Frn protocol is now accepting connections
-		self.echolink.run()	# Frn protocol is now accepting connections
-		self.eqso.run()		# Frn protocol is now accepting connections
-		self.pyhamp.run()	# Frn protocol is now accepting connections
+		self.echolink.run()	# Echolink protocol is now accepting connections
+		self.eqso.run()		# Eqso protocol is now accepting connections
+		self.pyhamp.run()	# Pyhamp protocol is now accepting connections
+		#self.test.run()		# Test protocol is now accepting connections
 		# Show main window:
 		self.mainwindow.Show()
 		# Execute GUI:

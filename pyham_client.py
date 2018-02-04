@@ -3,8 +3,9 @@
 # pyham client program
 
 # Command line parameters:
-# -config=path/file.conf
-# -log=path/file.log
+# --help
+# --configfile path/file.conf
+# --logfile path/file.log
 
 # TODO:
 # - Space key as PTT button without character repeating loop

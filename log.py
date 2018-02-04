@@ -15,7 +15,7 @@ def log(text, filename = None):
 	print >>sys.stderr, string
 
 	# Append to file:
-	if filename is not None:
+	if filename != None:
 		with open(filename, "a") as logfile:
 			logfile.write(string + "\n")
 

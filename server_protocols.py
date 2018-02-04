@@ -12,12 +12,12 @@ class ServerProtocol():
 		self.protocolname = "NONE"
 		self.rooms = []
 
-	def __bind(self):
-		log("Binding to port " + str(self.port) + " using " + self.protocolname + " protocol...")
+	def bind(self):
+		log("Binding to " + self.address + " in port " + str(self.port) + " as '" + self.name + "' using " + self.protocolname + "...")
 		try:
 			self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			self.socket.bind((socket.gethostname(), self.port))
-			self.socket.listen(2)
+			self.socket.listen(1)
 			#self.accept()
 			self.binded = True
 		except Exception, e:
@@ -55,7 +55,7 @@ class ServerProtocol():
 		return ''.join(chunks)
 
 	def run(self):
-		if self.__bind():
+		if self.bind():
 			log("Accepting connections.")
 		#while True:
 			# Accept connections from outside

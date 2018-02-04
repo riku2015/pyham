@@ -6,7 +6,7 @@ import pyaudio
 from log import log
 from client_gui_fbp import FrameMain, FrameSettings
 from testcode import play_testsound
-from client_protocols import ClientProtocolFrn, ClientProtocolPyhamp
+from testcode import ClientProtocolTest
 #from testcode import Test_Audiorecorder
 
 class Settingswindow(FrameSettings):
@@ -100,11 +100,12 @@ class Mainwindow(FrameMain):
 			
 			if self.button_Connect.GetLabel() == "Connect":
 				# Make connection:
-				self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
-				self.frn.connect()
-				self.frn.send("")
-				#self.pyhamp = ClientProtocolPyhamp("localhost", 1000)
-				#self.pyhamp.connect()
+				#self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
+				#self.frn.connect()
+				#self.frn.send("")
+
+				self.test = ClientProtocolTest("localhost", 3000)
+				self.test.connect()
 				# client.connect()
 				
 				# If successfully connected:

@@ -9,7 +9,6 @@ import pyaudio
 import wave
 
 from server_protocols import ServerProtocol
-from client_protocols import ClientProtocol
 
 class ServerProtocolTest(ServerProtocol):
 	def __init__(self, name, address, port):
@@ -19,31 +18,38 @@ class ServerProtocolTest(ServerProtocol):
 	def connect(self):
 		ServerProtocol.connect(self)
 
-	def test(self):
-		try:
-			print >>sys.stderr, 'connection from', client_address
+	def run(self):
+		self.bind()
+		while True:
+			# Wait for a connection
+			log('Waiting for incoming connection...')
+			connection, client_address = self.socket.accept()
+			try:
+				Log('incoming from' + client_address)
 
-			# Receive the data in small chunks and retransmit it
-			while True:
-				data = connection.recv(16)
-				print >>sys.stderr, 'received "%s"' % data
-				if data:
-					print >>sys.stderr, 'sending data back to the client'
-					connection.sendall(data)
-				else:
-					print >>sys.stderr, 'no more data from', client_address
-					break
+				# Receive the data in small chunks and retransmit it
+				while True:
+					data = connection.recv(16)
+					Log('received "%s"' % data)
+					if data:
+						Log('sending data back to the client')
+						connection.sendall(data)
+					else:
+						Log('no more data from ' + client_address)
+						break
 
-		finally:
-			# Clean up the connection
-			connection.close()
+			finally:
+				# Clean up the connection
+				connection.close()
+
+from client_protocols import ClientProtocol
 
 class ClientProtocolTest(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
 
 	def connect(self):
-		log("Connecting to server " + self.address + " at port " + str(self.port) + " using TEST.")
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using TEST...")
 		self.socket.connect((self.address, self.port))
 		log("Connected.")
 

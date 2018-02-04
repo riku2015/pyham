@@ -3,9 +3,10 @@
 # pyham server program
 
 # Command line parameters:
-# -config=path/file.conf
-# -log=path/file.log
-# -nogui
+# --help
+# --configfile path/file.conf
+# --log path/file.log
+# --nogui
 
 # TODO:
 # - Optional) GUI
