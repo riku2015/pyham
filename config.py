@@ -32,7 +32,7 @@ class Config():
 				#log("Error: config file not found.")
 			#except PermissionError:
 				#log("Error: No permission to read config file.")
-			except:
+			except Exception, e:
 				log("Error while reading config file.")
 		else:
 			log("Error: config file not found.")
@@ -49,7 +49,7 @@ class Config():
 					# line = "variable = value"
 					#log("Error while saving config file.")
 				log(str(linecount) + " lines wrote to config file.")
-		except:
+		except Exception, e:
 			log("Error while saving config file.")
 
 	def __str__():

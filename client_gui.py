@@ -5,9 +5,9 @@ import wave
 import pyaudio
 from log import log
 from client_gui_fbp import FrameMain, FrameSettings
-from tests import play_testsound
-from client_protocols import ClientProtocolFrn
-#from tests import Test_Audiorecorder
+from testcode import play_testsound
+from client_protocols import ClientProtocolFrn, ClientProtocolPyhamp
+#from testcode import Test_Audiorecorder
 
 class Settingswindow(FrameSettings):
 	def __init__(self,parent):
@@ -53,8 +53,8 @@ class Mainwindow(FrameMain):
 			# Keep recording and streaming until PTT button released.
 			# Do not get stuck in a loop here. (threading?)
 
-		except:
-			log('Error: cannot stream recording.')
+		except Exception, e:
+			log('Error while streaming recording: ' + str(e))
 
 	def release_ptt(self, event):
 		try:
@@ -63,15 +63,15 @@ class Mainwindow(FrameMain):
 			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
 			self.button_Ptt.SetLabel("Push To Talk")
 			# Roger beep
-		except:
-			log('Error.')
+		except Exception, e:
+			log('Error: ' + str(e))
 
 	def click_load(self, event):
 		try:
 			# Load preset
 			log('Load preset.')
-		except:
-			log('Error: cannot load preset.')
+		except Exception, e:
+			log('Error while loading preset: ' + str(e))
 
 	def click_delete(self, event):
 		try:
@@ -80,21 +80,21 @@ class Mainwindow(FrameMain):
 			result = dialog_delete.ShowModal()
 			if result == wx.ID_YES:
 				log('Delete preset.')
-		except:
-			log('Error: cannot delete preset.')
+		except Exception, e:
+			log('Error while deleting preset: \n + str(e)')
 
 	def click_save(self,event):
 		try:
 			# Save preset
 			log('Save preset.')
-		except:
-			log('Error: cannot save preset.')
+		except Exception, e:
+			log('Error while saving preset: ' + str(e))
 
 	def choose_room(self, event):
 		log("Room changed.")
 
 	def click_connect(self, event):
-		#try:
+		try:
 			# Connect to server
 			# (disconnect current connection before trying to make a new connection)
 			
@@ -102,6 +102,8 @@ class Mainwindow(FrameMain):
 			self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
 			self.frn.connect()
 			self.frn.send("")
+			#self.pyhamp = ClientProtocolPyhamp("localhost", 1000)
+			#self.pyhamp.connect()
 
 			# If successfull, disable connect button and enable disconnect button:
 			self.button_Connect.Disable()
@@ -110,8 +112,8 @@ class Mainwindow(FrameMain):
 
 			# If successfull, play sound:
 			play_testsound()
-		#except:
-			log('Error: cannot connect to server.')
+		except Exception, e:
+			log('Error while connect to server: ' + str(e))
 
 	def click_disconnect(self, event):
 		try:
@@ -119,14 +121,14 @@ class Mainwindow(FrameMain):
 			# Enable connect button and disable disconnect button:
 			self.button_Connect.Enable()
 			self.button_Disconnect.Disable()
-		except:
-			log('Error.')
+		except Exception, e:
+			log('Error while disconnecting from server: ' + str(e))
 
 	def click_send(self, event):
 		try:
 			log("Send to server.")
-		except:
-			log('Error: cannot send to server.')
+		except Exception, e:
+			log('Error while sending to server: ' + str(e))
 
 	def click_settings(self, event):
 		self.settingswindow = Settingswindow(None)
@@ -139,7 +141,7 @@ class Mainwindow(FrameMain):
 		log("Mic volume: " + str(self.slider_Mic.Value))
 
 	def choose_speaker(self, event):
-		log("Speaker device changed.")
+		log("Speaker device changed to " + str(self.choice_Speaker.GetSelection()) + ".")
 
 	def choose_mic(self, event):
-		log("Mic device changed.")
+		log("Mic device changed to " + str(self.choice_Mic.GetSelection()) + ".")

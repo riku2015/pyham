@@ -7,15 +7,15 @@ from client_gui import Mainwindow
 from client_gui import Settingswindow
 from config import Config
 from client_protocols import ClientProtocolFrn
-#from tests import get_devices
+from testcode import get_audiodevices
 
 class Client:
 	def __init__(self, filename_config):
 		self.filename_config = filename_config
 
 		# Create wxwidgets application:
-		#self.app = wx.App(self)
-		self.app = wx.App(None)
+		#self.app = wx.App(self)	# With separate log console window
+		self.app = wx.App(None)		# Without separate log console window
 		self.mainwindow = Mainwindow(parent=None)
 
 		# Read configuration:
@@ -30,6 +30,9 @@ class Client:
 				# mainwindow.choice_Speaker = self.config.parameters[device_speaker]
 				# mainwindow.choice_Mic = self.config.parameters[device_mic]
 
+				# Set audio device names to choive_Speaker and choice_Mic
+					# self.mainwindow.choice_Speaker.setlabel(get_audiodevices())
+
 			# Update parameters in settingswindow:
 				# settingswindow.choise_Preset = self.config.parameters[]
 				# settingswindow.choise_Room = self.config.parameters[]
@@ -38,9 +41,8 @@ class Client:
 				# settingswindow.choice_Mic = self.config.parameters[device_mic]
 
 	def Run(self):
-		log("Starting graphical client.")
+		log("Starting client.")
 		# Show main window:
-		#self.settingswindow.Show()
 		self.mainwindow.Show()
 		# Execute GUI:
 		self.app.MainLoop()

@@ -101,14 +101,14 @@ class FrameMain ( wx.Frame ):
 		fgSizer_PresetSettings.Add( self.staticText_Preset, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		comboBox_PresetChoices = []
-		self.comboBox_Preset = wx.ComboBox( self.panel_Server, wx.ID_ANY, u"frn.titanix.net", wx.DefaultPosition, wx.DefaultSize, comboBox_PresetChoices, 0 )
+		self.comboBox_Preset = wx.ComboBox( self.panel_Server, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, comboBox_PresetChoices, 0 )
 		fgSizer_PresetSettings.Add( self.comboBox_Preset, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Server = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Server", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Server.Wrap( -1 )
 		fgSizer_PresetSettings.Add( self.staticText_Server, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_Server = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"frn.titanix.net", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_Server = wx.TextCtrl( self.panel_Server, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_PresetSettings.Add( self.textCtrl_Server, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Port = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -121,7 +121,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer27.SetFlexibleDirection( wx.BOTH )
 		fgSizer27.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.textCtrl_Port = wx.TextCtrl( self.panel_Server, wx.ID_ANY, u"10024", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_Port = wx.TextCtrl( self.panel_Server, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer27.Add( self.textCtrl_Port, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Protocol = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Protocol", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -207,10 +207,10 @@ class FrameMain ( wx.Frame ):
 		
 		fgSizer24.Add( self.staticText_Speaker, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		choise_SpeakerChoices = [ u"Default", u"Spk 1", u"Spk 2" ]
-		self.choise_Speaker = wx.Choice( self.panel_Speaker, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choise_SpeakerChoices, 0 )
-		self.choise_Speaker.SetSelection( 0 )
-		fgSizer24.Add( self.choise_Speaker, 0, wx.ALL|wx.EXPAND, 5 )
+		choice_SpeakerChoices = [ u"Default", u"Spk 1", u"Spk 2" ]
+		self.choice_Speaker = wx.Choice( self.panel_Speaker, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_SpeakerChoices, 0 )
+		self.choice_Speaker.SetSelection( 0 )
+		fgSizer24.Add( self.choice_Speaker, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		fgSizer_Speaker.Add( fgSizer24, 1, wx.EXPAND, 5 )
@@ -299,7 +299,7 @@ class FrameMain ( wx.Frame ):
 		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Connect.Bind( wx.EVT_BUTTON, self.click_connect )
 		self.button_Disconnect.Bind( wx.EVT_BUTTON, self.click_disconnect )
-		self.choise_Speaker.Bind( wx.EVT_CHOICE, self.choose_speaker )
+		self.choice_Speaker.Bind( wx.EVT_CHOICE, self.choose_speaker )
 		self.slider_Speaker.Bind( wx.EVT_SCROLL, self.volume_speaker )
 		self.choice_Mic.Bind( wx.EVT_CHOICE, self.choose_mic )
 		self.slider_Mic.Bind( wx.EVT_SCROLL, self.volume_mic )

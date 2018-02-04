@@ -8,6 +8,35 @@ from log import log
 import pyaudio
 import wave
 
+from server_protocols import ServerProtocol
+class ServerProtocolTest(ServerProtocol):
+	def __init__(self, name, address, port):
+		ServerProtocol.__init__(self, name, address, port)
+		self.protocolname = "PYHAMP"
+		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
+
+	def connect(self):
+		ServerProtocol.connect(self)
+
+	def test_code(self):
+		try:
+			print >>sys.stderr, 'connection from', client_address
+
+			# Receive the data in small chunks and retransmit it
+			while True:
+				data = connection.recv(16)
+				print >>sys.stderr, 'received "%s"' % data
+				if data:
+					print >>sys.stderr, 'sending data back to the client'
+					connection.sendall(data)
+				else:
+					print >>sys.stderr, 'no more data from', client_address
+					break
+
+		finally:
+			# Clean up the connection
+			connection.close()
+
 '''
 p = pyaudio.PyAudio()
 for i in range(p.get_device_count()):
@@ -21,7 +50,7 @@ def get_audiodevices():
 	result = ""
 	for i in range(0, numdevices):
 			if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-				result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name')
+				result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name') + "\n"
 	return result
 
 def play_testsound():

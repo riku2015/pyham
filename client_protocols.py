@@ -5,47 +5,59 @@ from log import log
 
 class ClientProtocol:
 	def __init__(self, address, port):
+		self.protocolname = "NONE"
 		self.address = address
 		self.port = port
 		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+	def connect(self):
+		self.socket.connect((self.address, self.port))
+
+	def send(self, data):
+		self.socket.send(data)
+		# log("Error: cannot send trough socket.")
+
 # ProtocolPyhamp
+# commands:
+# <g> get rooms
+# <j roomname> join room
 
 class ClientProtocolPyhamp(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
+		self.protocolname = "PYHAMP"
 
-	def connect(self):
-		self.socket.connect(self)
+	def get_rooms():
+		self.send("<g>")
+		return []
 
-	def send(self, data):
-		#self.socket.send(data)
-		pass
+	def join_room(room):
+		self.send("<j " + room + ">()")
 
 # ProtocolEqso
 
 class ClientProtocolEqso(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
+		self.protocolname = "EQSO"
 
-	def connect(self):
-		self.socket.connect(self)
+	def get_rooms():
+		return []
 
-	def send(self, data):
-		#self.socket.send(data)
+	def join_room(room):
 		pass
 
 # ProtocolEcholink
 
 class ClientProtocolEcholink(ClientProtocol):
 	def __init__(self, address, port):
+		self.protocolname = "ECHOLINK"
 		ClientProtocol.__init__(self, address, port)
 
-	def connect(self):
-		self.socket.connect(self)
+	def get_rooms():
+		return []
 
-	def send(self, data):
-		#self.socket.send(data)
+	def join_room(room):
 		pass
 
 # ProtocolFrn
@@ -56,7 +68,7 @@ class ClientProtocolFrn(ClientProtocol):
 		ClientProtocol.__init__(self, address, port)
 
 	def connect(self):
-		log("Connecting to server " + self.address + " at port " + str(self.port) + ".")
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN.")
 		self.socket.connect((self.address, self.port))
 		#self.socket.connect(("frn.titanix.net", 10024))
 		log("Connected.")
@@ -91,3 +103,9 @@ class ClientProtocolFrn(ClientProtocol):
 			amount_received += len(data)
 			log('received "%s"' % data)
 			self.socket.send("\RX0")
+
+	def get_rooms():
+		return []
+
+	def join_room(room):
+		pass

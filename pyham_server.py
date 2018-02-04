@@ -5,33 +5,44 @@
 # Command line parameters:
 # -config=path/file.conf
 # -log=path/file.log
+# -nogui
 
 # TODO:
 # - Optional) GUI
-# - Threading?
+# - Threading
 # - Translate to different languages / Loalization
+# - Log command line parameters
 
 programName = "Pyham Server"
-programVersion = "0.004"
+programVersion = "0.006"
 filename_config = "pyham_server.conf"
 filename_log = "pyham_server.log"
 
 import sys
+import argparse
 from log import log
 from server import Server
 
 # Read command line parameters:
-if len(sys.argv) >= 2 and len(sys.argv[1]) >= 3:		# At least >=1 characters for parameter name, 1 for '=', and >=1 characters for value
-	pair = sys.argv[1].split('=')
-	if len(pair) == 2 and len(pair[0]) > 0 and len(pair[1]) > 0:
-		parameter = pair[0].strip()
-		value = pair[1].strip()
-		if parameter == "-config":
-			filename_config = value
+parser = argparse.ArgumentParser(description = programName)
+parser.add_argument('-c', '--configfile', help='Read this configuration file')
+parser.add_argument('-l', '--logfile', help='Log to this file')
+parser.add_argument('-n', '--nogui', action='store_true', help='Start without wxWidgets GUI')
+args = parser.parse_args()
+if args.configfile != None:
+	filename_config = args.configfile
+if args.logfile != None:
+	filename_log = args.logfile
 
 # Start server:
 log("Program started.")
-server = Server(filename_config)
+
+if args.nogui:
+	server = Server(filename_config)
+else:
+	from server import ServerWx
+	server = ServerWx(filename_config)
+
 server.Run()
 
 # Terminate program:
