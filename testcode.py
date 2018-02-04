@@ -9,16 +9,17 @@ import pyaudio
 import wave
 
 from server_protocols import ServerProtocol
+from client_protocols import ClientProtocol
+
 class ServerProtocolTest(ServerProtocol):
 	def __init__(self, name, address, port):
 		ServerProtocol.__init__(self, name, address, port)
-		self.protocolname = "PYHAMP"
-		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
+		self.protocolname = "TEST"
 
 	def connect(self):
 		ServerProtocol.connect(self)
 
-	def test_code(self):
+	def test(self):
 		try:
 			print >>sys.stderr, 'connection from', client_address
 
@@ -36,6 +37,42 @@ class ServerProtocolTest(ServerProtocol):
 		finally:
 			# Clean up the connection
 			connection.close()
+
+class ClientProtocolTest(ClientProtocol):
+	def __init__(self, address, port):
+		ClientProtocol.__init__(self, address, port)
+
+	def connect(self):
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using TEST.")
+		self.socket.connect((self.address, self.port))
+		log("Connected.")
+
+	def disconnect(self):
+		#self.socket.send("")
+		log("Disconnected.")
+
+	def test(self):
+		self.socket.send(data)
+		amount_received = 0
+		amount_expected = 1
+		try:
+			# Send data
+			message = 'This is the message.  It will be repeated.'
+			print >>sys.stderr, 'sending "%s"' % message
+			sock.sendall(message)
+
+			# Look for the response
+			amount_received = 0
+			amount_expected = len(message)
+
+			while amount_received < amount_expected:
+				data = sock.recv(16)
+				amount_received += len(data)
+				print >>sys.stderr, 'received "%s"' % data
+
+		finally:
+			print >>sys.stderr, 'closing socket'
+			sock.close()
 
 '''
 p = pyaudio.PyAudio()

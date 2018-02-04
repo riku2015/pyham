@@ -162,11 +162,6 @@ class FrameMain ( wx.Frame ):
 		self.button_Connect = wx.Button( self.panel_Server, wx.ID_ANY, u"Connect", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizerConnectionWidgets.Add( self.button_Connect, 0, wx.ALL, 5 )
 		
-		self.button_Disconnect = wx.Button( self.panel_Server, wx.ID_ANY, u"Disconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.button_Disconnect.Enable( False )
-		
-		fgSizerConnectionWidgets.Add( self.button_Disconnect, 0, wx.ALL, 5 )
-		
 		self.checkBox_Reconnect = wx.CheckBox( self.panel_Server, wx.ID_ANY, u"Reconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizerConnectionWidgets.Add( self.checkBox_Reconnect, 0, wx.ALL, 5 )
 		
@@ -298,7 +293,6 @@ class FrameMain ( wx.Frame ):
 		self.button_Delete.Bind( wx.EVT_BUTTON, self.click_delete )
 		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Connect.Bind( wx.EVT_BUTTON, self.click_connect )
-		self.button_Disconnect.Bind( wx.EVT_BUTTON, self.click_disconnect )
 		self.choice_Speaker.Bind( wx.EVT_CHOICE, self.choose_speaker )
 		self.slider_Speaker.Bind( wx.EVT_SCROLL, self.volume_speaker )
 		self.choice_Mic.Bind( wx.EVT_CHOICE, self.choose_mic )
@@ -332,9 +326,6 @@ class FrameMain ( wx.Frame ):
 		event.Skip()
 	
 	def click_connect( self, event ):
-		event.Skip()
-	
-	def click_disconnect( self, event ):
 		event.Skip()
 	
 	def choose_speaker( self, event ):

@@ -373,6 +373,14 @@ class FrameMain ( wx.Frame ):
 		self.button_Log.Bind( wx.EVT_BUTTON, self.click_log )
 		self.button_Allow.Bind( wx.EVT_BUTTON, self.click_allow )
 		self.button_Ban.Bind( wx.EVT_BUTTON, self.click_ban )
+		self.button_EqsoApply.Bind( wx.EVT_BUTTON, self.click_eqso_apply )
+		self.button_EqsoStart.Bind( wx.EVT_BUTTON, self.click_eqso_start )
+		self.button_EcholinkApply.Bind( wx.EVT_BUTTON, self.click_echolink_apply )
+		self.button_EcholinkStart.Bind( wx.EVT_BUTTON, self.click_echolink_start )
+		self.button_FrnApply.Bind( wx.EVT_BUTTON, self.click_frn_apply )
+		self.button_FrnStart.Bind( wx.EVT_BUTTON, self.click_frn_start )
+		self.button_PyhampApply.Bind( wx.EVT_BUTTON, self.click_pyhamp_apply )
+		self.button_PyhampStart.Bind( wx.EVT_BUTTON, self.click_pyhamp_start )
 	
 	def __del__( self ):
 		pass
@@ -401,6 +409,30 @@ class FrameMain ( wx.Frame ):
 		event.Skip()
 	
 	def click_ban( self, event ):
+		event.Skip()
+	
+	def click_eqso_apply( self, event ):
+		event.Skip()
+	
+	def click_eqso_start( self, event ):
+		event.Skip()
+	
+	def click_echolink_apply( self, event ):
+		event.Skip()
+	
+	def click_echolink_start( self, event ):
+		event.Skip()
+	
+	def click_frn_apply( self, event ):
+		event.Skip()
+	
+	def click_frn_start( self, event ):
+		event.Skip()
+	
+	def click_pyhamp_apply( self, event ):
+		event.Skip()
+	
+	def click_pyhamp_start( self, event ):
 		event.Skip()
 	
 

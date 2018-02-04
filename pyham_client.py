@@ -24,9 +24,9 @@ from log import log
 from client import Client
 
 # Read command line parameters:
-parser = argparse.ArgumentParser(description = programName)
-parser.add_argument('-c', '--configfile', help='Read this configuration file')
-parser.add_argument('-l', '--logfile', help='Log to this file')
+parser = argparse.ArgumentParser(description = programName + " " + programVersion)
+parser.add_argument('-c', '--configfile', help='read this configuration file')
+parser.add_argument('-l', '--logfile', help='log to this file')
 args = parser.parse_args()
 if args.configfile != None:
 	filename_config = args.configfile

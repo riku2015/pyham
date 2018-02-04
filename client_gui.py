@@ -98,31 +98,29 @@ class Mainwindow(FrameMain):
 			# Connect to server
 			# (disconnect current connection before trying to make a new connection)
 			
-			# Test connection:
-			self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
-			self.frn.connect()
-			self.frn.send("")
-			#self.pyhamp = ClientProtocolPyhamp("localhost", 1000)
-			#self.pyhamp.connect()
-
-			# If successfull, disable connect button and enable disconnect button:
-			self.button_Connect.Disable()
-			self.button_Disconnect.Enable()
-			# client.connect()
-
-			# If successfull, play sound:
-			play_testsound()
+			if self.button_Connect.GetLabel() == "Connect":
+				# Make connection:
+				self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
+				self.frn.connect()
+				self.frn.send("")
+				#self.pyhamp = ClientProtocolPyhamp("localhost", 1000)
+				#self.pyhamp.connect()
+				# client.connect()
+				
+				# If successfully connected:
+				play_testsound()
+				self.button_Connect.SetLabel("Disconnect")
+			else:
+				# If successfully disconnected:
+				self.button_Connect.SetLabel("Connect")
+				log("Disconnected.")
+			
+			
+			#log("Connected to server.")
+			#log("Disconnect from server.")
 		except Exception, e:
-			log('Error while connect to server: ' + str(e))
-
-	def click_disconnect(self, event):
-		try:
-			log("Disconnect from server.")
-			# Enable connect button and disable disconnect button:
-			self.button_Connect.Enable()
-			self.button_Disconnect.Disable()
-		except Exception, e:
-			log('Error while disconnecting from server: ' + str(e))
+			log('Error while connecting to server: ' + str(e))
+			#log('Error while disconnecting from server: ' + str(e))
 
 	def click_send(self, event):
 		try:

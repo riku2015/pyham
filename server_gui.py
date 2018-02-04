@@ -9,7 +9,7 @@ class Mainwindow(FrameMain):
 
 	def click_quit( self, event ):
 		# TODO: autosave
-		pass
+		self.Close()
 
 	def click_settings( self, event ):
 		pass
@@ -30,4 +30,28 @@ class Mainwindow(FrameMain):
 		log("Ban.")
 
 	def click_stats( self, event ):
+		pass
+
+	def click_eqso_apply( self, event ):
+		pass
+
+	def click_eqso_start( self, event ):
+		pass
+
+	def click_echolink_apply( self, event ):
+		pass
+
+	def click_echolink_start( self, event ):
+		pass
+
+	def click_frn_apply( self, event ):
+		pass
+
+	def click_frn_start( self, event ):
+		pass
+
+	def click_pyhamp_apply( self, event ):
+		pass
+
+	def click_pyhamp_start( self, event ):
 		pass

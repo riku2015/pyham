@@ -5,6 +5,7 @@ from datetime import datetime
 
 # TODO:
 # - Logging options: stdout, stderr, file, window...
+# - Set filename from command line parameter
 
 def log(text, filename = None):
 	# Format text with timestamp:

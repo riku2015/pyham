@@ -68,7 +68,7 @@ class ClientProtocolFrn(ClientProtocol):
 		ClientProtocol.__init__(self, address, port)
 
 	def connect(self):
-		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN.")
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN...")
 		self.socket.connect((self.address, self.port))
 		#self.socket.connect(("frn.titanix.net", 10024))
 		log("Connected.")
