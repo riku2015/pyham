@@ -13,9 +13,9 @@ Tested on GNU/Linux and Windows versions of [wxPython](https://www.wxpython.org)
 >
 > python pyham_client.py --help
 >
-> python pyham_client.py --configfile <filename>
+> python pyham_client.py --configfile filename.conf
 >
-> python pyham_client.py --logfile <filename>
+> python pyham_client.py --logfile filename.log
 
 
 ### How to run server:
@@ -23,9 +23,9 @@ Tested on GNU/Linux and Windows versions of [wxPython](https://www.wxpython.org)
 >
 >python pyham_server.py --help
 >
->python pyham_server.py --configfile <filename>
+>python pyham_server.py --configfile filename.conf
 >
->python pyham_server.py --logfile <filename>
+>python pyham_server.py --logfile filename.log
 >
 >python pyham_server.py --nogui
 
