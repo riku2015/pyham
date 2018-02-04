@@ -12,9 +12,9 @@ python pyham_client.py
 
 python pyham_client.py --help
 
-python pyham_client.py --configfile=path/filename
+python pyham_client.py --configfile path/filename
 
-python pyham_client.py --logfile=path/filename
+python pyham_client.py --logfile path/filename
 
 
 ### How to run server:
@@ -22,9 +22,9 @@ python pyham_server.py
 
 python pyham_server.py --help
 
-python pyham_server.py --configfile=path/filename
+python pyham_server.py --configfile path/filename
 
-python pyham_server.py --logfile=path/filename
+python pyham_server.py --logfile path/filename
 
 python pyham_server.py --nogui
 
