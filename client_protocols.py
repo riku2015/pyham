@@ -17,22 +17,45 @@ class ClientProtocol:
 		self.socket.send(data)
 		# log("Error: cannot send trough socket.")
 
+	def receive(self):
+		return ""
+
 # ProtocolPyhamp
 # commands:
-# <g> get rooms
+# <gr> get rooms
 # <j roomname> join room
+# <d> disconnect
+# <v> get server version
+# <v string> send client version
 
 class ClientProtocolPyhamp(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
 		self.protocolname = "PYHAMP"
+		self.version = "0.05"
 
-	def get_rooms():
-		self.send("<g>")
+	def send_audio(data):
+		pass
+
+	def get_audio():
+		return None
+
+	def get_rooms(self):
+		self.send("<gr>")
+		self.receive()
 		return []
 
-	def join_room(room):
+	def join_room(self, room):
 		self.send("<j " + room + ">()")
+
+	def disconnect(self):
+		pass
+
+	def get_version(self):
+		pass
+
+	def send_version(self):
+		pass
 
 # ProtocolEqso
 
@@ -41,10 +64,25 @@ class ClientProtocolEqso(ClientProtocol):
 		ClientProtocol.__init__(self, address, port)
 		self.protocolname = "EQSO"
 
+	def send_audio(data):
+		pass
+
+	def get_audio():
+		return None
+
 	def get_rooms():
 		return []
 
 	def join_room(room):
+		pass
+
+	def disconnect(self):
+		pass
+
+	def get_version(self):
+		pass
+
+	def send_version(self):
 		pass
 
 # ProtocolEcholink
@@ -54,14 +92,31 @@ class ClientProtocolEcholink(ClientProtocol):
 		self.protocolname = "ECHOLINK"
 		ClientProtocol.__init__(self, address, port)
 
+	def send_audio(data):
+		pass
+
+	def get_audio():
+		return None
+
 	def get_rooms():
 		return []
 
 	def join_room(room):
 		pass
 
+	def disconnect(self):
+		pass
+
+	def get_version(self):
+		pass
+
+	def send_version(self):
+		pass
+
 # ProtocolFrn
 # http://freeradionetwork.eu/frnprotocol.htm
+
+programVersion = "0.010"	# FIXME: duplicate definition here
 
 class ClientProtocolFrn(ClientProtocol):
 	def __init__(self, address, port):
@@ -70,7 +125,6 @@ class ClientProtocolFrn(ClientProtocol):
 	def connect(self):
 		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN...")
 		self.socket.connect((self.address, self.port))
-		#self.socket.connect(("frn.titanix.net", 10024))
 		log("Connected.")
 
 	def disconnect(self):
@@ -88,7 +142,7 @@ class ClientProtocolFrn(ClientProtocol):
 		self.socket.send("<ON>kokeilu</ON>")			# Kutsu tahan
 		self.socket.send("<CL>2</CL>")					# KIINTEE TOISTASEKS
 		self.socket.send("<BC>PC Only</BC>")			# KIINTEE toistaseks
-		self.socket.send("<DS>description</DS>")		# Paikkakunta kommentti ym tama
+		self.socket.send("<DS>Pyham Cient " + programVersion + " test</DS>")	# Paikkakunta kommentti ym tama
 		self.socket.send("<NN>Finland</NN>")			# KIINTEE TOISTASEKSI
 		self.socket.send("<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
 		self.socket.send("<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
@@ -99,13 +153,25 @@ class ClientProtocolFrn(ClientProtocol):
 		amount_expected = 1
 
 		while amount_received < amount_expected:
-			data = self.socket.recv(16)
+			data = self.socket.recv(256)
 			amount_received += len(data)
 			log('received "%s"' % data)
 			self.socket.send("\RX0")
+
+	def send_audio(data):
+		pass
+
+	def get_audio():
+		return None
 
 	def get_rooms():
 		return []
 
 	def join_room(room):
+		pass
+
+	def get_version(self):
+		pass
+
+	def send_version(self):
 		pass

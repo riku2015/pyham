@@ -8,14 +8,13 @@
 # --logfile path/file.log
 
 # TODO:
-# - Space key as PTT button without character repeating loop
+# - Keyboard key (space) as PTT button without character repeating loop while holding down
 # - Translate to different languages / Loalization
-# - Threading
 # - Status bar (with log display)
-# - Log command line parameters
+# - Log command line parameters and config variables
 
 programName = "Pyham Client"
-programVersion = "0.008"
+programVersion = "0.010"
 filename_config = "pyham_client.conf"
 filename_log = "pyham_client.log"
 
@@ -38,7 +37,7 @@ if args.logfile != None:
 log("Program started.")
 
 client = Client(filename_config)
-client.Run()
+client.run()
 
 # Terminate program:
 log("Exit program.")

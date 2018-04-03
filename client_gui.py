@@ -1,13 +1,17 @@
 #!/usr/bin/python
 
+# client windows
+
+# TODO:
+# - Scalable widgets (different font size for low res & high res etc.)
+
 import wx
-import wave
-import pyaudio
 from log import log
+from audio import *
+from client_protocols import *
 from client_gui_fbp import FrameMain, FrameSettings
-from testcode import play_testsound
-from testcode import ClientProtocolTest
-#from testcode import Test_Audiorecorder
+
+from testcode import *
 
 class Settingswindow(FrameSettings):
 	def __init__(self,parent):
@@ -17,7 +21,7 @@ class Settingswindow(FrameSettings):
 		# Apply changes
 		# Close window:
 		self.Close()
-	
+
 	def click_save( self, event ):
 		log("Save settings.")
 	
@@ -28,30 +32,26 @@ class Settingswindow(FrameSettings):
 class Mainwindow(FrameMain):
 	def __init__(self,parent):
 		FrameMain.__init__(self,parent)
-
-		# Get available sound devices:
-		# print get_devices()
-		# Put them into comboBoxes:
-		# self.comboBox_Speaker.
-		# self.comboBox_Mic
+		self.settingswindow = None
+		self.Bind(EVT_ErrorAudiostreamer, self.OnRecordError)
+		self.audiostreamer = Audiostreamer(self)
+		self.recorder = Recorder(self)
 
 	def push_ptt(self, event):
 		try:
 			log("PTT button pushed down, recording audio to server...")
+
 			# Set PTT button color to red:
 			self.button_Ptt.SetBackgroundColour(wx.Colour(216, 186, 200))
 			self.button_Ptt.SetLabel("Recording...")
 
-			# Record sound:
-			# recorder = Test_Audiorecorder()
-			# recorder.rec()
-
-			# Stream using current protocol:
-			#
-
-			# TODO:
-			# Keep recording and streaming until PTT button released.
-			# Do not get stuck in a loop here. (threading?)
+			# Record and stream audio to server:
+			self.recorder = Recorder(self)
+			self.recorder.running = True
+			self.recorder.start()
+			self.audiostreamer = Audiostreamer(self)
+			self.audiostreamer.running = True
+			self.audiostreamer.start()
 
 		except Exception, e:
 			log('Error while streaming recording: ' + str(e))
@@ -59,10 +59,16 @@ class Mainwindow(FrameMain):
 	def release_ptt(self, event):
 		try:
 			log("PTT button released, end recording to server.")
+
+			self.audiostreamer.running = False
 			# Set PTT button color to green:
 			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
 			self.button_Ptt.SetLabel("Push To Talk")
-			# Roger beep
+
+			# Stop recording thread:
+			self.audiostreamer.stop()
+			self.recorder.stop()
+
 		except Exception, e:
 			log('Error: ' + str(e))
 
@@ -91,7 +97,15 @@ class Mainwindow(FrameMain):
 			log('Error while saving preset: ' + str(e))
 
 	def choose_room(self, event):
+		# Connect to room
 		log("Room changed.")
+
+	def choose_Preset( self, event ):
+		# TODO: Update text fields when preset selected
+		#self.textCtrl_Server.SetValue(self.config.parameters["presets"])
+		#self.textCtrl_Port.SetValue(self.config.parameters["presets"])
+		#self.choice_Protocol
+		pass
 
 	def click_connect(self, event):
 		try:
@@ -100,23 +114,26 @@ class Mainwindow(FrameMain):
 			
 			if self.button_Connect.GetLabel() == "Connect":
 				# Make connection:
-				#self.frn = ClientProtocolFrn("frn.titanix.net", 10024)
-				#self.frn.connect()
-				#self.frn.send("")
-
-				self.test = ClientProtocolTest("localhost", 3000)
-				self.test.connect()
-				# client.connect()
+				protocol = self.choice_Protocol.GetSelection()
+				if protocol == 0:
+					self.protocol = ClientProtocolEcholink(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+				elif protocol == 1:
+					self.protocol = ClientProtocolEqso(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+				elif protocol == 2:
+					self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+				elif protocol == 3:
+					self.protocol = ClientProtocolPyhamp(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+				self.protocol.connect()
+				self.protocol.send("")
 				
 				# If successfully connected:
-				play_testsound()
+				#play_sound("sound.wav")
 				self.button_Connect.SetLabel("Disconnect")
 			else:
 				# If successfully disconnected:
 				self.button_Connect.SetLabel("Connect")
 				log("Disconnected.")
-			
-			
+
 			#log("Connected to server.")
 			#log("Disconnect from server.")
 		except Exception, e:
@@ -130,7 +147,11 @@ class Mainwindow(FrameMain):
 			log('Error while sending to server: ' + str(e))
 
 	def click_settings(self, event):
-		self.settingswindow = Settingswindow(None)
+		if not self.settingswindow:
+			# Closes automatically when main window closes:
+			self.settingswindow = Settingswindow(self)
+			# Persistent when main window closes:
+			#self.settingswindow = Settingswindow(None)
 		self.settingswindow.Show()
 
 	def volume_speaker(self, event):
@@ -144,3 +165,8 @@ class Mainwindow(FrameMain):
 
 	def choose_mic(self, event):
 		log("Mic device changed to " + str(self.choice_Mic.GetSelection()) + ".")
+
+	def OnRecordError(self, evt):
+		# Set PTT button color to green:
+		self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
+		self.button_Ptt.SetLabel("Push To Talk")

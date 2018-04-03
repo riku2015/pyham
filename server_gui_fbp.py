@@ -65,12 +65,6 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Buttons.Fit( self.m_panel5 )
 		fgSizer48.Add( self.m_panel5, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		fgSizer_Main = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer_Main.AddGrowableCol( 0 )
-		fgSizer_Main.AddGrowableRow( 0 )
-		fgSizer_Main.SetFlexibleDirection( wx.BOTH )
-		fgSizer_Main.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
 		fgSizer2 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer2.AddGrowableCol( 0 )
 		fgSizer2.AddGrowableRow( 0 )
@@ -137,73 +131,25 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Protocols.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Protocols.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Eqso = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.RAISED_BORDER|wx.TAB_TRAVERSAL )
-		fgSizer_Eqso = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer_Eqso.SetFlexibleDirection( wx.BOTH )
-		fgSizer_Eqso.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.staticText_Eqso = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"eQSO", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Eqso.Wrap( -1 )
-		self.staticText_Eqso.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
-		
-		fgSizer_Eqso.Add( self.staticText_Eqso, 0, wx.ALL, 5 )
-		
-		fgSizer1413 = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer1413.AddGrowableCol( 1 )
-		fgSizer1413.SetFlexibleDirection( wx.BOTH )
-		fgSizer1413.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.staticText_EqsoName = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_EqsoName.Wrap( -1 )
-		fgSizer1413.Add( self.staticText_EqsoName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
-		
-		self.textCtrl_EqsoName = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1413.Add( self.textCtrl_EqsoName, 0, wx.ALL|wx.EXPAND, 5 )
-		
-		self.staticText_EqsoPort = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_EqsoPort.Wrap( -1 )
-		fgSizer1413.Add( self.staticText_EqsoPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
-		
-		self.textCtrl_EqsoPort = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1413.Add( self.textCtrl_EqsoPort, 0, wx.ALL|wx.EXPAND, 5 )
-		
-		
-		fgSizer_Eqso.Add( fgSizer1413, 1, wx.EXPAND, 5 )
-		
-		fgSizer38 = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer38.SetFlexibleDirection( wx.BOTH )
-		fgSizer38.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.button_EqsoApply = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer38.Add( self.button_EqsoApply, 0, wx.ALL, 5 )
-		
-		self.button_EqsoStart = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer38.Add( self.button_EqsoStart, 0, wx.ALIGN_RIGHT|wx.ALL, 5 )
-		
-		
-		fgSizer_Eqso.Add( fgSizer38, 1, wx.EXPAND, 5 )
-		
-		
-		self.panel_Eqso.SetSizer( fgSizer_Eqso )
-		self.panel_Eqso.Layout()
-		fgSizer_Eqso.Fit( self.panel_Eqso )
-		fgSizer_Protocols.Add( self.panel_Eqso, 1, wx.EXPAND |wx.ALL, 5 )
-		
 		self.panel_Echolink = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.RAISED_BORDER|wx.TAB_TRAVERSAL )
 		fgSizer_Echolink = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Echolink.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Echolink.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Echolink = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Echolink", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Echolink.Wrap( -1 )
-		self.staticText_Echolink.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
-		
-		fgSizer_Echolink.Add( self.staticText_Echolink, 0, wx.ALL, 5 )
-		
 		fgSizer141 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer141.AddGrowableCol( 1 )
 		fgSizer141.SetFlexibleDirection( wx.BOTH )
 		fgSizer141.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_Echolink = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Echolink", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Echolink.Wrap( -1 )
+		self.staticText_Echolink.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer141.Add( self.staticText_Echolink, 0, wx.ALL, 5 )
+		
+		self.staticText_EcholinkState = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_EcholinkState.Wrap( -1 )
+		fgSizer141.Add( self.staticText_EcholinkState, 0, wx.ALL, 5 )
 		
 		self.staticText_EcholinkName = wx.StaticText( self.panel_Echolink, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_EcholinkName.Wrap( -1 )
@@ -241,21 +187,81 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Echolink.Fit( self.panel_Echolink )
 		fgSizer_Protocols.Add( self.panel_Echolink, 1, wx.EXPAND |wx.ALL, 5 )
 		
+		self.panel_Eqso = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.RAISED_BORDER|wx.TAB_TRAVERSAL )
+		fgSizer_Eqso = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer_Eqso.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Eqso.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		fgSizer1413 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer1413.AddGrowableCol( 1 )
+		fgSizer1413.SetFlexibleDirection( wx.BOTH )
+		fgSizer1413.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_Eqso = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"eQSO", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Eqso.Wrap( -1 )
+		self.staticText_Eqso.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer1413.Add( self.staticText_Eqso, 0, wx.ALL, 5 )
+		
+		self.staticText_EqsoState = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_EqsoState.Wrap( -1 )
+		fgSizer1413.Add( self.staticText_EqsoState, 0, wx.ALL, 5 )
+		
+		self.staticText_EqsoName = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_EqsoName.Wrap( -1 )
+		fgSizer1413.Add( self.staticText_EqsoName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		
+		self.textCtrl_EqsoName = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1413.Add( self.textCtrl_EqsoName, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.staticText_EqsoPort = wx.StaticText( self.panel_Eqso, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_EqsoPort.Wrap( -1 )
+		fgSizer1413.Add( self.staticText_EqsoPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		
+		self.textCtrl_EqsoPort = wx.TextCtrl( self.panel_Eqso, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1413.Add( self.textCtrl_EqsoPort, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		fgSizer_Eqso.Add( fgSizer1413, 1, wx.EXPAND, 5 )
+		
+		fgSizer38 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer38.SetFlexibleDirection( wx.BOTH )
+		fgSizer38.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.button_EqsoApply = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer38.Add( self.button_EqsoApply, 0, wx.ALL, 5 )
+		
+		self.button_EqsoStart = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer38.Add( self.button_EqsoStart, 0, wx.ALIGN_RIGHT|wx.ALL, 5 )
+		
+		
+		fgSizer_Eqso.Add( fgSizer38, 1, wx.EXPAND, 5 )
+		
+		
+		self.panel_Eqso.SetSizer( fgSizer_Eqso )
+		self.panel_Eqso.Layout()
+		fgSizer_Eqso.Fit( self.panel_Eqso )
+		fgSizer_Protocols.Add( self.panel_Eqso, 1, wx.EXPAND |wx.ALL, 5 )
+		
 		self.panel_Frn = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.RAISED_BORDER|wx.TAB_TRAVERSAL )
 		fgSizer_Frn = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Frn.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Frn.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Frn = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"FRN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Frn.Wrap( -1 )
-		self.staticText_Frn.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
-		
-		fgSizer_Frn.Add( self.staticText_Frn, 0, wx.ALL, 5 )
-		
 		fgSizer1411 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer1411.AddGrowableCol( 1 )
 		fgSizer1411.SetFlexibleDirection( wx.BOTH )
 		fgSizer1411.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_Frn = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"FRN", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Frn.Wrap( -1 )
+		self.staticText_Frn.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer1411.Add( self.staticText_Frn, 0, wx.ALL, 5 )
+		
+		self.staticText_FrnState = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_FrnState.Wrap( -1 )
+		fgSizer1411.Add( self.staticText_FrnState, 0, wx.ALL, 5 )
 		
 		self.staticText_FrnName = wx.StaticText( self.panel_Frn, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_FrnName.Wrap( -1 )
@@ -298,16 +304,20 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Pyhamp.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Pyhamp.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Pyhamp = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"pyhamp", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Pyhamp.Wrap( -1 )
-		self.staticText_Pyhamp.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
-		
-		fgSizer_Pyhamp.Add( self.staticText_Pyhamp, 0, wx.ALL, 5 )
-		
 		fgSizer1412 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer1412.AddGrowableCol( 1 )
 		fgSizer1412.SetFlexibleDirection( wx.BOTH )
 		fgSizer1412.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_Pyhamp = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"pyhamp", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Pyhamp.Wrap( -1 )
+		self.staticText_Pyhamp.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer1412.Add( self.staticText_Pyhamp, 0, wx.ALL, 5 )
+		
+		self.staticText_PyhampState = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_PyhampState.Wrap( -1 )
+		fgSizer1412.Add( self.staticText_PyhampState, 0, wx.ALL, 5 )
 		
 		self.staticText_PyhampName = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_PyhampName.Wrap( -1 )
@@ -349,10 +359,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer2.Add( fgSizer_Protocols, 1, wx.EXPAND, 5 )
 		
 		
-		fgSizer_Main.Add( fgSizer2, 1, wx.EXPAND, 5 )
-		
-		
-		fgSizer48.Add( fgSizer_Main, 1, wx.EXPAND, 5 )
+		fgSizer48.Add( fgSizer2, 1, wx.EXPAND, 5 )
 		
 		
 		self.m_scrolledWindow2.SetSizer( fgSizer48 )
@@ -375,10 +382,10 @@ class FrameMain ( wx.Frame ):
 		self.button_Log.Bind( wx.EVT_BUTTON, self.click_log )
 		self.button_Allow.Bind( wx.EVT_BUTTON, self.click_allow )
 		self.button_Ban.Bind( wx.EVT_BUTTON, self.click_ban )
-		self.button_EqsoApply.Bind( wx.EVT_BUTTON, self.click_eqso_apply )
-		self.button_EqsoStart.Bind( wx.EVT_BUTTON, self.click_eqso_start )
 		self.button_EcholinkApply.Bind( wx.EVT_BUTTON, self.click_echolink_apply )
 		self.button_EcholinkStart.Bind( wx.EVT_BUTTON, self.click_echolink_start )
+		self.button_EqsoApply.Bind( wx.EVT_BUTTON, self.click_eqso_apply )
+		self.button_EqsoStart.Bind( wx.EVT_BUTTON, self.click_eqso_start )
 		self.button_FrnApply.Bind( wx.EVT_BUTTON, self.click_frn_apply )
 		self.button_FrnStart.Bind( wx.EVT_BUTTON, self.click_frn_start )
 		self.button_PyhampApply.Bind( wx.EVT_BUTTON, self.click_pyhamp_apply )
@@ -413,16 +420,16 @@ class FrameMain ( wx.Frame ):
 	def click_ban( self, event ):
 		event.Skip()
 	
-	def click_eqso_apply( self, event ):
-		event.Skip()
-	
-	def click_eqso_start( self, event ):
-		event.Skip()
-	
 	def click_echolink_apply( self, event ):
 		event.Skip()
 	
 	def click_echolink_start( self, event ):
+		event.Skip()
+	
+	def click_eqso_apply( self, event ):
+		event.Skip()
+	
+	def click_eqso_start( self, event ):
 		event.Skip()
 	
 	def click_frn_apply( self, event ):

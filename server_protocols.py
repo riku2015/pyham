@@ -25,7 +25,7 @@ class ServerProtocol():
 			log("Error while binding socket: " + str(e))
 		return self.binded
 
-	def __unbind(self):
+	def unbind(self):
 		# TODO
 		self.binded = False
 
@@ -75,7 +75,7 @@ class ServerProtocol():
 
 # ProtocolPyhamp
 # Default port:
-# 1000 ?
+# ?
 
 class ServerProtocolPyhamp(ServerProtocol):
 	def __init__(self, name, address, port):
@@ -138,4 +138,3 @@ class ServerProtocolFrn(ServerProtocol):
 	def send(self, data):
 		#self.socket.send(data)
 		log("Sending data.")
-

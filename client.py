@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+# TODO:
+# - CLI client without wxWidgets GUI
+
 import wx
 
 from log import log
@@ -7,9 +10,8 @@ from client_gui import Mainwindow
 from client_gui import Settingswindow
 from config import Config
 from client_protocols import ClientProtocolFrn
-from testcode import get_audiodevices
 
-class Client:
+class Client():
 	def __init__(self, filename_config):
 		self.filename_config = filename_config
 
@@ -21,26 +23,30 @@ class Client:
 		# Read configuration:
 		self.config = Config()
 		self.config.load(filename_config)
+		self.mainwindow.comboBox_Preset.Append(self.config.parameters["autoconnect_preset"])
 
 		# TODO:
-			# Update parameters in mainwindow:
-				# mainwindow.comboBox_Room = self.config.parameters[room]
-				# mainwindow.choise_Callsign = self.config.parameters[callsign]
-				# mainwindow.textCtrl_Description = self.config.parameters[description]
-				# mainwindow.choice_Speaker = self.config.parameters[device_speaker]
-				# mainwindow.choice_Mic = self.config.parameters[device_mic]
+		# Update parameters in mainwindow:
+		# mainwindow.comboBox_Room = self.config.parameters[room]
+		self.mainwindow.textCtrl_Callsign.SetValue(self.config.parameters["callsign"])
+		# mainwindow.textCtrl_Description = self.config.parameters[description]
+		# mainwindow.choice_Speaker = self.config.parameters[device_speaker]
+		# mainwindow.choice_Mic = self.config.parameters[device_mic]
 
-				# Set audio device names to choive_Speaker and choice_Mic
-					# self.mainwindow.choice_Speaker.setlabel(get_audiodevices())
+		# Get available sound devices:
+			# get_audiodevices()
+		# Put them into choice widgets:
+			# self.mainwindow.choice_Speaker.
+			# self.mainwindow.choice_Mic.
 
-			# Update parameters in settingswindow:
-				# settingswindow.choise_Preset = self.config.parameters[]
-				# settingswindow.choise_Room = self.config.parameters[]
-				# settingswindow.checkBox_Autosave = self.config.parameters[]
-				# settingswindow.choice_Speaker = self.config.parameters[device_speaker]
-				# settingswindow.choice_Mic = self.config.parameters[device_mic]
+		# Update parameters in settingswindow:
+		# settingswindow.choise_Preset = self.config.parameters[]
+		# settingswindow.choise_Room = self.config.parameters[]
+		# settingswindow.checkBox_Autosave = self.config.parameters[]
+		# settingswindow.choice_Speaker = self.config.parameters[device_speaker]
+		# settingswindow.choice_Mic = self.config.parameters[device_mic]
 
-	def Run(self):
+	def run(self):
 		log("Starting client.")
 		# Show main window:
 		self.mainwindow.Show()

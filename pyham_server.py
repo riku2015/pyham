@@ -12,10 +12,10 @@
 # - Optional) GUI
 # - Threading
 # - Translate to different languages / Loalization
-# - Log command line parameters
+# - Log command line parameters and config variables
 
 programName = "Pyham Server"
-programVersion = "0.006"
+programVersion = "0.007"
 filename_config = "pyham_server.conf"
 filename_log = "pyham_server.log"
 
@@ -44,7 +44,7 @@ else:
 	from server import ServerWx
 	server = ServerWx(filename_config)
 
-server.Run()
+server.run()
 
 # Terminate program:
 log("Exit program.")
