@@ -27,6 +27,8 @@ class ClientProtocol:
 # <d> disconnect
 # <v> get server version
 # <v string> send client version
+# <c callsign> send callsign
+# <d description> send description
 
 class ClientProtocolPyhamp(ClientProtocol):
 	def __init__(self, address, port):

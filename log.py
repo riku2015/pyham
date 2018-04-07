@@ -2,6 +2,7 @@
 
 import sys
 from datetime import datetime
+import wx
 
 # TODO:
 # - Logging options: stdout, stderr, file, window...
@@ -42,3 +43,9 @@ class Log:
 
 	def gethistory():
 		return this.history
+
+def error(parent, message, caption='Error'):
+	log("ERROR: " + message)
+	dialogError = wx.MessageDialog(parent, message, caption, wx.OK | wx.ICON_WARNING)
+	dialogError.ShowModal()
+	dialogError.Destroy()

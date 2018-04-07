@@ -24,7 +24,6 @@ def get_audiodevices():
 def play_sound(filename):
 	CHUNK = 1024
 	wave_test = wave.open(filename, 'rb')
-	#audio = pyaudio.PyAudio()
 	stream_test = audio.open(format=audio.get_format_from_width(wave_test.getsampwidth()), channels=wave_test.getnchannels(), rate=wave_test.getframerate(), output=True)
 	data_test = wave_test.readframes(CHUNK)
 	while data_test != '':
@@ -89,9 +88,7 @@ class Audiostreamer(threading.Thread):
 		self.buffer = []
 
 	def run(self):
-		"""Overrides Thread.run. Don't call this directly its called internally
-		when you call Thread.start().
-		"""
+		# Overrides Thread.run. Don't call this directly its called internally when you call Thread.start().
 
 		# If error:
 		#evt = EventAudiostreamerError(Event_ErrorAudiostreamer, -1)

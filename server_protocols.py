@@ -38,8 +38,8 @@ class ServerProtocol():
 		while totalsent < MSGLEN:
 			sent = self.sock.send(data[totalsent:])
 			if sent == 0:
-				log("Error while sending trough socket: " + str(e))
-				#raise RuntimeError("Error: broken socket while sending.")
+				error(self, "while sending trough socket: " + str(e))
+				#raise Runtimeerror(self, "Error: broken socket while sending.")
 			totalsent = totalsent + sent
 
 	def receive(self):
@@ -48,8 +48,8 @@ class ServerProtocol():
 		while bytes_recd < MSGLEN:
 			chunk = self.sock.recv(min(MSGLEN - bytes_received, 2048))
 			if chunk == '':
-				log("Error while receiving via socket: " + str(e))
-				#raise RuntimeError("Error: broken socket while receiving.")
+				error(self, "while receiving via socket: " + str(e))
+				#raise Runtimeerror(self, "Error: broken socket while receiving.")
 			chunks.append(chunk)
 			bytes_received += len(chunk)
 		return ''.join(chunks)
@@ -84,7 +84,8 @@ class ServerProtocolPyhamp(ServerProtocol):
 		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
 
 	def connect(self):
-		ServerProtocol.connect(self)
+		#ServerProtocol.connect(self)
+		pass
 
 # ProtocolEqso
 # Default port:
@@ -96,7 +97,8 @@ class ServerProtocolEqso(ServerProtocol):
 		self.protocolname = "EQSO"
 
 	def connect(self):
-		ServerProtocol.connect(self)
+		#ServerProtocol.connect(self)
+		pass
 
 	def send(self):
 		log("Sending data.")
@@ -113,7 +115,8 @@ class ServerProtocolEcholink(ServerProtocol):
 		self.protocolname = "ECHOLINK"
 
 	def connect(self):
-		ServerProtocol.connect(self)
+		#ServerProtocol.connect(self)
+		pass
 
 	def send(self):
 		log("Sending data.")
@@ -129,7 +132,8 @@ class ServerProtocolFrn(ServerProtocol):
 		self.protocolname = "FRN"
 
 	def connect(self):
-		ServerProtocol.connect(self)
+		#ServerProtocol.connect(self)
+		pass
 
 	def disconnect(self):
 		self.socket.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan

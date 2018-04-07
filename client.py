@@ -9,7 +9,6 @@ from log import log
 from client_gui import Mainwindow
 from client_gui import Settingswindow
 from config import Config
-from client_protocols import ClientProtocolFrn
 
 class Client():
 	def __init__(self, filename_config):
@@ -29,15 +28,15 @@ class Client():
 		# Update parameters in mainwindow:
 		# mainwindow.comboBox_Room = self.config.parameters[room]
 		self.mainwindow.textCtrl_Callsign.SetValue(self.config.parameters["callsign"])
-		# mainwindow.textCtrl_Description = self.config.parameters[description]
+		self.mainwindow.textCtrl_Description.SetValue(self.config.parameters["description"])
 		# mainwindow.choice_Speaker = self.config.parameters[device_speaker]
 		# mainwindow.choice_Mic = self.config.parameters[device_mic]
 
 		# Get available sound devices:
 			# get_audiodevices()
 		# Put them into choice widgets:
-			# self.mainwindow.choice_Speaker.
-			# self.mainwindow.choice_Mic.
+			# self.mainwindow.choice_Speaker.Append()
+			# self.mainwindow.choice_Mic.Append()
 
 		# Update parameters in settingswindow:
 		# settingswindow.choise_Preset = self.config.parameters[]

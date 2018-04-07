@@ -6,7 +6,7 @@
 # - Scalable widgets (different font size for low res & high res etc.)
 
 import wx
-from log import log
+from log import *
 from audio import *
 from client_protocols import *
 from client_gui_fbp import FrameMain, FrameSettings
@@ -17,13 +17,31 @@ class Settingswindow(FrameSettings):
 	def __init__(self,parent):
 		FrameSettings.__init__(self,parent)
 
+	def click_fileroger( self, event ):
+		with wx.FileDialog(self, "Open sound file", wildcard="WAV files (*.wav)|*.wav", style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+			if fileDialog.ShowModal() == wx.ID_CANCEL:
+				return
+			self.textCtrl_FileRoger.SetValue(fileDialog.GetPath())
+	
+	def click_fileconnect( self, event ):
+		with wx.FileDialog(self, "Open sound file", wildcard="WAV files (*.wav)|*.wav", style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+			if fileDialog.ShowModal() == wx.ID_CANCEL:
+				return
+			self.textCtrl_FileConnect.SetValue(fileDialog.GetPath())
+	
+	def click_filedisconnect( self, event ):
+		with wx.FileDialog(self, "Open sound file", wildcard="WAV files (*.wav)|*.wav", style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+			if fileDialog.ShowModal() == wx.ID_CANCEL:
+				return
+			self.textCtrl_FileDisconnect.SetValue(fileDialog.GetPath())
+
 	def click_ok( self, event ):
 		# Apply changes
 		# Close window:
 		self.Close()
 
 	def click_save( self, event ):
-		log("Save settings.")
+		log("Settings saved.")
 	
 	def click_cancel( self, event ):
 		# Close window:
@@ -54,7 +72,7 @@ class Mainwindow(FrameMain):
 			self.audiostreamer.start()
 
 		except Exception, e:
-			log('Error while streaming recording: ' + str(e))
+			error(self, "while streaming recording: " + str(e))
 
 	def release_ptt(self, event):
 		try:
@@ -70,31 +88,31 @@ class Mainwindow(FrameMain):
 			self.recorder.stop()
 
 		except Exception, e:
-			log('Error: ' + str(e))
+			error(str(e))
 
 	def click_load(self, event):
 		try:
 			# Load preset
 			log('Load preset.')
 		except Exception, e:
-			log('Error while loading preset: ' + str(e))
+			error(self, "while loading preset: " + str(e))
 
 	def click_delete(self, event):
 		try:
 			# Delete preset
-			dialog_delete = wx.MessageDialog(None, 'Delete preset?', 'Confirm delete', wx.YES_NO | wx.ICON_QUESTION)
+			dialog_delete = wx.MessageDialog(self, 'Delete preset?', 'Confirm delete', wx.YES_NO | wx.ICON_QUESTION)
 			result = dialog_delete.ShowModal()
 			if result == wx.ID_YES:
 				log('Delete preset.')
 		except Exception, e:
-			log('Error while deleting preset: \n + str(e)')
+			error(self, "while deleting preset: \n + str(e)")
 
 	def click_save(self,event):
 		try:
 			# Save preset
 			log('Save preset.')
 		except Exception, e:
-			log('Error while saving preset: ' + str(e))
+			error(self, "while saving preset: " + str(e))
 
 	def choose_room(self, event):
 		# Connect to room
@@ -104,47 +122,53 @@ class Mainwindow(FrameMain):
 		# TODO: Update text fields when preset selected
 		#self.textCtrl_Server.SetValue(self.config.parameters["presets"])
 		#self.textCtrl_Port.SetValue(self.config.parameters["presets"])
-		#self.choice_Protocol
+		#self.choice_Protocol.
 		pass
 
 	def click_connect(self, event):
-		try:
-			# Connect to server
-			# (disconnect current connection before trying to make a new connection)
-			
-			if self.button_Connect.GetLabel() == "Connect":
-				# Make connection:
-				protocol = self.choice_Protocol.GetSelection()
-				if protocol == 0:
-					self.protocol = ClientProtocolEcholink(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-				elif protocol == 1:
-					self.protocol = ClientProtocolEqso(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-				elif protocol == 2:
-					self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-				elif protocol == 3:
-					self.protocol = ClientProtocolPyhamp(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-				self.protocol.connect()
-				self.protocol.send("")
-				
-				# If successfully connected:
-				#play_sound("sound.wav")
-				self.button_Connect.SetLabel("Disconnect")
-			else:
-				# If successfully disconnected:
-				self.button_Connect.SetLabel("Connect")
-				log("Disconnected.")
+		if len(self.textCtrl_Server.GetValue()) > 0:
+			if self.textCtrl_Port.GetValue().isdigit():
+				try:
+					# Connect to server
+					# (disconnect current connection before trying to make a new connection)
+					
+					if self.button_Connect.GetLabel() == "Connect":
+						# Make connection:
+						protocol = self.choice_Protocol.GetSelection()
+						if protocol == 0:
+							self.protocol = ClientProtocolEcholink(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+						elif protocol == 1:
+							self.protocol = ClientProtocolEqso(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+						elif protocol == 2:
+							self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+						elif protocol == 3:
+							self.protocol = ClientProtocolPyhamp(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+						self.protocol.connect()
+						self.protocol.send("")
+						
+						# If successfully connected:
+						#play_sound("sound.wav")
+						self.button_Connect.SetLabel("Disconnect")
+					else:
+						# If successfully disconnected:
+						self.button_Connect.SetLabel("Connect")
+						log("Disconnected.")
 
-			#log("Connected to server.")
-			#log("Disconnect from server.")
-		except Exception, e:
-			log('Error while connecting to server: ' + str(e))
-			#log('Error while disconnecting from server: ' + str(e))
+					#log("Connected to server.")
+					#log("Disconnect from server.")
+				except Exception, e:
+					error(self, "while connecting to server: " + str(e))
+					#log('Error while disconnecting from server: ' + str(e))
+			else:
+				error(self, "Invalid port.")
+		else:
+			error(self, "Invalid server address.")
 
 	def click_send(self, event):
 		try:
 			log("Send to server.")
 		except Exception, e:
-			log('Error while sending to server: ' + str(e))
+			log('while sending to server: ' + str(e))
 
 	def click_settings(self, event):
 		if not self.settingswindow:

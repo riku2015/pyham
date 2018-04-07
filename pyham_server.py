@@ -9,13 +9,12 @@
 # --nogui
 
 # TODO:
-# - Optional) GUI
 # - Threading
-# - Translate to different languages / Loalization
+# - Translate to different languages / Localization
 # - Log command line parameters and config variables
 
 programName = "Pyham Server"
-programVersion = "0.007"
+programVersion = "0.008"
 filename_config = "pyham_server.conf"
 filename_log = "pyham_server.log"
 
@@ -26,7 +25,7 @@ from server import Server
 
 # Read command line parameters:
 parser = argparse.ArgumentParser(description = programName + " " + programVersion)
-parser.add_argument('-c', '--configfile', help='read this configuration file')
+parser.add_argument('-c', '--configfile', help='use this configuration file')
 parser.add_argument('-l', '--logfile', help='log to this file')
 parser.add_argument('-n', '--nogui', action='store_true', help='start without wxWidgets GUI')
 args = parser.parse_args()

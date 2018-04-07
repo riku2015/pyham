@@ -9,8 +9,8 @@ from log import log
 from server_gui_fbp import FrameMain
 
 class Mainwindow(FrameMain):
-	def __init__(self,parent):
-		FrameMain.__init__(self,parent)
+	def __init__(self, parent):
+		FrameMain.__init__(self, parent)
 
 	def click_quit( self, event ):
 		# TODO: autosave

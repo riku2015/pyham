@@ -6,9 +6,10 @@
 # parameter = value
 #
 # Values:
-# integer
-# string
-# 0/1, true/false, on/off, enabled/disabled
+# 	integer
+# 	string
+# 	boolean:
+# 		0/1, true/false, on/off, enabled/disabled
 
 from log import log
 from os.path import isfile
@@ -45,12 +46,13 @@ class Config():
 			#except PermissionError:
 				#log("Error: No permission to read config file.")
 			except Exception, e:
-				log("Error while reading config file: " + str(e))
+				error(self, "while reading config file: " + str(e))
 		else:
-			log("Error: config file not found. Using zero values.")
+			error(self, "config file not found. Using zero values.")
 
 	def save(self, filename):
 		# Generate config file from self.parameters
+		# TODO: Create new config file template with comments
 		log("Saving config file '" + filename + "'...")
 		try:
 			with open(filename, "w") as file:
@@ -63,7 +65,7 @@ class Config():
 					#log("Error while saving config file.")
 				log(str(linecount) + " lines wrote to config file.")
 		except Exception, e:
-			log("Error while saving config file: " + str(e))
+			error(self, "while saving config file: " + str(e))
 
 	def __str__():
 		# Return current parameters
