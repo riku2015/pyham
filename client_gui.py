@@ -74,6 +74,10 @@ class Mainwindow(FrameMain):
 		except Exception, e:
 			error(self, "while streaming recording: " + str(e))
 
+			# Set PTT button color to green:
+			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
+			self.button_Ptt.SetLabel("Push To Talk")
+
 	def release_ptt(self, event):
 		try:
 			log("PTT button released, end recording to server.")
