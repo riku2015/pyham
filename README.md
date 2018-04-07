@@ -8,6 +8,8 @@ This program is under development and no working version is released yet.
 
 Tested on GNU/Linux and Windows versions of [wxPython](https://www.wxpython.org).
 
+Currently Python 2.7 is supported and 3.5 is not. Later versions of this program will require 3.5.
+
 ### How to run client:
 > python pyham_client.py [-h] [-c CONFIGFILE] [-l LOGFILE]
 >
