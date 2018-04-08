@@ -14,7 +14,7 @@
 # - Log command line parameters and config variables
 
 programName = "Pyham Server"
-programVersion = "0.008"
+programVersion = "0.009"
 filename_config = "pyham_server.conf"
 filename_log = "pyham_server.log"
 
