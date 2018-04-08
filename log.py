@@ -46,6 +46,6 @@ class Log:
 
 def error(parent, message, caption='Error'):
 	log("ERROR: " + message)
-	dialogError = wx.MessageDialog(parent, message, caption, wx.OK | wx.ICON_WARNING)
+	dialogError = wx.MessageDialog(parent, "ERROR:\n" + message, caption, wx.OK | wx.ICON_WARNING)
 	dialogError.ShowModal()
 	dialogError.Destroy()

@@ -186,7 +186,7 @@ class FrameMain ( wx.Frame ):
 		fgSizerConnectionWidgets.Add( self.button_Connect, 0, wx.ALL, 5 )
 		
 		self.checkBox_Reconnect = wx.CheckBox( self.panel_Server, wx.ID_ANY, u"Reconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizerConnectionWidgets.Add( self.checkBox_Reconnect, 0, wx.ALL, 5 )
+		fgSizerConnectionWidgets.Add( self.checkBox_Reconnect, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		
 		fgSizer_Preset.Add( fgSizerConnectionWidgets, 1, wx.EXPAND, 5 )
@@ -505,7 +505,7 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer27.Add( self.m_staticText18, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 		
-		m_choice9Choices = [ u"UI", u"COM1", u"LPT1", u"USB" ]
+		m_choice9Choices = [ u"UI button", u"COM1", u"LPT1", u"USB serial", u"Joystick 1 button 1" ]
 		self.m_choice9 = wx.Choice( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice9Choices, 0 )
 		self.m_choice9.SetSelection( 0 )
 		fgSizer27.Add( self.m_choice9, 0, wx.ALL, 5 )
@@ -543,8 +543,8 @@ class FrameSettings ( wx.Frame ):
 		self.checkBox_SoundRoger = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Transmit roger beep", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer32.Add( self.checkBox_SoundRoger, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.m_checkBox6 = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Also play locally", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer32.Add( self.m_checkBox6, 0, wx.ALL, 5 )
+		self.checkBox_ = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play roger beep on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer32.Add( self.checkBox_, 0, wx.ALL, 5 )
 		
 		
 		fgSizer23.Add( fgSizer32, 1, wx.EXPAND, 5 )
@@ -566,7 +566,7 @@ class FrameSettings ( wx.Frame ):
 		self.m_staticline1 = wx.StaticLine( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		fgSizer23.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.checkBox_SoundConnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play connect notification", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.checkBox_SoundConnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play connect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer23.Add( self.checkBox_SoundConnect, 0, wx.ALL, 5 )
 		
 		fgSizer28 = wx.FlexGridSizer( 0, 2, 0, 0 )
@@ -586,7 +586,7 @@ class FrameSettings ( wx.Frame ):
 		self.m_staticline2 = wx.StaticLine( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		fgSizer23.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.checkBox_SoundDisconnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play disconnect notification", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.checkBox_SoundDisconnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play disconnect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer23.Add( self.checkBox_SoundDisconnect, 0, wx.ALL, 5 )
 		
 		fgSizer281 = wx.FlexGridSizer( 0, 2, 0, 0 )

@@ -6,10 +6,11 @@ from server_protocols import *
 from server_gui import Mainwindow
 from testcode import ServerProtocolTest
 
+# One server can use one or more different protocols at the same time.
+# Only one instance of a certain protocol can be used within one server at the same time.
+
 # Server
 # Server with no user interface
-# One server can use one or more different protocols at the same time.
-# Same protocol can be used only once in one server.
 
 class Server:
 	def __init__(self, filename_config):

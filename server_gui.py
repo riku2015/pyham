@@ -6,18 +6,40 @@
 # - Scalable widgets (different font size for low res & high res etc.)
 
 from log import log
-from server_gui_fbp import FrameMain
+from server_gui_fbp import FrameMain, FrameSettings
+
+class Settingswindow(FrameSettings):
+	def __init__(self,parent):
+		FrameSettings.__init__(self,parent)
+
+	def click_ok( self, event ):
+		# Apply changes
+		# Close window:
+		self.Close()
+
+	def click_save( self, event ):
+		log("Settings saved.")
+	
+	def click_cancel( self, event ):
+		# Close window:
+		self.Close()
 
 class Mainwindow(FrameMain):
 	def __init__(self, parent):
 		FrameMain.__init__(self, parent)
+		self.settingswindow = None
 
 	def click_quit( self, event ):
 		# TODO: autosave
 		self.Close()
 
 	def click_settings( self, event ):
-		pass
+		if not self.settingswindow:
+			# Closes automatically when main window closes:
+			self.settingswindow = Settingswindow(self)
+			# Persistent when main window closes:
+			#self.settingswindow = Settingswindow(None)
+		self.settingswindow.Show()
 
 	def click_load( self, event ):
 		log("Load.")

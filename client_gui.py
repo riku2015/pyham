@@ -72,11 +72,10 @@ class Mainwindow(FrameMain):
 			self.audiostreamer.start()
 
 		except Exception, e:
-			error(self, "while streaming recording: " + str(e))
-
 			# Set PTT button color to green:
 			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
 			self.button_Ptt.SetLabel("Push To Talk")
+			error(self, "while streaming recording: " + str(e))
 
 	def release_ptt(self, event):
 		try:
@@ -115,6 +114,7 @@ class Mainwindow(FrameMain):
 		try:
 			# Save preset
 			log('Save preset.')
+			# self.config.save()
 		except Exception, e:
 			error(self, "while saving preset: " + str(e))
 

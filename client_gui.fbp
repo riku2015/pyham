@@ -2236,7 +2236,7 @@
                                                         </object>
                                                         <object class="sizeritem" expanded="0">
                                                             <property name="border">5</property>
-                                                            <property name="flag">wxALL</property>
+                                                            <property name="flag">wxALIGN_CENTER_VERTICAL|wxALL</property>
                                                             <property name="proportion">0</property>
                                                             <object class="wxCheckBox" expanded="0">
                                                                 <property name="BottomDockable">1</property>
@@ -5078,7 +5078,7 @@
                                                         <property name="caption"></property>
                                                         <property name="caption_visible">1</property>
                                                         <property name="center_pane">0</property>
-                                                        <property name="choices">&quot;UI&quot; &quot;COM1&quot; &quot;LPT1&quot; &quot;USB&quot;</property>
+                                                        <property name="choices">&quot;UI button&quot; &quot;COM1&quot; &quot;LPT1&quot; &quot;USB serial&quot; &quot;Joystick 1 button 1&quot;</property>
                                                         <property name="close_button">1</property>
                                                         <property name="context_help"></property>
                                                         <property name="context_menu">1</property>
@@ -5479,7 +5479,7 @@
                                                                 <property name="gripper">0</property>
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_ANY</property>
-                                                                <property name="label">Also play locally</property>
+                                                                <property name="label">Play roger beep on speaker</property>
                                                                 <property name="max_size"></property>
                                                                 <property name="maximize_button">0</property>
                                                                 <property name="maximum_size"></property>
@@ -5487,7 +5487,7 @@
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
-                                                                <property name="name">m_checkBox6</property>
+                                                                <property name="name">checkBox_</property>
                                                                 <property name="pane_border">1</property>
                                                                 <property name="pane_position"></property>
                                                                 <property name="pane_size"></property>
@@ -5847,7 +5847,7 @@
                                                         <property name="gripper">0</property>
                                                         <property name="hidden">0</property>
                                                         <property name="id">wxID_ANY</property>
-                                                        <property name="label">Play connect notification</property>
+                                                        <property name="label">Play connect notification on speaker</property>
                                                         <property name="max_size"></property>
                                                         <property name="maximize_button">0</property>
                                                         <property name="maximum_size"></property>
@@ -6213,7 +6213,7 @@
                                                         <property name="gripper">0</property>
                                                         <property name="hidden">0</property>
                                                         <property name="id">wxID_ANY</property>
-                                                        <property name="label">Play disconnect notification</property>
+                                                        <property name="label">Play disconnect notification on speaker</property>
                                                         <property name="max_size"></property>
                                                         <property name="maximize_button">0</property>
                                                         <property name="maximum_size"></property>

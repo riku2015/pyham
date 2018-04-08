@@ -452,7 +452,7 @@ class FrameMain ( wx.Frame ):
 class FrameSettings ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server - Settings", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -480,7 +480,7 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer27.Add( self.m_staticText18, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 		
-		m_choice9Choices = [ u"UI", u"COM1", u"LPT1", u"USB" ]
+		m_choice9Choices = [ u"COM1", u"LPT1", u"USB serial", u"Joystick 1 button 1" ]
 		self.m_choice9 = wx.Choice( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice9Choices, 0 )
 		self.m_choice9.SetSelection( 0 )
 		fgSizer27.Add( self.m_choice9, 0, wx.ALL, 5 )

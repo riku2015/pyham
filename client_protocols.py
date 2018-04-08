@@ -125,7 +125,7 @@ class ClientProtocolFrn(ClientProtocol):
 		ClientProtocol.__init__(self, address, port)
 
 	def connect(self):
-		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN...")
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using FRN protocol...")
 		self.socket.connect((self.address, self.port))
 		log("Connected.")
 

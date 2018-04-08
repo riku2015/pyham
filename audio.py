@@ -12,13 +12,12 @@ from log import log
 audio = pyaudio.PyAudio()
 
 def get_audiodevices():
-	p = pyaudio.PyAudio()
-	info = p.get_host_api_info_by_index(0)
+	info = audio.get_host_api_info_by_index(0)
 	numdevices = info.get('deviceCount')
 	result = ""
 	for i in range(0, numdevices):
-		if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-			result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name') + "\n"
+		if (audio.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+			result += "Input Device id " + str(i) + " - " + audio.get_device_info_by_host_api_device_index(0, i).get('name') + "\n"
 	return result
 
 def play_sound(filename):

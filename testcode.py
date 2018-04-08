@@ -5,8 +5,6 @@
 # It should not be imported at all in a final release.
 
 from log import log
-import pyaudio
-import wave
 
 from server_protocols import ServerProtocol
 
@@ -49,7 +47,7 @@ class ClientProtocolTest(ClientProtocol):
 		ClientProtocol.__init__(self, address, port)
 
 	def connect(self):
-		log("Connecting to server " + self.address + " at port " + str(self.port) + " using TEST...")
+		log("Connecting to server " + self.address + " at port " + str(self.port) + " using TEST protocol...")
 		self.socket.connect((self.address, self.port))
 		log("Connected.")
 
@@ -65,85 +63,41 @@ class ClientProtocolTest(ClientProtocol):
 			# Send data
 			message = 'This is the message.  It will be repeated.'
 			print >>sys.stderr, 'sending "%s"' % message
-			sock.sendall(message)
+			self.socket.sendall(message)
 
 			# Look for the response
 			amount_received = 0
 			amount_expected = len(message)
 
 			while amount_received < amount_expected:
-				data = sock.recv(16)
+				data = self.socket.recv(16)
 				amount_received += len(data)
 				print >>sys.stderr, 'received "%s"' % data
 
 		finally:
-			print >>sys.stderr, 'closing socket'
-			sock.close()
+			self.socket.close()
+			log("Socket closed.")
+
+	def stream_audio():
+		pass
+
+import pyaudio
 
 '''
 p = pyaudio.PyAudio()
 for i in range(p.get_device_count()):
 	print p.get_device_info_by_index(i)
+
+WAVE_OUTPUT_FILENAME = "test.wav"
+# Save to file:
+#waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+#waveFile.setnchannels(CHANNELS)
+#waveFile.setsampwidth(self.audio.get_sample_size(FORMAT))
+#waveFile.setframerate(RATE)
+#waveFile.writeframes(b''.join(frames))
+#waveFile.close()
+
 '''
-
-def get_audiodevices():
-	p = pyaudio.PyAudio()
-	info = p.get_host_api_info_by_index(0)
-	numdevices = info.get('deviceCount')
-	result = ""
-	for i in range(0, numdevices):
-			if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-				result += "Input Device id " + str(i) + " - " + p.get_device_info_by_host_api_device_index(0, i).get('name') + "\n"
-	return result
-
-def play_testsound():
-	CHUNK = 1024
-	wave_test = wave.open("sound.wav", 'rb')
-	audio_test = pyaudio.PyAudio()
-	stream_test = audio_test.open(format=audio_test.get_format_from_width(wave_test.getsampwidth()), channels=wave_test.getnchannels(), rate=wave_test.getframerate(), output=True)
-	data_test = wave_test.readframes(CHUNK)
-	while data_test != '':
-		stream_test.write(data_test)
-		data_test = wave_test.readframes(CHUNK)
-	stream_test.stop_stream()
-	stream_test.close()
-	audio_test.terminate()
-
-class Test_Audiorecorder:
-	def __init__(self):
-		self.audio = pyaudio.PyAudio()
-
-	def rec(self):
-		FORMAT = pyaudio.paInt16
-		CHANNELS = 2
-		RATE = 44100
-		CHUNK = 1024
-		RECORD_SECONDS = 5
-		WAVE_OUTPUT_FILENAME = "test.wav"
-
-		# Start recording
-		stream = self.audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-		log("TEST: Recording for 5 seconds...")
-		frames = []
-
-		for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-			data = stream.read(CHUNK)
-			frames.append(data)
-
-		# Stop recording
-		stream.stop_stream()
-		stream.close()
-		self.audio.terminate()
-
-		log("TEST: Finished recording.")
-
-		# Save to file:
-		waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-		waveFile.setnchannels(CHANNELS)
-		waveFile.setsampwidth(self.audio.get_sample_size(FORMAT))
-		waveFile.setframerate(RATE)
-		waveFile.writeframes(b''.join(frames))
-		waveFile.close()
 
 class Test_Soundlooper:
 	def __init__(self):
@@ -159,3 +113,4 @@ class Test_Soundlooper:
 	def stream():
 		# Send data to client
 		pass
+
