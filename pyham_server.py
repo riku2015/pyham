@@ -14,7 +14,7 @@
 # - Log command line parameters and config variables
 
 programName = "Pyham Server"
-programVersion = "0.009"
+programVersion = "0.010"
 filename_config = "pyham_server.conf"
 filename_log = "pyham_server.log"
 
@@ -28,6 +28,9 @@ parser = argparse.ArgumentParser(description = programName + " " + programVersio
 parser.add_argument('-c', '--configfile', help='use this configuration file')
 parser.add_argument('-l', '--logfile', help='log to this file')
 parser.add_argument('-n', '--nogui', action='store_true', help='start without wxWidgets GUI')
+parser.add_argument('-t', '--terminal', action='store_true', help='start with separate console window (when using GUI)')
+
+
 args = parser.parse_args()
 if args.configfile != None:
 	filename_config = args.configfile
@@ -41,7 +44,7 @@ if args.nogui:
 	server = Server(filename_config)
 else:
 	from server import ServerWx
-	server = ServerWx(filename_config)
+	server = ServerWx(filename_config, args.terminal)
 
 server.run()
 

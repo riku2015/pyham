@@ -40,12 +40,12 @@ class Config():
 					#if verbose:
 					#log("Parameters:")
 					#for key in self.parameters:
-					#	log(key + " = " + self.parameters[key])
+						#log(key + " = " + self.parameters[key])
 			#except FileNotFoundError:
 				#log("Error: config file not found.")
 			#except PermissionError:
 				#log("Error: No permission to read config file.")
-			except Exception, e:
+			except Exception as e:
 				error(self, "while reading config file: " + str(e))
 		else:
 			error(self, "config file not found. Using zero values.")
@@ -57,14 +57,15 @@ class Config():
 		try:
 			with open(filename, "w") as file:
 				linecount = 0
-				for line in self.parameters:
+				for key in self.parameters:
+					file.write(key + " = " + self.parameters[key] + "\n")
 					linecount += 1
-					# log(key, value)
+					#log(key, value)
 					# Iterate trough all variables
 					# line = "variable = value"
 					#log("Error while saving config file.")
 				log(str(linecount) + " lines wrote to config file.")
-		except Exception, e:
+		except Exception as e:
 			error(self, "while saving config file: " + str(e))
 
 	def __str__():

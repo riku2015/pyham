@@ -17,6 +17,10 @@ class Settingswindow(FrameSettings):
 	def __init__(self,parent):
 		FrameSettings.__init__(self,parent)
 
+	def set_main(self, main):
+		# Used to access Client (parent) object's variables/functions
+		self.main = main
+
 	def click_fileroger( self, event ):
 		with wx.FileDialog(self, "Open sound file", wildcard="WAV files (*.wav)|*.wav", style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
 			if fileDialog.ShowModal() == wx.ID_CANCEL:
@@ -35,14 +39,42 @@ class Settingswindow(FrameSettings):
 				return
 			self.textCtrl_FileDisconnect.SetValue(fileDialog.GetPath())
 
-	def click_ok( self, event ):
+	def apply_changes(self):
 		# Apply changes
+		self.main.config.parameters["soundfile_roger"] = self.textCtrl_FileRoger.GetValue()
+		self.main.config.parameters["soundfile_connect"] = self.textCtrl_FileConnect.GetValue()
+		self.main.config.parameters["soundfile_disconnect"] = self.textCtrl_FileDisconnect.GetValue()
+		self.main.config.parameters["callsign"] = self.textCtrl_Callsign.GetValue()
+		if self.checkBox_PlayRoger.GetValue():
+			self.main.config.parameters["play_roger"] = "on"
+		else:
+			self.main.config.parameters["play_roger"] = "off"
+		
+		if self.checkBox_PlayConnect.GetValue():
+			self.main.config.parameters["play_connect"] = "on"
+		else:
+			self.main.config.parameters["play_connect"] = "off"
+
+		if self.checkBox_PlayDisconnect.GetValue():
+			self.main.config.parameters["play_disconnect"] = "on"
+		else:
+			self.main.config.parameters["play_disconnect"] = "off"
+
+		if self.checkBox_TransmitRoger.GetValue():
+			self.main.config.parameters["transmit_roger"] = "on"
+		else:
+			self.main.config.parameters["transmit_roger"] = "off"
+
+	def click_ok( self, event ):
+		self.apply_changes()
 		# Close window:
 		self.Close()
 
 	def click_save( self, event ):
+		self.apply_changes()
+		self.main.config.save(self.main.filename_config)
 		log("Settings saved.")
-	
+
 	def click_cancel( self, event ):
 		# Close window:
 		self.Close()
@@ -54,6 +86,10 @@ class Mainwindow(FrameMain):
 		self.Bind(EVT_ErrorAudiostreamer, self.OnRecordError)
 		self.audiostreamer = Audiostreamer(self)
 		self.recorder = Recorder(self)
+
+	def set_main(self, main):
+		# Used to access Client (parent) object's variables/functions
+		self.main = main
 
 	def push_ptt(self, event):
 		try:
@@ -71,7 +107,7 @@ class Mainwindow(FrameMain):
 			self.audiostreamer.running = True
 			self.audiostreamer.start()
 
-		except Exception, e:
+		except Exception as e:
 			# Set PTT button color to green:
 			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
 			self.button_Ptt.SetLabel("Push To Talk")
@@ -90,14 +126,18 @@ class Mainwindow(FrameMain):
 			self.audiostreamer.stop()
 			self.recorder.stop()
 
-		except Exception, e:
+		except Exception as e:
 			error(str(e))
-
+			
 	def click_load(self, event):
 		try:
 			# Load preset
+			# Update text fields:
+			self.textCtrl_Server.SetValue(self.main.config.parameters["presets"])
+			#self.textCtrl_Port.SetValue(parent.config.parameters["presets"])
+			#self.choice_Protocol.SetSelection(2)	# BOGUS
 			log('Load preset.')
-		except Exception, e:
+		except Exception as e:
 			error(self, "while loading preset: " + str(e))
 
 	def click_delete(self, event):
@@ -107,7 +147,7 @@ class Mainwindow(FrameMain):
 			result = dialog_delete.ShowModal()
 			if result == wx.ID_YES:
 				log('Delete preset.')
-		except Exception, e:
+		except Exception as e:
 			error(self, "while deleting preset: \n + str(e)")
 
 	def click_save(self,event):
@@ -115,7 +155,7 @@ class Mainwindow(FrameMain):
 			# Save preset
 			log('Save preset.')
 			# self.config.save()
-		except Exception, e:
+		except Exception as e:
 			error(self, "while saving preset: " + str(e))
 
 	def choose_room(self, event):
@@ -123,16 +163,13 @@ class Mainwindow(FrameMain):
 		log("Room changed.")
 
 	def choose_Preset( self, event ):
-		# TODO: Update text fields when preset selected
-		#self.textCtrl_Server.SetValue(self.config.parameters["presets"])
-		#self.textCtrl_Port.SetValue(self.config.parameters["presets"])
-		#self.choice_Protocol.
+		# probably not needed
 		pass
 
 	def click_connect(self, event):
 		if len(self.textCtrl_Server.GetValue()) > 0:
 			if self.textCtrl_Port.GetValue().isdigit():
-				try:
+				#try:
 					# Connect to server
 					# (disconnect current connection before trying to make a new connection)
 					
@@ -147,8 +184,9 @@ class Mainwindow(FrameMain):
 							self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
 						elif protocol == 3:
 							self.protocol = ClientProtocolPyhamp(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+						log(str(protocol))
 						self.protocol.connect()
-						self.protocol.send("")
+						self.protocol.send(b"")
 						
 						# If successfully connected:
 						#play_sound("sound.wav")
@@ -160,8 +198,8 @@ class Mainwindow(FrameMain):
 
 					#log("Connected to server.")
 					#log("Disconnect from server.")
-				except Exception, e:
-					error(self, "while connecting to server: " + str(e))
+				#except Exception as e:
+					#error(self, "while connecting to server: " + str(e))
 					#log('Error while disconnecting from server: ' + str(e))
 			else:
 				error(self, "Invalid port.")
@@ -171,15 +209,41 @@ class Mainwindow(FrameMain):
 	def click_send(self, event):
 		try:
 			log("Send to server.")
-		except Exception, e:
+		except Exception as e:
 			log('while sending to server: ' + str(e))
 
 	def click_settings(self, event):
 		if not self.settingswindow:
 			# Closes automatically when main window closes:
 			self.settingswindow = Settingswindow(self)
+			self.settingswindow.set_main(self.main)
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
+		# Set from config:
+		self.settingswindow.textCtrl_FileRoger.SetValue(self.main.config.parameters["soundfile_roger"])
+		self.settingswindow.textCtrl_FileConnect.SetValue(self.main.config.parameters["soundfile_connect"])
+		self.settingswindow.textCtrl_FileDisconnect.SetValue(self.main.config.parameters["soundfile_disconnect"])
+		self.settingswindow.textCtrl_Callsign.SetValue(self.main.config.parameters["callsign"])
+		if self.main.config.parameters["play_roger"] == "on":
+			self.settingswindow.checkBox_PlayRoger.SetValue(True)
+		if self.main.config.parameters["play_roger"] == "off":
+			self.settingswindow.checkBox_PlayRoger.SetValue(False)
+		
+		if self.main.config.parameters["play_connect"] == "on":
+			self.settingswindow.checkBox_PlayConnect.SetValue(True)
+		if self.main.config.parameters["play_connect"] == "off":
+			self.settingswindow.checkBox_PlayConnect.SetValue(False)
+		
+		if self.main.config.parameters["play_disconnect"] == "on":
+			self.settingswindow.checkBox_PlayDisconnect.SetValue(True)
+		if self.main.config.parameters["play_disconnect"] == "off":
+			self.settingswindow.checkBox_PlayDisconnect.SetValue(False)
+		
+		if self.main.config.parameters["transmit_roger"] == "on":
+			self.settingswindow.checkBox_TransmitRoger.SetValue(True)
+		if self.main.config.parameters["transmit_roger"] == "off":
+			self.settingswindow.checkBox_TransmitRoger.SetValue(False)
+
 		self.settingswindow.Show()
 
 	def volume_speaker(self, event):

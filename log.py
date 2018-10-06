@@ -14,8 +14,9 @@ def log(text, filename = None):
 	string = "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
 
 	# Print to console:
-	print >>sys.stderr, string
-
+	#print >>sys.stderr, string
+	print (string)
+	
 	# Append to file:
 	if filename != None:
 		with open(filename, "a") as logfile:

@@ -14,7 +14,7 @@
 # - Log command line parameters and config variables
 
 programName = "Pyham Client"
-programVersion = "0.012"
+programVersion = "0.013"
 filename_config = "pyham_client.conf"
 filename_log = "pyham_client.log"
 
@@ -27,6 +27,9 @@ from client import Client
 parser = argparse.ArgumentParser(description = programName + " " + programVersion)
 parser.add_argument('-c', '--configfile', help='use this configuration file')
 parser.add_argument('-l', '--logfile', help='log to this file')
+parser.add_argument('-n', '--nogui', action='store_true', help='start without wxWidgets GUI')
+parser.add_argument('-t', '--terminal', action='store_true', help='start with separate console window (when using GUI)')
+
 args = parser.parse_args()
 if args.configfile != None:
 	filename_config = args.configfile
@@ -36,7 +39,12 @@ if args.logfile != None:
 # Start client:
 log("Program started.")
 
-client = Client(filename_config)
+if args.nogui:
+	client = Client(filename_config)
+else:
+	from client import ClientWx
+	client = ClientWx(filename_config, args.terminal)
+
 client.run()
 
 # Terminate program:

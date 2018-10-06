@@ -20,7 +20,7 @@ class ServerProtocol():
 			self.socket.listen(1)
 			#self.accept()
 			self.binded = True
-		except Exception, e:
+		except Exception as e:
 			self.binded = False
 			log("Error while binding socket: " + str(e))
 		return self.binded

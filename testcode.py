@@ -81,7 +81,7 @@ class ClientProtocolTest(ClientProtocol):
 	def stream_audio():
 		pass
 
-import pyaudio
+#import pyaudio
 
 '''
 p = pyaudio.PyAudio()

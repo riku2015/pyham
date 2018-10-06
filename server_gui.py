@@ -6,9 +6,13 @@
 # - Scalable widgets (different font size for low res & high res etc.)
 
 from log import log
-from server_gui_fbp import FrameMain, FrameSettings
+from server_gui_fbp import FrameMain, FrameSettings, FrameStats
 
-class Settingswindow(FrameSettings):
+class WindowStats(FrameStats):
+	def __init__(self,parent):
+		FrameStats.__init__(self,parent)
+
+class WindowSettings(FrameSettings):
 	def __init__(self,parent):
 		FrameSettings.__init__(self,parent)
 
@@ -24,10 +28,15 @@ class Settingswindow(FrameSettings):
 		# Close window:
 		self.Close()
 
-class Mainwindow(FrameMain):
+class WindowMain(FrameMain):
 	def __init__(self, parent):
 		FrameMain.__init__(self, parent)
 		self.settingswindow = None
+		self.statswindow = None
+
+	def set_main(self, main):
+		# Used to access Server (parent) object's variables/functions
+		self.main = main
 
 	def click_quit( self, event ):
 		# TODO: autosave
@@ -36,7 +45,7 @@ class Mainwindow(FrameMain):
 	def click_settings( self, event ):
 		if not self.settingswindow:
 			# Closes automatically when main window closes:
-			self.settingswindow = Settingswindow(self)
+			self.settingswindow = WindowSettings(self)
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
 		self.settingswindow.Show()
@@ -59,6 +68,12 @@ class Mainwindow(FrameMain):
 
 	def click_stats( self, event ):
 		# Open stats window
+		if not self.statswindow:
+			# Closes automatically when main window closes:
+			self.statswindow = WindowStats(self)
+			# Persistent when main window closes:
+			#self.settingswindow = Settingswindow(None)
+		self.statswindow.Show()
 		pass
 
 	def click_eqso_apply( self, event ):

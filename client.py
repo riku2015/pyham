@@ -10,18 +10,30 @@ from client_gui import Mainwindow
 from client_gui import Settingswindow
 from config import Config
 
-class Client():
+class Client:
 	def __init__(self, filename_config):
 		self.filename_config = filename_config
-
-		# Create wxwidgets application:
-		#self.app = wx.App(self)	# With separate log console window
-		self.app = wx.App(None)		# Without separate log console window
-		self.mainwindow = Mainwindow(parent=None)
 
 		# Read configuration:
 		self.config = Config()
 		self.config.load(filename_config)
+
+	def run(self):
+		pass
+
+class ClientWx(Client):
+	def __init__(self, filename_config, makeconsole):
+		#self.filename_config = filename_config
+		Client.__init__(self, filename_config)
+		
+		# Create wxwidgets application:
+		if makeconsole:
+			self.app = wx.App(self)		# With separate log console window
+		else:
+			self.app = wx.App(None)		# Without separate log console window
+		self.mainwindow = Mainwindow(parent=None)
+		self.mainwindow.set_main(self)
+		#self.mainwindow = Mainwindow(parent=self)
 		self.mainwindow.comboBox_Preset.Append(self.config.parameters["autoconnect_preset"])
 
 		# TODO:

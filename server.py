@@ -3,7 +3,7 @@
 from log import log
 from config import Config
 from server_protocols import *
-from server_gui import Mainwindow
+from server_gui import WindowMain
 from testcode import ServerProtocolTest
 
 # One server can use one or more different protocols at the same time.
@@ -61,12 +61,14 @@ import wx
 # Server with wxWidgets GUI
 
 class ServerWx(Server):
-	def __init__(self, filename_config):
+	def __init__(self, filename_config, makeconsole):
 		Server.__init__(self, filename_config)
 		# Create wxwidgets application:
-		#self.app = wx.App(self)	# With separate log console window
-		self.app = wx.App(None)		# Without separate log console window
-		self.mainwindow = Mainwindow(parent=None)
+		if makeconsole:
+			self.app = wx.App(self)	# With separate log console window
+		else:
+			self.app = wx.App(None)		# Without separate log console window
+		self.mainwindow = WindowMain(parent=None)
 
 	def run(self):
 		log("Starting server (wx).")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Dec 26 2017)
+## Python code generated with wxFormBuilder (version Aug  8 2018)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO *NOT* EDIT THIS FILE!
@@ -19,7 +19,7 @@ class FrameMain ( wx.Frame ):
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client", pos = wx.DefaultPosition, size = wx.Size( 680,540 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL, name = u"pyham" )
 		
-		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
 		fgSizer21 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer21.AddGrowableCol( 0 )
@@ -42,6 +42,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Room = wx.StaticText( self.scrolledWindow_Main, wx.ID_ANY, u"Room", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Room.Wrap( -1 )
+		
 		self.staticText_Room.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_Roomselect.Add( self.staticText_Room, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -68,6 +69,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Callsign = wx.StaticText( self.scrolledWindow_Main, wx.ID_ANY, u"Callsign", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Callsign.Wrap( -1 )
+		
 		self.staticText_Callsign.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_Send.Add( self.staticText_Callsign, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -80,6 +82,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Description = wx.StaticText( self.scrolledWindow_Main, wx.ID_ANY, u"Description", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Description.Wrap( -1 )
+		
 		self.staticText_Description.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_Send.Add( self.staticText_Description, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -100,7 +103,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Bottom.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Bottom.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Server = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SUNKEN_BORDER|wx.TAB_TRAVERSAL )
+		self.panel_Server = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
 		fgSizer_Preset = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Preset.AddGrowableCol( 0 )
 		fgSizer_Preset.SetFlexibleDirection( wx.BOTH )
@@ -113,6 +116,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Preset = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Preset", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Preset.Wrap( -1 )
+		
 		self.staticText_Preset.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
 		fgSizer_PresetSettings.Add( self.staticText_Preset, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -123,6 +127,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Server = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Server", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Server.Wrap( -1 )
+		
 		self.staticText_Server.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_PresetSettings.Add( self.staticText_Server, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -132,6 +137,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Port = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Port.Wrap( -1 )
+		
 		self.staticText_Port.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_PresetSettings.Add( self.staticText_Port, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -147,6 +153,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Protocol = wx.StaticText( self.panel_Server, wx.ID_ANY, u"Protocol", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Protocol.Wrap( -1 )
+		
 		self.staticText_Protocol.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer27.Add( self.staticText_Protocol, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -206,7 +213,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Audio.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Audio.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Speaker = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,-1 ), wx.SUNKEN_BORDER|wx.TAB_TRAVERSAL )
+		self.panel_Speaker = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,-1 ), wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
 		fgSizer_Speaker = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Speaker.AddGrowableRow( 0 )
 		fgSizer_Speaker.AddGrowableRow( 1 )
@@ -221,6 +228,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Speaker = wx.StaticText( self.panel_Speaker, wx.ID_ANY, u"Spk", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Speaker.Wrap( -1 )
+		
 		self.staticText_Speaker.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_SpeakerSelect.Add( self.staticText_Speaker, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -246,7 +254,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Speaker.Fit( self.panel_Speaker )
 		fgSizer_Audio.Add( self.panel_Speaker, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		self.panel_Mic = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,-1 ), wx.SUNKEN_BORDER|wx.TAB_TRAVERSAL )
+		self.panel_Mic = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,-1 ), wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
 		fgSizer_Mic = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Mic.AddGrowableRow( 0 )
 		fgSizer_Mic.AddGrowableRow( 1 )
@@ -261,6 +269,7 @@ class FrameMain ( wx.Frame ):
 		
 		self.staticText_Mic = wx.StaticText( self.panel_Mic, wx.ID_ANY, u"Mic", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Mic.Wrap( -1 )
+		
 		self.staticText_Mic.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
 		
 		fgSizer_MicSelect.Add( self.staticText_Mic, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -389,9 +398,9 @@ class FrameMain ( wx.Frame ):
 class FrameSettings ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client - Settings", pos = wx.DefaultPosition, size = wx.Size( 480,650 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client - Settings", pos = wx.DefaultPosition, size = wx.Size( 600,690 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		#self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
 		fgSizer24 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer24.AddGrowableCol( 0 )
@@ -403,33 +412,29 @@ class FrameSettings ( wx.Frame ):
 		self.m_scrolledWindow2.SetScrollRate( 5, 5 )
 		fgSizer_Settings = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Settings.AddGrowableCol( 0 )
-		fgSizer_Settings.AddGrowableRow( 2 )
+		fgSizer_Settings.AddGrowableRow( 1 )
 		fgSizer_Settings.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Settings.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.staticTextAbout = wx.StaticText( self.m_scrolledWindow2, wx.ID_ANY, u"These settings apply when the program starts up.", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticTextAbout.Wrap( -1 )
-		self.staticTextAbout.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
-		
-		fgSizer_Settings.Add( self.staticTextAbout, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
 		fgSizer_SettingsWidgets = wx.FlexGridSizer( 0, 3, 0, 0 )
 		fgSizer_SettingsWidgets.SetFlexibleDirection( wx.BOTH )
 		fgSizer_SettingsWidgets.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Devices = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SIMPLE_BORDER|wx.TAB_TRAVERSAL )
+		self.panel_Devices = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Devices = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Devices.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Devices.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Audio = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Audio devices", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Audio = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Audio device defaults", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Audio.Wrap( -1 )
+		
 		self.staticText_Audio.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
 		fgSizer_Devices.Add( self.staticText_Audio, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 		
-		self.staticText_Speaker = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Default speaker:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Speaker = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Speaker device:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Speaker.Wrap( -1 )
+		
 		fgSizer_Devices.Add( self.staticText_Speaker, 0, wx.ALL, 5 )
 		
 		choice_SpeakerChoices = [ u"Default", u"Spk 1", u"Spk 2" ]
@@ -437,8 +442,20 @@ class FrameSettings ( wx.Frame ):
 		self.choice_Speaker.SetSelection( 0 )
 		fgSizer_Devices.Add( self.choice_Speaker, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.staticText_Mic = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Default mic:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText20 = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Speaker volume:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText20.Wrap( -1 )
+		
+		fgSizer_Devices.Add( self.m_staticText20, 0, wx.ALL, 5 )
+		
+		self.m_spinCtrl1 = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
+		fgSizer_Devices.Add( self.m_spinCtrl1, 0, wx.ALL, 5 )
+		
+		self.m_staticline3 = wx.StaticLine( self.panel_Devices, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		fgSizer_Devices.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
+		
+		self.staticText_Mic = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Mic device:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Mic.Wrap( -1 )
+		
 		fgSizer_Devices.Add( self.staticText_Mic, 0, wx.ALL, 5 )
 		
 		choice_MicChoices = [ u"Default", u"Mic 1", u"Mic 2" ]
@@ -446,25 +463,35 @@ class FrameSettings ( wx.Frame ):
 		self.choice_Mic.SetSelection( 0 )
 		fgSizer_Devices.Add( self.choice_Mic, 0, wx.ALL|wx.EXPAND, 5 )
 		
+		self.m_staticText21 = wx.StaticText( self.panel_Devices, wx.ID_ANY, u"Mic volume:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText21.Wrap( -1 )
+		
+		fgSizer_Devices.Add( self.m_staticText21, 0, wx.ALL, 5 )
+		
+		self.m_spinCtrl2 = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
+		fgSizer_Devices.Add( self.m_spinCtrl2, 0, wx.ALL, 5 )
+		
 		
 		self.panel_Devices.SetSizer( fgSizer_Devices )
 		self.panel_Devices.Layout()
 		fgSizer_Devices.Fit( self.panel_Devices )
 		fgSizer_SettingsWidgets.Add( self.panel_Devices, 1, wx.ALL, 5 )
 		
-		self.panel_Autoconnect = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SIMPLE_BORDER|wx.TAB_TRAVERSAL )
+		self.panel_Autoconnect = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Autoconnect = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Autoconnect.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Autoconnect.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Autoconnect = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Autoconnect", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Autoconnect = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Autoconnect at startup", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Autoconnect.Wrap( -1 )
+		
 		self.staticText_Autoconnect.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
 		fgSizer_Autoconnect.Add( self.staticText_Autoconnect, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 		
 		self.staticText_Preset = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Server preset:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Preset.Wrap( -1 )
+		
 		fgSizer_Autoconnect.Add( self.staticText_Preset, 0, wx.ALL, 5 )
 		
 		choice_AutoconnectChoices = []
@@ -474,6 +501,7 @@ class FrameSettings ( wx.Frame ):
 		
 		self.staticText_Room = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Room:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Room.Wrap( -1 )
+		
 		fgSizer_Autoconnect.Add( self.staticText_Room, 0, wx.ALL, 5 )
 		
 		choice_RoomChoices = []
@@ -483,6 +511,7 @@ class FrameSettings ( wx.Frame ):
 		
 		self.staticText_Callsign = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Callsign:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Callsign.Wrap( -1 )
+		
 		fgSizer_Autoconnect.Add( self.staticText_Callsign, 0, wx.ALL, 5 )
 		
 		self.textCtrl_Callsign = wx.TextCtrl( self.panel_Autoconnect, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -494,21 +523,22 @@ class FrameSettings ( wx.Frame ):
 		fgSizer_Autoconnect.Fit( self.panel_Autoconnect )
 		fgSizer_SettingsWidgets.Add( self.panel_Autoconnect, 1, wx.ALL, 5 )
 		
-		self.m_panel7 = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SIMPLE_BORDER|wx.TAB_TRAVERSAL )
+		self.m_panel7 = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer27 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer27.SetFlexibleDirection( wx.BOTH )
 		fgSizer27.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.m_staticText18 = wx.StaticText( self.m_panel7, wx.ID_ANY, u"PTT trigger", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText18.Wrap( -1 )
+		
 		self.m_staticText18.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
 		fgSizer27.Add( self.m_staticText18, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 		
-		m_choice9Choices = [ u"UI button", u"COM1", u"LPT1", u"USB serial", u"Joystick 1 button 1" ]
-		self.m_choice9 = wx.Choice( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_choice9Choices, 0 )
-		self.m_choice9.SetSelection( 0 )
-		fgSizer27.Add( self.m_choice9, 0, wx.ALL, 5 )
+		choice_pttChoices = [ u"UI button", u"COM1", u"LPT1", u"USB serial", u"Joystick 1 button 1" ]
+		self.choice_ptt = wx.Choice( self.m_panel7, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_pttChoices, 0 )
+		self.choice_ptt.SetSelection( 0 )
+		fgSizer27.Add( self.choice_ptt, 0, wx.ALL, 5 )
 		
 		
 		self.m_panel7.SetSizer( fgSizer27 )
@@ -519,12 +549,12 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer_Settings.Add( fgSizer_SettingsWidgets, 1, wx.EXPAND, 5 )
 		
-		fgSizer22 = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer22.AddGrowableCol( 0 )
-		fgSizer22.SetFlexibleDirection( wx.BOTH )
-		fgSizer22.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		fgSizer_NotifyWidgets = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer_NotifyWidgets.AddGrowableCol( 0 )
+		fgSizer_NotifyWidgets.SetFlexibleDirection( wx.BOTH )
+		fgSizer_NotifyWidgets.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.m_panel6 = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SIMPLE_BORDER|wx.TAB_TRAVERSAL )
+		self.m_panel6 = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer23 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer23.AddGrowableCol( 0 )
 		fgSizer23.SetFlexibleDirection( wx.BOTH )
@@ -532,6 +562,7 @@ class FrameSettings ( wx.Frame ):
 		
 		self.m_staticText19 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Sound notifications", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText19.Wrap( -1 )
+		
 		self.m_staticText19.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
 		fgSizer23.Add( self.m_staticText19, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
@@ -540,11 +571,11 @@ class FrameSettings ( wx.Frame ):
 		fgSizer32.SetFlexibleDirection( wx.BOTH )
 		fgSizer32.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.checkBox_SoundRoger = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Transmit roger beep", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer32.Add( self.checkBox_SoundRoger, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		self.checkBox_PlayRoger = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play roger beep on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer32.Add( self.checkBox_PlayRoger, 0, wx.ALL, 5 )
 		
-		self.checkBox_ = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play roger beep on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer32.Add( self.checkBox_, 0, wx.ALL, 5 )
+		self.checkBox_TransmitRoger = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Transmit roger beep", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer32.Add( self.checkBox_TransmitRoger, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
 		
 		fgSizer23.Add( fgSizer32, 1, wx.EXPAND, 5 )
@@ -554,7 +585,7 @@ class FrameSettings ( wx.Frame ):
 		fgSizer26.SetFlexibleDirection( wx.BOTH )
 		fgSizer26.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.textCtrl_FileRoger = wx.TextCtrl( self.m_panel6, wx.ID_ANY, u"/path/file.wav", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_FileRoger = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer26.Add( self.textCtrl_FileRoger, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.button_FileRoger = wx.Button( self.m_panel6, wx.ID_ANY, u"Browse...", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -566,15 +597,15 @@ class FrameSettings ( wx.Frame ):
 		self.m_staticline1 = wx.StaticLine( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		fgSizer23.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.checkBox_SoundConnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play connect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer23.Add( self.checkBox_SoundConnect, 0, wx.ALL, 5 )
+		self.checkBox_PlayConnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play connect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer23.Add( self.checkBox_PlayConnect, 0, wx.ALL, 5 )
 		
 		fgSizer28 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer28.AddGrowableCol( 0 )
 		fgSizer28.SetFlexibleDirection( wx.BOTH )
 		fgSizer28.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.textCtrl_FileConnect = wx.TextCtrl( self.m_panel6, wx.ID_ANY, u"/path/file.wav", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_FileConnect = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer28.Add( self.textCtrl_FileConnect, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.button_FileConnect = wx.Button( self.m_panel6, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -586,15 +617,15 @@ class FrameSettings ( wx.Frame ):
 		self.m_staticline2 = wx.StaticLine( self.m_panel6, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		fgSizer23.Add( self.m_staticline2, 0, wx.EXPAND |wx.ALL, 5 )
 		
-		self.checkBox_SoundDisconnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play disconnect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer23.Add( self.checkBox_SoundDisconnect, 0, wx.ALL, 5 )
+		self.checkBox_PlayDisconnect = wx.CheckBox( self.m_panel6, wx.ID_ANY, u"Play disconnect notification on speaker", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer23.Add( self.checkBox_PlayDisconnect, 0, wx.ALL, 5 )
 		
 		fgSizer281 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer281.AddGrowableCol( 0 )
 		fgSizer281.SetFlexibleDirection( wx.BOTH )
 		fgSizer281.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.textCtrl_FileDisconnect = wx.TextCtrl( self.m_panel6, wx.ID_ANY, u"/path/file.wav", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.textCtrl_FileDisconnect = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer281.Add( self.textCtrl_FileDisconnect, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.button_FileDisconnect = wx.Button( self.m_panel6, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -607,27 +638,30 @@ class FrameSettings ( wx.Frame ):
 		self.m_panel6.SetSizer( fgSizer23 )
 		self.m_panel6.Layout()
 		fgSizer23.Fit( self.m_panel6 )
-		fgSizer22.Add( self.m_panel6, 1, wx.EXPAND |wx.ALL, 5 )
+		fgSizer_NotifyWidgets.Add( self.m_panel6, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
-		fgSizer_Settings.Add( fgSizer22, 1, wx.EXPAND, 5 )
+		fgSizer_Settings.Add( fgSizer_NotifyWidgets, 1, wx.EXPAND, 5 )
+		
+		self.m_staticline4 = wx.StaticLine( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		fgSizer_Settings.Add( self.m_staticline4, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		fgSizer_BottomWidgets = wx.FlexGridSizer( 0, 4, 0, 0 )
-		fgSizer_BottomWidgets.AddGrowableCol( 3 )
+		fgSizer_BottomWidgets.AddGrowableCol( 1 )
 		fgSizer_BottomWidgets.SetFlexibleDirection( wx.BOTH )
 		fgSizer_BottomWidgets.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.button_OK = wx.Button( self.m_scrolledWindow2, wx.ID_ANY, u"OK", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_BottomWidgets.Add( self.button_OK, 0, wx.ALL, 5 )
 		
 		self.button_Save = wx.Button( self.m_scrolledWindow2, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.button_Save, 0, wx.ALL, 5 )
 		
+		self.checkBox_Autosave = wx.CheckBox( self.m_scrolledWindow2, wx.ID_ANY, u"Autosave on quit", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer_BottomWidgets.Add( self.checkBox_Autosave, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		
 		self.button_Cancel = wx.Button( self.m_scrolledWindow2, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.button_Cancel, 0, wx.ALL, 5 )
 		
-		self.checkBox_Autosave = wx.CheckBox( self.m_scrolledWindow2, wx.ID_ANY, u"Autosave on quit", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_BottomWidgets.Add( self.checkBox_Autosave, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		self.button_OK = wx.Button( self.m_scrolledWindow2, wx.ID_ANY, u"OK", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer_BottomWidgets.Add( self.button_OK, 0, wx.ALL, 5 )
 		
 		
 		fgSizer_Settings.Add( fgSizer_BottomWidgets, 1, wx.EXPAND, 5 )
@@ -648,9 +682,9 @@ class FrameSettings ( wx.Frame ):
 		self.button_FileRoger.Bind( wx.EVT_BUTTON, self.click_fileroger )
 		self.button_FileConnect.Bind( wx.EVT_BUTTON, self.click_fileconnect )
 		self.button_FileDisconnect.Bind( wx.EVT_BUTTON, self.click_filedisconnect )
-		self.button_OK.Bind( wx.EVT_BUTTON, self.click_ok )
 		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Cancel.Bind( wx.EVT_BUTTON, self.click_cancel )
+		self.button_OK.Bind( wx.EVT_BUTTON, self.click_ok )
 	
 	def __del__( self ):
 		pass
@@ -666,13 +700,13 @@ class FrameSettings ( wx.Frame ):
 	def click_filedisconnect( self, event ):
 		event.Skip()
 	
-	def click_ok( self, event ):
-		event.Skip()
-	
 	def click_save( self, event ):
 		event.Skip()
 	
 	def click_cancel( self, event ):
+		event.Skip()
+	
+	def click_ok( self, event ):
 		event.Skip()
 	
 
