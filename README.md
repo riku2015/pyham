@@ -2,10 +2,9 @@
 
 # pyham
 ## HAM Radio with Python
-
-### About
 *This program is under development and no working version is released yet.*
 
+### About
 With this program you can connect many HAM radios together trough the Internet.
 
 You can also use your PC as it would be a HAM radio itself.
