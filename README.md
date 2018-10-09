@@ -9,6 +9,8 @@ With this program you can connect many HAM radios together trough the Internet.
 
 You can also use your PC as it would be a HAM radio itself.
 
+It is supposed to be compatible with eQSO, FRN and Echolink. It also introduces its own protocol.
+
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
 
