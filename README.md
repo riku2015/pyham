@@ -16,7 +16,7 @@ This program requires [Python](https://www.python.org/) 3.x to be installed. Tes
 
 [wxPython](https://pypi.org/project/wxPython/) is required for graphical interface.
 
-[PyAudio](https://pypi.org/project/PyAudio/) is required for sound in the client. Not required for the server.
+[PyAudio](https://pypi.org/project/PyAudio/) is required for sound.
 
 ### How to install required libraries:
 > pip install wx
