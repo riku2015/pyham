@@ -10,10 +10,6 @@ With this program you can connect many HAM radios together trough the Internet.
 
 You can also use your PC as it would be a HAM radio itself.
 
-Configuration can be changed at runtime. It is saved in files **pyham_client.conf** and **pyham_server.conf**.
-
-You'll find commented configuration file templates in files **pyham_client.conf.template** and **pyham_server.conf.template**. 
-
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
 
@@ -53,6 +49,11 @@ Start with command line user interface:
 Get help on command line parameters:
 
 > python pyham_server.py --help
+
+### Configuration
+Configuration can be changed and saved at runtime. It is saved in files **pyham_client.conf** and **pyham_server.conf**.
+
+You'll find commented configuration file templates in files **pyham_client.conf.template** and **pyham_server.conf.template**. 
 
 #### Screenshots:
 
