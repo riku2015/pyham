@@ -1,15 +1,15 @@
 
 
-# pyham
+# Pyham
 ## HAM Radio with Python
-*This program is under development and no working version is released yet.*
+*This pair of programs is under development and no working version is released yet.*
 
 ### About
-The server connects many HAM radios together trough the Internet. The server needs to be connected to real HAM radio hardware.
+The server program connects distant HAM radios together trough the Internet, thus giving them more range / coverage. The computer needs to be connected to real HAM radio hardware. Instructions are coming later...
 
-The client is for using your PC as it would be a HAM radio. No real radio needed.
+The client program is for using your PC as it would be a HAM radio. No real radio needed - just connect to some server on the Internet and start talking with people, some of them having a PC client program, some of them having a real radio.
 
-It is supposed to be compatible with eQSO, FRN and Echolink. It also introduces its own protocol.
+Both are to be compatible with eQSO, FRN and Echolink. Pyham also introduces its own protocol.
 
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
