@@ -7,7 +7,9 @@
 This program is under development and no working version is released yet.
 
 Should work at least on GNU/Linux and Windows versions of Python 3.x.
+
 [wxPython](https://pypi.org/project/wxPython/) is required for graphical interface.
+
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound in the client. Not required for the server. 
 
 ### How to run client:
