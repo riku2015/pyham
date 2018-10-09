@@ -15,6 +15,7 @@ Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_I
 This program requires [Python](https://www.python.org/) 3.x to be installed. Mandatory.
 
 **Python modules**
+
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound. Mandatory.
 
 [wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory if using command line interface.
