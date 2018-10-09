@@ -14,14 +14,14 @@ Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_I
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
 
-[wxPython](https://pypi.org/project/wxPython/) is required for graphical interface.
+[PyAudio](https://pypi.org/project/PyAudio/) is required for sound. Mandatory.
 
-[PyAudio](https://pypi.org/project/PyAudio/) is required for sound.
+[wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory.
 
 ### How to install required libraries:
-> pip install wx
->
 > pip install pyaudio
+>
+> pip install wx
 
 Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
 
