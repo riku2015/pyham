@@ -21,14 +21,21 @@ Run commands:
 Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
 
 ### How to run client:
-> python pyham_client.py [-h] [-c CONFIGFILE] [-l LOGFILE] [-n] [-t]
->
+> python pyham_client.py
+
+Get help on command line parameters:
+
 > python pyham_client.py --help
 
 ### How to run server:
->python pyham_server.py [-h] [-c CONFIGFILE] [-l LOGFILE] [-n] [-t]
->
->python pyham_server.py --help
+> python pyham_client.py
+
+Get help on command line parameters:
+
+> python pyham_server.py --help
+
+Configuration can be changed at runtime. It is saved in files *pyham_client.conf* and *pyham_server.conf*.
+You'll find commented configuration file templates in files *pyham_client.conf.template* and *pyham_server.conf.template*.
 
 #### Screenshots:
 
