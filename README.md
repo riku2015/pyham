@@ -29,14 +29,26 @@ This program requires [Python](https://www.python.org/) 3.x to be installed. Tes
 Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
 
 ### How to run client:
+Start with graphical user interface:
+
 > python pyham_client.py
+
+Start with command line user interface:
+
+> python pyham_client.py --nogui
 
 Get help on command line parameters:
 
 > python pyham_client.py --help
 
 ### How to run server:
+Start with graphical user interface:
+
 > python pyham_server.py
+
+Start with command line user interface:
+
+> python pyham_server.py --nogui
 
 Get help on command line parameters:
 
