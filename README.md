@@ -5,9 +5,9 @@
 *This program is under development and no working version is released yet.*
 
 ### About
-With this program you can connect many HAM radios together trough the Internet.
+The server connects many HAM radios together trough the Internet. The server needs to be connected to real HAM radio hardware.
 
-You can also use your PC as it would be a HAM radio itself.
+The client is for using your PC as it would be a HAM radio. No real radio needed.
 
 It is supposed to be compatible with eQSO, FRN and Echolink. It also introduces its own protocol.
 
