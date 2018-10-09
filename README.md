@@ -20,14 +20,14 @@ This program requires [Python](https://www.python.org/) 3.x to be installed. Man
 
 [wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory if using command line interface.
 
-### How to install required libraries:
+### How to install required libraries
 > pip install pyaudio
 >
 > pip install wx
 
 Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
 
-### How to run client:
+### How to run client
 Start with graphical user interface:
 
 > python pyham_client.py
@@ -40,7 +40,7 @@ Get help on command line parameters:
 
 > python pyham_client.py --help
 
-### How to run server:
+### How to run server
 Start with graphical user interface:
 
 > python pyham_server.py
@@ -58,7 +58,7 @@ Configuration can be changed and saved at runtime. It is saved in files **pyham_
 
 You'll find commented configuration file templates in files **pyham_client.conf.template** and **pyham_server.conf.template**. 
 
-#### Screenshots:
+#### Screenshots
 
 ![alt text](http://titanix.net/~japek/pyham-client-0001.png)
 
