@@ -12,6 +12,14 @@ Should work at least on GNU/Linux and Windows versions of Python 3.x.
 
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound in the client. Not required for the server. 
 
+### How to install required libraries:
+Run commands:
+> pip install wx
+>
+> pip install pyaudio
+
+Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
+
 ### How to run client:
 > python pyham_client.py [-h] [-c CONFIGFILE] [-l LOGFILE] [-n] [-t]
 >
