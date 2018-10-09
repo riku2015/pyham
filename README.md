@@ -9,7 +9,7 @@ The server program connects distant HAM radios together trough the Internet, thu
 
 The client program is for using your PC as it would be a HAM radio. No real radio needed - just connect to some server on the Internet and start talking with people, some of them having a PC client program, some of them having a real radio.
 
-Both are to be compatible with eQSO, FRN and Echolink. Pyham also introduces its own protocol.
+Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_IP#eQSO), [FRN](http://www.freeradionetwork.eu/) and [Echolink](http://www.echolink.org/). Pyham also introduces its own protocol.
 
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
