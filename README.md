@@ -14,7 +14,7 @@ Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_I
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Mandatory.
 
-**Python modules**
+**Python modules:**
 
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound. Mandatory.
 
@@ -62,4 +62,4 @@ You'll find commented configuration file templates in files **pyham_client.conf.
 
 ![alt text](http://titanix.net/~japek/pyham-client-0001.png)
 
-Ver. 0.001
+Client v. 0.001 (GNU/Linux)
