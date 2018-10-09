@@ -35,7 +35,6 @@ Get help on command line parameters:
 
 > python pyham_client.py --help
 
-Or use some oth
 ### How to run server:
 > python pyham_client.py
 
