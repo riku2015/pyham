@@ -12,11 +12,12 @@ The client program is for using your PC as it would be a HAM radio. No real radi
 Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_IP#eQSO), [FRN](http://www.freeradionetwork.eu/) and [Echolink](http://www.echolink.org/). Pyham also introduces its own protocol.
 
 ### Software requirements
-This program requires [Python](https://www.python.org/) 3.x to be installed. Tested with Python 3.6 on Windows.
+This program requires [Python](https://www.python.org/) 3.x to be installed. Mandatory.
 
+**Python modules**
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound. Mandatory.
 
-[wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory.
+[wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory if using command line interface.
 
 ### How to install required libraries:
 > pip install pyaudio
