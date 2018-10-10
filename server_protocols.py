@@ -4,19 +4,18 @@ import socket
 from log import log
 
 class ServerProtocol():
-	def __init__(self, name, address, port):
+	def __init__(self, name, port):
 		self.binded = False
 		self.name = name
-		self.address = "localhost"
 		self.port = port
 		self.protocolname = "NONE"
 		self.rooms = []
 
 	def bind(self):
-		log("Binding to " + self.address + " in port " + str(self.port) + " as '" + self.name + "' using " + self.protocolname + "...")
+		log("Binding to port " + self.port + " as '" + self.name + "' using " + self.protocolname + "...")
 		try:
 			self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			self.socket.bind((socket.gethostname(), self.port))
+			self.socket.bind((socket.gethostname(), int(self.port)))
 			self.socket.listen(1)
 			#self.accept()
 			self.binded = True
@@ -28,10 +27,15 @@ class ServerProtocol():
 	def unbind(self):
 		# TODO
 		self.binded = False
+		# TODO: disconect all
+		#self.disconnect()
 
-	#def connect(self):
-	#	log("Incoming connection from --- to port ---.")
+	def connect(self):
+		log(self.name + ": Incoming connection from --- to port ---.")
 
+	def disconnect(self):
+		log(self.name + ": Disconnected.")
+		
 	def send(self, data):
 		log("Sending data.")
 		totalsent = 0
@@ -55,8 +59,10 @@ class ServerProtocol():
 		return ''.join(chunks)
 
 	def run(self):
+		result = False
 		if self.bind():
-			log("Accepting connections.")
+			log(self.name + ": Accepting connections.")
+			result = True
 		#while True:
 			# Accept connections from outside
 			#(clientsocket, address) = self.socket.accept()
@@ -66,6 +72,7 @@ class ServerProtocol():
 			# Make thread for connection:
 			# ct = client_thread(clientsocket)
 			# ct.run()
+		return result
 
 	def set_rooms(rooms):
 		self.rooms = rooms
@@ -73,18 +80,30 @@ class ServerProtocol():
 	def get_rooms():
 		return self.rooms
 
-# ProtocolPyhamp
+# ProtocolPyham
 # Default port:
 # ?
 
-class ServerProtocolPyhamp(ServerProtocol):
-	def __init__(self, name, address, port):
-		ServerProtocol.__init__(self, name, address, port)
-		self.protocolname = "PYHAMP"
+class ServerProtocolPyham(ServerProtocol):
+	def __init__(self, name, port):
+		ServerProtocol.__init__(self, name, port)
+		self.protocolname = "PYHAM"
 		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
 
 	def connect(self):
 		#ServerProtocol.connect(self)
+		pass
+
+	def send_rooms(self):
+		pass
+
+	def send_version(self):
+		pass
+
+	def send_audio(self):
+		pass
+
+	def get_audio(self):
 		pass
 
 # ProtocolEqso
@@ -92,8 +111,8 @@ class ServerProtocolPyhamp(ServerProtocol):
 # 5000 ?
 
 class ServerProtocolEqso(ServerProtocol):
-	def __init__(self, name, address, port):
-		ServerProtocol.__init__(self, name, address, port)
+	def __init__(self, name, port):
+		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "EQSO"
 
 	def connect(self):
@@ -103,6 +122,10 @@ class ServerProtocolEqso(ServerProtocol):
 	def send(self):
 		log("Sending data.")
 
+	def disconnect(self):
+		self.socket.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
+		log("Disconnected.")
+
 # ProtocolEcholink
 # Default ports:
 # 5198 UDP EchoLink VoIP Amateur Radio Software (Voice)
@@ -110,8 +133,8 @@ class ServerProtocolEqso(ServerProtocol):
 # 5200 TCP EchoLink VoIP Amateur Radio Software (Information)
 
 class ServerProtocolEcholink(ServerProtocol):
-	def __init__(self, name, address, port):
-		ServerProtocol.__init__(self, name, address, port)
+	def __init__(self, name, port):
+		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "ECHOLINK"
 
 	def connect(self):
@@ -127,18 +150,16 @@ class ServerProtocolEcholink(ServerProtocol):
 # 10024 ?
 
 class ServerProtocolFrn(ServerProtocol):
-	def __init__(self, name, address, port):
-		ServerProtocol.__init__(self, name, address, port)
+	def __init__(self, name, port):
+		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "FRN"
 
 	def connect(self):
 		#ServerProtocol.connect(self)
 		pass
 
-	def disconnect(self):
-		self.socket.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
-		log("Disconnected.")
-
 	def send(self, data):
 		#self.socket.send(data)
 		log("Sending data.")
+
+# from testcode import ServerProtocolTest

@@ -13,6 +13,9 @@ class ClientProtocol:
 	def connect(self):
 		self.socket.connect((self.address, self.port))
 
+	def disconnect(self):
+		pass
+
 	def send(self, data):
 		self.socket.send(data)
 		# log("Error: cannot send trough socket.")
@@ -20,27 +23,29 @@ class ClientProtocol:
 	def receive(self):
 		return ""
 
-# ProtocolPyhamp
+# ProtocolPyham
 # commands:
 # <gr> get rooms
-# <j roomname> join room
+# <jr roomname> join room
 # <d> disconnect
-# <v> get server version
-# <v string> send client version
-# <c callsign> send callsign
-# <d description> send description
+# <gv> get server version
+# <sv string> send client version
+# <sc callsign> send callsign
+# <sd description> send description
+# <sa> send audio
+# <ga> get audio
 
-class ClientProtocolPyhamp(ClientProtocol):
+class ClientProtocolPyham(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
-		self.protocolname = "PYHAMP"
+		self.protocolname = "PYHAM"
 		self.version = "0.05"
 
 	def send_audio(data):
-		pass
+		self.send(b"<sa>")
 
 	def get_audio():
-		return None
+		self.send(b"<ga>")
 
 	def get_rooms(self):
 		self.send(b"<gr>")
@@ -48,16 +53,17 @@ class ClientProtocolPyhamp(ClientProtocol):
 		return []
 
 	def join_room(self, room):
-		self.send(b"<j " + room + ">()")
+		self.send(b"<jr " + room + ">()")
 
 	def disconnect(self):
-		pass
+		self.send(b"<d>")
 
 	def get_version(self):
-		pass
+		self.send(b"<gv>")
+		# return version
 
 	def send_version(self):
-		pass
+		self.send(b"<sv " + self.version + ">")
 
 # ProtocolEqso
 
@@ -70,7 +76,7 @@ class ClientProtocolEqso(ClientProtocol):
 		#self.socket.send(data)
 
 		# TODO: Send the whole thing at once (if works):
-		self.socket.send(b"CT:")							# KIINTEE
+		self.socket.send(b"CT:")						# KIINTEE
 		self.socket.send(b"<VX>2014003</VX>")			# KIINTEE
 		self.socket.send(b"<EA>moimoi@moimoi.moi</EA>")	# Toistaseksi annetaan olla KIINTEE
 		self.socket.send(b"<PW>asdfghjk</PW>")			# Toistaseksi kiintea
@@ -145,8 +151,6 @@ class ClientProtocolEcholink(ClientProtocol):
 # ProtocolFrn
 # http://freeradionetwork.eu/frnprotocol.htm
 
-programVersion = "0.010"	# FIXME: duplicate definition here
-
 class ClientProtocolFrn(ClientProtocol):
 	def __init__(self, address, port):
 		ClientProtocol.__init__(self, address, port)
@@ -180,3 +184,5 @@ class ClientProtocolFrn(ClientProtocol):
 
 	def send_version(self):
 		pass
+
+# from testcode import ClientProtocolTest

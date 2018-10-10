@@ -6,8 +6,8 @@
 import wx
 
 from log import log
-from client_gui import Mainwindow
-from client_gui import Settingswindow
+from client_gui import WindowMain
+# from client_gui import WindowSettings	# For some reason it works without this
 from config import Config
 
 class Client:
@@ -23,7 +23,6 @@ class Client:
 
 class ClientWx(Client):
 	def __init__(self, filename_config, makeconsole):
-		#self.filename_config = filename_config
 		Client.__init__(self, filename_config)
 		
 		# Create wxwidgets application:
@@ -31,12 +30,11 @@ class ClientWx(Client):
 			self.app = wx.App(self)		# With separate log console window
 		else:
 			self.app = wx.App(None)		# Without separate log console window
-		self.mainwindow = Mainwindow(parent=None)
+		self.mainwindow = WindowMain(parent = None)
 		self.mainwindow.set_main(self)
 		#self.mainwindow = Mainwindow(parent=self)
 		self.mainwindow.comboBox_Preset.Append(self.config.parameters["autoconnect_preset"])
 
-		# TODO:
 		# Update parameters in mainwindow:
 		# mainwindow.comboBox_Room = self.config.parameters[room]
 		self.mainwindow.textCtrl_Callsign.SetValue(self.config.parameters["callsign"])
@@ -50,12 +48,6 @@ class ClientWx(Client):
 			# self.mainwindow.choice_Speaker.Append()
 			# self.mainwindow.choice_Mic.Append()
 
-		# Update parameters in settingswindow:
-		# settingswindow.choise_Preset = self.config.parameters[]
-		# settingswindow.choise_Room = self.config.parameters[]
-		# settingswindow.checkBox_Autosave = self.config.parameters[]
-		# settingswindow.choice_Speaker = self.config.parameters[device_speaker]
-		# settingswindow.choice_Mic = self.config.parameters[device_mic]
 
 	def run(self):
 		log("Starting client.")

@@ -5,6 +5,7 @@
 # TODO:
 # - Scalable widgets (different font size for low res & high res etc.)
 
+import wx
 from log import log
 from server_gui_fbp import FrameMain, FrameSettings, FrameStats
 
@@ -16,14 +17,66 @@ class WindowSettings(FrameSettings):
 	def __init__(self,parent):
 		FrameSettings.__init__(self,parent)
 
-	def click_ok( self, event ):
+	def set_main(self, main):
+		# Used to access Client (parent) object's variables/functions
+		self.main = main
+
+	def apply_changes(self):
 		# Apply changes
+
+		self.main.config.parameters["echolink_name"] = self.textCtrl_EcholinkName.GetValue()
+		self.main.config.parameters["echolink_port"] = self.textCtrl_EcholinkPort.GetValue()
+		if self.checkBox_EcholinkAutostart.GetValue():
+			self.main.config.parameters["echolink_autostart"] = "on"
+		else:
+			self.main.config.parameters["echolink_autostart"] = "off"
+		
+		self.main.config.parameters["eqso_name"] = self.textCtrl_EqsoName.GetValue()
+		self.main.config.parameters["eqso_port"] = self.textCtrl_EqsoPort.GetValue()
+		if self.checkBox_EqsoAutostart.GetValue():
+			self.main.config.parameters["eqso_autostart"] = "on"
+		else:
+			self.main.config.parameters["eqso_autostart"] = "off"
+
+		self.main.config.parameters["frn_name"] = self.textCtrl_FrnName.GetValue()
+		self.main.config.parameters["frn_port"] = self.textCtrl_FrnPort.GetValue()
+		if self.checkBox_FrnAutostart.GetValue():
+			self.main.config.parameters["frn_autostart"] = "on"
+		else:
+			self.main.config.parameters["frn_autostart"] = "off"
+
+		self.main.config.parameters["pyham_name"] = self.textCtrl_PyhamName.GetValue()
+		self.main.config.parameters["pyham_port"] = self.textCtrl_PyhamPort.GetValue()
+		if self.checkBox_PyhamAutostart.GetValue():
+			self.main.config.parameters["pyham_autostart"] = "on"
+		else:
+			self.main.config.parameters["pyham_autostart"] = "off"
+
+		if self.checkBox_Autosave.GetValue():
+			self.main.config.parameters["autosave"] = "on"
+		else:
+			self.main.config.parameters["autosave"] = "off"
+
+		self.main.config.parameters["path_recording"] = self.textCtrl_RecordingPath.GetValue()
+
+		# TODO: PTT trigger value
+
+	def click_recordingpath( self, event):
+		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
+			if dirDialog.ShowModal() == wx.ID_CANCEL:
+				return
+			self.textCtrl_RecordingPath.SetValue(dirDialog.GetPath())
+
+	def click_ok( self, event ):
+		self.apply_changes()
 		# Close window:
 		self.Close()
 
 	def click_save( self, event ):
+		self.apply_changes()
+		self.main.config.save(self.main.filename_config)
 		log("Settings saved.")
-	
+
 	def click_cancel( self, event ):
 		# Close window:
 		self.Close()
@@ -40,21 +93,45 @@ class WindowMain(FrameMain):
 
 	def click_quit( self, event ):
 		# TODO: autosave
+		# if self.autosave:
+		# 	self.main.config.save()
 		self.Close()
 
 	def click_settings( self, event ):
 		if not self.settingswindow:
 			# Closes automatically when main window closes:
 			self.settingswindow = WindowSettings(self)
+			self.settingswindow.set_main(self.main)
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
+
+			# Update settings window text fields:
+			self.settingswindow.textCtrl_EqsoName.SetValue(self.main.config.parameters["eqso_name"])
+			self.settingswindow.textCtrl_EqsoPort.SetValue(self.main.config.parameters["eqso_port"])
+
+			self.settingswindow.textCtrl_EcholinkName.SetValue(self.main.config.parameters["echolink_name"])
+			self.settingswindow.textCtrl_EcholinkPort.SetValue(self.main.config.parameters["echolink_port"])
+			
+			self.settingswindow.textCtrl_FrnName.SetValue(self.main.config.parameters["frn_name"])
+			self.settingswindow.textCtrl_FrnPort.SetValue(self.main.config.parameters["frn_port"])
+			
+			self.settingswindow.textCtrl_PyhamName.SetValue(self.main.config.parameters["pyham_name"])
+			self.settingswindow.textCtrl_PyhamPort.SetValue(self.main.config.parameters["pyham_port"])
+			
+			if self.main.config.parameters["autosave"] == "on":
+				self.settingswindow.checkBox_Autosave.SetValue(True)
+			elif self.main.config.parameters["autosave"] == "off":
+				self.settingswindow.checkBox_Autosave.SetValue(False)
+
+			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["path_recording"])
+
 		self.settingswindow.Show()
 
 	def click_load( self, event ):
 		log("Load.")
 
 	def click_save( self, event ):
-		log("Save.")
+		log("Saved.")
 
 	def click_log( self, event ):
 		# Show log window
@@ -77,10 +154,10 @@ class WindowMain(FrameMain):
 		pass
 
 	def click_eqso_apply( self, event ):
-		pass
+		self.button_EqsoApply.Enable(False)
 
 	def click_eqso_start( self, event ):
-		if self.button_EqsoStart.GetLabel() == "Start":
+		if self.button_EqsoStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
 			#self.eqso.run()
 			# If successfully started:
 			self.button_EqsoStart.SetLabel("Stop")
@@ -92,10 +169,10 @@ class WindowMain(FrameMain):
 			self.staticText_EqsoState.SetLabel("Stopped")
 
 	def click_echolink_apply( self, event ):
-		pass
+		self.button_EcholinkApply.Enable(False)
 
 	def click_echolink_start( self, event ):
-		if self.button_EcholinkStart.GetLabel() == "Start":
+		if self.button_EcholinkStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
 			#self.echolink.run()
 			# If successfully started:
 			self.button_EcholinkStart.SetLabel("Stop")
@@ -107,10 +184,10 @@ class WindowMain(FrameMain):
 			self.staticText_EcholinkState.SetLabel("Stopped")
 
 	def click_frn_apply( self, event ):
-		pass
+		self.button_FrnApply.Enable(False)
 
 	def click_frn_start( self, event ):
-		if self.button_FrnStart.GetLabel() == "Start":
+		if self.button_FrnStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
 			#self.frn.run()
 			# If successfully started:
 			self.button_FrnStart.SetLabel("Stop")
@@ -121,17 +198,33 @@ class WindowMain(FrameMain):
 			self.button_FrnStart.SetLabel("Start")
 			self.staticText_FrnState.SetLabel("Stopped")
 
-	def click_pyhamp_apply( self, event ):
-		pass
+	def click_pyham_apply( self, event ):
+		self.button_PyhamApply.Enable(False)
 
-	def click_pyhamp_start( self, event ):
-		if self.button_PyhampStart.GetLabel() == "Start":
-			#self.pyhamp.run()
+	def click_pyham_start( self, event ):
+		if self.button_PyhamStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
+			#self.pyham.run()
 			# If successfully started:
-			self.button_PyhampStart.SetLabel("Stop")
-			self.staticText_PyhampState.SetLabel("Running")
+			self.button_PyhamStart.SetLabel("Stop")
+			self.staticText_PyhamState.SetLabel("Running")
 		else:
-			#self.pyhamp.disconnect()
+			#self.pyham.disconnect()
 			# If successfully Stopped:
-			self.button_PyhampStart.SetLabel("Start")
-			self.staticText_PyhampState.SetLabel("Stopped")
+			self.button_PyhamStart.SetLabel("Start")
+			self.staticText_PyhamState.SetLabel("Stopped")
+
+	def text_Echolink(self, event):
+		# Name or Port changed, enable Apply button:
+		self.button_EcholinkApply.Enable(True)
+
+	def text_Eqso(self, event):
+		# Name or Port changed, enable Apply button:
+		self.button_EqsoApply.Enable(True)
+
+	def text_Frn(self, event):
+		# Name or Port changed, enable Apply button:
+		self.button_FrnApply.Enable(True)
+
+	def text_Pyham(self, event):
+		# Name or Port changed, enable Apply button:
+		self.button_PyhamApply.Enable(True)

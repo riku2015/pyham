@@ -9,6 +9,10 @@ import wave
 
 from log import log
 
+# import codecs
+
+# TODO: get rid of wx in this file
+
 audio = pyaudio.PyAudio()
 
 def get_audiodevices():

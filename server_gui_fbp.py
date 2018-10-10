@@ -17,7 +17,7 @@ import wx.xrc
 class FrameMain ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server 0.013", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -37,27 +37,21 @@ class FrameMain ( wx.Frame ):
 		
 		self.panel_MainButtons = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
 		fgSizer_MainButtons = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer_MainButtons.AddGrowableRow( 2 )
+		fgSizer_MainButtons.AddGrowableRow( 3 )
 		fgSizer_MainButtons.SetFlexibleDirection( wx.BOTH )
 		fgSizer_MainButtons.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-		
-		self.button_Quit = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Quit", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_MainButtons.Add( self.button_Quit, 0, wx.ALL, 5 )
-		
-		self.button_Load = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Load", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_MainButtons.Add( self.button_Load, 0, wx.ALL, 5 )
-		
-		self.button_Save = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_MainButtons.Add( self.button_Save, 0, wx.ALL, 5 )
 		
 		self.button_Settings = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Settings", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_MainButtons.Add( self.button_Settings, 0, wx.ALL, 5 )
 		
+		self.button_Log = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Log", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer_MainButtons.Add( self.button_Log, 0, wx.ALL, 5 )
+		
 		self.button_Stats = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Stats", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_MainButtons.Add( self.button_Stats, 0, wx.ALL, 5 )
 		
-		self.button_Log = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Log", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_MainButtons.Add( self.button_Log, 0, wx.ALL, 5 )
+		self.button_Quit = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Quit", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer_MainButtons.Add( self.button_Quit, 0, wx.ALL, 5 )
 		
 		
 		self.panel_MainButtons.SetSizer( fgSizer_MainButtons )
@@ -115,13 +109,10 @@ class FrameMain ( wx.Frame ):
 		self.textCtrl_Hostname = wx.TextCtrl( self.scrolledWindow_Main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer12.Add( self.textCtrl_Hostname, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.textCtrl_Ip = wx.TextCtrl( self.scrolledWindow_Main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer12.Add( self.textCtrl_Ip, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_IP = wx.TextCtrl( self.scrolledWindow_Main, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer12.Add( self.textCtrl_IP, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.button_Allow = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Allow", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer12.Add( self.button_Allow, 0, wx.ALL, 5 )
-		
-		self.button_Ban = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Ban", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_Ban = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Ban / Unban", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer12.Add( self.button_Ban, 0, wx.ALL, 5 )
 		
 		
@@ -180,6 +171,8 @@ class FrameMain ( wx.Frame ):
 		fgSizer381.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.button_EcholinkApply = wx.Button( self.panel_Echolink, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_EcholinkApply.Enable( False )
+		
 		fgSizer381.Add( self.button_EcholinkApply, 0, wx.ALL, 5 )
 		
 		self.button_EcholinkStart = wx.Button( self.panel_Echolink, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -240,6 +233,8 @@ class FrameMain ( wx.Frame ):
 		fgSizer38.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.button_EqsoApply = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_EqsoApply.Enable( False )
+		
 		fgSizer38.Add( self.button_EqsoApply, 0, wx.ALL, 5 )
 		
 		self.button_EqsoStart = wx.Button( self.panel_Eqso, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -300,6 +295,8 @@ class FrameMain ( wx.Frame ):
 		fgSizer382.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.button_FrnApply = wx.Button( self.panel_Frn, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_FrnApply.Enable( False )
+		
 		fgSizer382.Add( self.button_FrnApply, 0, wx.ALL, 5 )
 		
 		self.button_FrnStart = wx.Button( self.panel_Frn, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -324,33 +321,33 @@ class FrameMain ( wx.Frame ):
 		fgSizer1412.SetFlexibleDirection( wx.BOTH )
 		fgSizer1412.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Pyhamp = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"pyhamp", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Pyhamp.Wrap( -1 )
+		self.staticText_Pyham = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Pyham", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Pyham.Wrap( -1 )
 		
-		self.staticText_Pyhamp.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.staticText_Pyham.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
-		fgSizer1412.Add( self.staticText_Pyhamp, 0, wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_Pyham, 0, wx.ALL, 5 )
 		
-		self.staticText_PyhampState = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_PyhampState.Wrap( -1 )
+		self.staticText_PyhamState = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Stopped", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_PyhamState.Wrap( -1 )
 		
-		fgSizer1412.Add( self.staticText_PyhampState, 0, wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_PyhamState, 0, wx.ALL, 5 )
 		
-		self.staticText_PyhampName = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_PyhampName.Wrap( -1 )
+		self.staticText_PyhamName = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_PyhamName.Wrap( -1 )
 		
-		fgSizer1412.Add( self.staticText_PyhampName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_PyhamName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_PyhampName = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1412.Add( self.textCtrl_PyhampName, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_PyhamName = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1412.Add( self.textCtrl_PyhamName, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.staticText_PyhampPort = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_PyhampPort.Wrap( -1 )
+		self.staticText_PyhamPort = wx.StaticText( self.Panel_Pyhamp, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_PyhamPort.Wrap( -1 )
 		
-		fgSizer1412.Add( self.staticText_PyhampPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+		fgSizer1412.Add( self.staticText_PyhamPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_PyhampPort = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1412.Add( self.textCtrl_PyhampPort, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_PyhamPort = wx.TextCtrl( self.Panel_Pyhamp, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1412.Add( self.textCtrl_PyhamPort, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		fgSizer_Pyhamp.Add( fgSizer1412, 1, wx.EXPAND, 5 )
@@ -359,11 +356,13 @@ class FrameMain ( wx.Frame ):
 		fgSizer383.SetFlexibleDirection( wx.BOTH )
 		fgSizer383.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.button_PyhampApply = wx.Button( self.Panel_Pyhamp, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer383.Add( self.button_PyhampApply, 0, wx.ALL, 5 )
+		self.button_PyhamApply = wx.Button( self.Panel_Pyhamp, wx.ID_ANY, u"Apply", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_PyhamApply.Enable( False )
 		
-		self.button_PyhampStart = wx.Button( self.Panel_Pyhamp, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer383.Add( self.button_PyhampStart, 0, wx.ALIGN_RIGHT|wx.ALL, 5 )
+		fgSizer383.Add( self.button_PyhamApply, 0, wx.ALL, 5 )
+		
+		self.button_PyhamStart = wx.Button( self.Panel_Pyhamp, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer383.Add( self.button_PyhamStart, 0, wx.ALIGN_RIGHT|wx.ALL, 5 )
 		
 		
 		fgSizer_Pyhamp.Add( fgSizer383, 1, wx.EXPAND, 5 )
@@ -393,51 +392,51 @@ class FrameMain ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.button_Quit.Bind( wx.EVT_BUTTON, self.click_quit )
-		self.button_Load.Bind( wx.EVT_BUTTON, self.click_load )
-		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Settings.Bind( wx.EVT_BUTTON, self.click_settings )
-		self.button_Stats.Bind( wx.EVT_BUTTON, self.click_stats )
 		self.button_Log.Bind( wx.EVT_BUTTON, self.click_log )
-		self.button_Allow.Bind( wx.EVT_BUTTON, self.click_allow )
+		self.button_Stats.Bind( wx.EVT_BUTTON, self.click_stats )
+		self.button_Quit.Bind( wx.EVT_BUTTON, self.click_quit )
 		self.button_Ban.Bind( wx.EVT_BUTTON, self.click_ban )
+		self.textCtrl_EcholinkName.Bind( wx.EVT_TEXT, self.text_Echolink )
+		self.textCtrl_EcholinkPort.Bind( wx.EVT_TEXT, self.text_Echolink )
 		self.button_EcholinkApply.Bind( wx.EVT_BUTTON, self.click_echolink_apply )
 		self.button_EcholinkStart.Bind( wx.EVT_BUTTON, self.click_echolink_start )
+		self.textCtrl_EqsoName.Bind( wx.EVT_TEXT, self.text_Eqso )
+		self.textCtrl_EqsoPort.Bind( wx.EVT_TEXT, self.text_Eqso )
 		self.button_EqsoApply.Bind( wx.EVT_BUTTON, self.click_eqso_apply )
 		self.button_EqsoStart.Bind( wx.EVT_BUTTON, self.click_eqso_start )
+		self.textCtrl_FrnName.Bind( wx.EVT_TEXT, self.text_Frn )
+		self.textCtrl_FrnPort.Bind( wx.EVT_TEXT, self.text_Frn )
 		self.button_FrnApply.Bind( wx.EVT_BUTTON, self.click_frn_apply )
 		self.button_FrnStart.Bind( wx.EVT_BUTTON, self.click_frn_start )
-		self.button_PyhampApply.Bind( wx.EVT_BUTTON, self.click_pyhamp_apply )
-		self.button_PyhampStart.Bind( wx.EVT_BUTTON, self.click_pyhamp_start )
+		self.textCtrl_PyhamName.Bind( wx.EVT_TEXT, self.text_Pyham )
+		self.textCtrl_PyhamPort.Bind( wx.EVT_TEXT, self.text_Pyham )
+		self.button_PyhamApply.Bind( wx.EVT_BUTTON, self.click_pyham_apply )
+		self.button_PyhamStart.Bind( wx.EVT_BUTTON, self.click_pyham_start )
 	
 	def __del__( self ):
 		pass
 	
 	
 	# Virtual event handlers, overide them in your derived class
-	def click_quit( self, event ):
-		event.Skip()
-	
-	def click_load( self, event ):
-		event.Skip()
-	
-	def click_save( self, event ):
-		event.Skip()
-	
 	def click_settings( self, event ):
-		event.Skip()
-	
-	def click_stats( self, event ):
 		event.Skip()
 	
 	def click_log( self, event ):
 		event.Skip()
 	
-	def click_allow( self, event ):
+	def click_stats( self, event ):
+		event.Skip()
+	
+	def click_quit( self, event ):
 		event.Skip()
 	
 	def click_ban( self, event ):
 		event.Skip()
+	
+	def text_Echolink( self, event ):
+		event.Skip()
+	
 	
 	def click_echolink_apply( self, event ):
 		event.Skip()
@@ -445,11 +444,19 @@ class FrameMain ( wx.Frame ):
 	def click_echolink_start( self, event ):
 		event.Skip()
 	
+	def text_Eqso( self, event ):
+		event.Skip()
+	
+	
 	def click_eqso_apply( self, event ):
 		event.Skip()
 	
 	def click_eqso_start( self, event ):
 		event.Skip()
+	
+	def text_Frn( self, event ):
+		event.Skip()
+	
 	
 	def click_frn_apply( self, event ):
 		event.Skip()
@@ -457,10 +464,14 @@ class FrameMain ( wx.Frame ):
 	def click_frn_start( self, event ):
 		event.Skip()
 	
-	def click_pyhamp_apply( self, event ):
+	def text_Pyham( self, event ):
 		event.Skip()
 	
-	def click_pyhamp_start( self, event ):
+	
+	def click_pyham_apply( self, event ):
+		event.Skip()
+	
+	def click_pyham_start( self, event ):
 		event.Skip()
 	
 
@@ -485,13 +496,12 @@ class FrameSettings ( wx.Frame ):
 		self.scrolledWindow_Main.SetScrollRate( 5, 5 )
 		fgSizer21 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer21.AddGrowableCol( 0 )
-		fgSizer21.AddGrowableRow( 1 )
+		fgSizer21.AddGrowableRow( 2 )
 		fgSizer21.SetFlexibleDirection( wx.BOTH )
 		fgSizer21.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		fgSizer24 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer24.AddGrowableCol( 0 )
-		fgSizer24.AddGrowableCol( 1 )
 		fgSizer24.SetFlexibleDirection( wx.BOTH )
 		fgSizer24.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -532,8 +542,8 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer32.Add( fgSizer141, 1, wx.EXPAND, 5 )
 		
-		self.m_checkBox2 = wx.CheckBox( self.m_panel7, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer32.Add( self.m_checkBox2, 0, wx.ALL, 5 )
+		self.checkBox_EcholinkAutostart = wx.CheckBox( self.m_panel7, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer32.Add( self.checkBox_EcholinkAutostart, 0, wx.ALL, 5 )
 		
 		
 		self.m_panel7.SetSizer( fgSizer32 )
@@ -575,8 +585,8 @@ class FrameSettings ( wx.Frame ):
 		self.textCtrl_EqsoPort = wx.TextCtrl( self.m_panel71, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer1413.Add( self.textCtrl_EqsoPort, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_checkBox2111 = wx.CheckBox( self.m_panel71, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1413.Add( self.m_checkBox2111, 0, wx.ALL, 5 )
+		self.checkBox_EqsoAutostart = wx.CheckBox( self.m_panel71, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1413.Add( self.checkBox_EqsoAutostart, 0, wx.ALL, 5 )
 		
 		
 		fgSizer251.Add( fgSizer1413, 1, wx.EXPAND, 5 )
@@ -624,8 +634,8 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer2511.Add( fgSizer1411, 1, wx.EXPAND, 5 )
 		
-		self.m_checkBox211 = wx.CheckBox( self.m_panel711, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer2511.Add( self.m_checkBox211, 0, wx.ALL, 5 )
+		self.checkBox_FrnAutostart = wx.CheckBox( self.m_panel711, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer2511.Add( self.checkBox_FrnAutostart, 0, wx.ALL, 5 )
 		
 		
 		self.m_panel711.SetSizer( fgSizer2511 )
@@ -639,12 +649,12 @@ class FrameSettings ( wx.Frame ):
 		fgSizer2512.SetFlexibleDirection( wx.BOTH )
 		fgSizer2512.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Pyhamp = wx.StaticText( self.m_panel712, wx.ID_ANY, u"Pyhamp", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.staticText_Pyhamp.Wrap( -1 )
+		self.staticText_Pyham = wx.StaticText( self.m_panel712, wx.ID_ANY, u"Pyham", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Pyham.Wrap( -1 )
 		
-		self.staticText_Pyhamp.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		self.staticText_Pyham.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
-		fgSizer2512.Add( self.staticText_Pyhamp, 0, wx.ALL, 5 )
+		fgSizer2512.Add( self.staticText_Pyham, 0, wx.ALL, 5 )
 		
 		fgSizer1412 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer1412.AddGrowableCol( 1 )
@@ -656,22 +666,22 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer1412.Add( self.staticText_PyhampName, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_PyhampName = wx.TextCtrl( self.m_panel712, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1412.Add( self.textCtrl_PyhampName, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_PyhamName = wx.TextCtrl( self.m_panel712, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1412.Add( self.textCtrl_PyhamName, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_PyhampPort = wx.StaticText( self.m_panel712, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_PyhampPort.Wrap( -1 )
 		
 		fgSizer1412.Add( self.staticText_PyhampPort, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.textCtrl_PyhampPort = wx.TextCtrl( self.m_panel712, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer1412.Add( self.textCtrl_PyhampPort, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_PyhamPort = wx.TextCtrl( self.m_panel712, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer1412.Add( self.textCtrl_PyhamPort, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		fgSizer2512.Add( fgSizer1412, 1, wx.EXPAND, 5 )
 		
-		self.m_checkBox2112 = wx.CheckBox( self.m_panel712, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer2512.Add( self.m_checkBox2112, 0, wx.ALL, 5 )
+		self.checkBox_PyhamAutostart = wx.CheckBox( self.m_panel712, wx.ID_ANY, u"Autostart", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer2512.Add( self.checkBox_PyhamAutostart, 0, wx.ALL, 5 )
 		
 		
 		self.m_panel712.SetSizer( fgSizer2512 )
@@ -681,6 +691,39 @@ class FrameSettings ( wx.Frame ):
 		
 		
 		fgSizer21.Add( fgSizer24, 1, wx.EXPAND, 5 )
+		
+		self.panel_RecordingPath = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer30 = wx.FlexGridSizer( 3, 0, 0, 0 )
+		fgSizer30.AddGrowableCol( 0 )
+		fgSizer30.SetFlexibleDirection( wx.BOTH )
+		fgSizer30.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_RecordingPath = wx.StaticText( self.panel_RecordingPath, wx.ID_ANY, u"Recording path", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_RecordingPath.Wrap( -1 )
+		
+		self.staticText_RecordingPath.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer30.Add( self.staticText_RecordingPath, 0, wx.ALL, 5 )
+		
+		fgSizer321 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer321.AddGrowableCol( 0 )
+		fgSizer321.SetFlexibleDirection( wx.BOTH )
+		fgSizer321.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.textCtrl_RecordingPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.textCtrl_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.button_RecordingPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.button_RecordingPath, 0, wx.ALL, 5 )
+		
+		
+		fgSizer30.Add( fgSizer321, 1, wx.EXPAND, 5 )
+		
+		
+		self.panel_RecordingPath.SetSizer( fgSizer30 )
+		self.panel_RecordingPath.Layout()
+		fgSizer30.Fit( self.panel_RecordingPath )
+		fgSizer21.Add( self.panel_RecordingPath, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		self.panel_Ptt = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Ptt = wx.FlexGridSizer( 0, 1, 0, 0 )
@@ -741,6 +784,7 @@ class FrameSettings ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
+		self.button_RecordingPath.Bind( wx.EVT_BUTTON, self.click_recordingpath )
 		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Cancel.Bind( wx.EVT_BUTTON, self.click_cancel )
 		self.button_OK.Bind( wx.EVT_BUTTON, self.click_ok )
@@ -750,6 +794,9 @@ class FrameSettings ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
+	def click_recordingpath( self, event ):
+		event.Skip()
+	
 	def click_save( self, event ):
 		event.Skip()
 	

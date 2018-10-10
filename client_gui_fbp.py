@@ -17,7 +17,7 @@ import wx.xrc
 class FrameMain ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client", pos = wx.DefaultPosition, size = wx.Size( 680,540 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL, name = u"pyham" )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client 0.016", pos = wx.DefaultPosition, size = wx.Size( 780,540 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL, name = u"pyham" )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -62,7 +62,7 @@ class FrameMain ( wx.Frame ):
 		self.listBox_Users = wx.ListBox( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, listBox_UsersChoices, 0 )
 		fgSizer_Main.Add( self.listBox_Users, 0, wx.EXPAND|wx.ALL, 5 )
 		
-		fgSizer_Send = wx.FlexGridSizer( 0, 5, 0, 0 )
+		fgSizer_Send = wx.FlexGridSizer( 0, 6, 0, 0 )
 		fgSizer_Send.AddGrowableCol( 3 )
 		fgSizer_Send.SetFlexibleDirection( wx.HORIZONTAL )
 		fgSizer_Send.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -94,6 +94,9 @@ class FrameMain ( wx.Frame ):
 		
 		self.button_Send = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Send", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_Send.Add( self.button_Send, 0, wx.ALL, 5 )
+		
+		self.button_Discrecorder = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Record to disk", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer_Send.Add( self.button_Discrecorder, 0, wx.ALL, 5 )
 		
 		
 		fgSizer_Main.Add( fgSizer_Send, 0, wx.EXPAND, 5 )
@@ -158,7 +161,7 @@ class FrameMain ( wx.Frame ):
 		
 		fgSizer27.Add( self.staticText_Protocol, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		choice_ProtocolChoices = [ u"Echolink", u"Eqso", u"Frn", u"Pyhamp" ]
+		choice_ProtocolChoices = [ u"Echolink", u"Eqso", u"Frn", u"Pyham" ]
 		self.choice_Protocol = wx.Choice( self.panel_Server, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_ProtocolChoices, 0 )
 		self.choice_Protocol.SetSelection( 0 )
 		fgSizer27.Add( self.choice_Protocol, 0, wx.ALL|wx.EXPAND, 5 )
@@ -327,6 +330,7 @@ class FrameMain ( wx.Frame ):
 		self.choice_Room.Bind( wx.EVT_CHOICE, self.choose_room )
 		self.button_Settings.Bind( wx.EVT_BUTTON, self.click_settings )
 		self.button_Send.Bind( wx.EVT_BUTTON, self.click_send )
+		self.button_Discrecorder.Bind( wx.EVT_BUTTON, self.click_Diskrecorder )
 		self.comboBox_Preset.Bind( wx.EVT_COMBOBOX, self.choose_Preset )
 		self.button_Load.Bind( wx.EVT_BUTTON, self.click_load )
 		self.button_Delete.Bind( wx.EVT_BUTTON, self.click_delete )
@@ -353,6 +357,9 @@ class FrameMain ( wx.Frame ):
 		event.Skip()
 	
 	def click_send( self, event ):
+		event.Skip()
+	
+	def click_Diskrecorder( self, event ):
 		event.Skip()
 	
 	def choose_Preset( self, event ):
@@ -398,7 +405,7 @@ class FrameMain ( wx.Frame ):
 class FrameSettings ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client - Settings", pos = wx.DefaultPosition, size = wx.Size( 600,690 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client - Settings", pos = wx.DefaultPosition, size = wx.Size( 620,740 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -412,7 +419,7 @@ class FrameSettings ( wx.Frame ):
 		self.m_scrolledWindow2.SetScrollRate( 5, 5 )
 		fgSizer_Settings = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Settings.AddGrowableCol( 0 )
-		fgSizer_Settings.AddGrowableRow( 1 )
+		fgSizer_Settings.AddGrowableRow( 2 )
 		fgSizer_Settings.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Settings.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -447,8 +454,8 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer_Devices.Add( self.m_staticText20, 0, wx.ALL, 5 )
 		
-		self.m_spinCtrl1 = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
-		fgSizer_Devices.Add( self.m_spinCtrl1, 0, wx.ALL, 5 )
+		self.spinCtrl_Speaker = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
+		fgSizer_Devices.Add( self.spinCtrl_Speaker, 0, wx.ALL, 5 )
 		
 		self.m_staticline3 = wx.StaticLine( self.panel_Devices, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		fgSizer_Devices.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
@@ -468,8 +475,8 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer_Devices.Add( self.m_staticText21, 0, wx.ALL, 5 )
 		
-		self.m_spinCtrl2 = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
-		fgSizer_Devices.Add( self.m_spinCtrl2, 0, wx.ALL, 5 )
+		self.spinCtrl_Mic = wx.SpinCtrl( self.panel_Devices, wx.ID_ANY, u"50", wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 50 )
+		fgSizer_Devices.Add( self.spinCtrl_Mic, 0, wx.ALL, 5 )
 		
 		
 		self.panel_Devices.SetSizer( fgSizer_Devices )
@@ -494,10 +501,10 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer_Autoconnect.Add( self.staticText_Preset, 0, wx.ALL, 5 )
 		
-		choice_AutoconnectChoices = []
-		self.choice_Autoconnect = wx.Choice( self.panel_Autoconnect, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_AutoconnectChoices, 0 )
-		self.choice_Autoconnect.SetSelection( 0 )
-		fgSizer_Autoconnect.Add( self.choice_Autoconnect, 0, wx.ALL|wx.EXPAND, 5 )
+		choice_AutoconnectPresetChoices = []
+		self.choice_AutoconnectPreset = wx.Choice( self.panel_Autoconnect, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_AutoconnectPresetChoices, 0 )
+		self.choice_AutoconnectPreset.SetSelection( 0 )
+		fgSizer_Autoconnect.Add( self.choice_AutoconnectPreset, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.staticText_Room = wx.StaticText( self.panel_Autoconnect, wx.ID_ANY, u"Room:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Room.Wrap( -1 )
@@ -548,6 +555,39 @@ class FrameSettings ( wx.Frame ):
 		
 		
 		fgSizer_Settings.Add( fgSizer_SettingsWidgets, 1, wx.EXPAND, 5 )
+		
+		self.panel_RecordingPath = wx.Panel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer30 = wx.FlexGridSizer( 3, 0, 0, 0 )
+		fgSizer30.AddGrowableCol( 0 )
+		fgSizer30.SetFlexibleDirection( wx.BOTH )
+		fgSizer30.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.staticText_RecordingPath = wx.StaticText( self.panel_RecordingPath, wx.ID_ANY, u"Recording path", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_RecordingPath.Wrap( -1 )
+		
+		self.staticText_RecordingPath.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
+		
+		fgSizer30.Add( self.staticText_RecordingPath, 0, wx.ALL, 5 )
+		
+		fgSizer321 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer321.AddGrowableCol( 0 )
+		fgSizer321.SetFlexibleDirection( wx.BOTH )
+		fgSizer321.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.textCtrl_RecordingPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.textCtrl_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.button_RecordingPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.button_RecordingPath, 0, wx.ALL, 5 )
+		
+		
+		fgSizer30.Add( fgSizer321, 1, wx.EXPAND, 5 )
+		
+		
+		self.panel_RecordingPath.SetSizer( fgSizer30 )
+		self.panel_RecordingPath.Layout()
+		fgSizer30.Fit( self.panel_RecordingPath )
+		fgSizer_Settings.Add( self.panel_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		fgSizer_NotifyWidgets = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer_NotifyWidgets.AddGrowableCol( 0 )
@@ -679,6 +719,7 @@ class FrameSettings ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
+		self.button_RecordingPath.Bind( wx.EVT_BUTTON, self.click_recordingpath )
 		self.button_FileRoger.Bind( wx.EVT_BUTTON, self.click_fileroger )
 		self.button_FileConnect.Bind( wx.EVT_BUTTON, self.click_fileconnect )
 		self.button_FileDisconnect.Bind( wx.EVT_BUTTON, self.click_filedisconnect )
@@ -691,6 +732,9 @@ class FrameSettings ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
+	def click_recordingpath( self, event ):
+		event.Skip()
+	
 	def click_fileroger( self, event ):
 		event.Skip()
 	

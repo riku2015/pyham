@@ -28,3 +28,14 @@ class Spectrum:
 	def draw(self, sound_data):
 		# Return pixel array in some sort of wxwidget
 		pass
+
+# HistoryGraph
+# A bit like Scope but for history graph (ping, transferred data, amount of connections etc.)
+
+class HistoryGraph:
+	def __init__(self):
+		pass
+
+	def draw(self, sound_data):
+		# Return pixel array in some sort of wxwidget
+		pass

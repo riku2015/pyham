@@ -9,9 +9,10 @@ from log import log
 from server_protocols import ServerProtocol
 
 class ServerProtocolTest(ServerProtocol):
-	def __init__(self, name, address, port):
-		ServerProtocol.__init__(self, name, address, port)
+	def __init__(self, name, port):
+		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "TEST"
+		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
 
 	def connect(self):
 		ServerProtocol.connect(self)
@@ -113,4 +114,3 @@ class Test_Soundlooper:
 	def stream():
 		# Send data to client
 		pass
-

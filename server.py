@@ -4,6 +4,8 @@ from log import log
 from config import Config
 from server_protocols import *
 from server_gui import WindowMain
+# from server_gui import WindowStats	# For some reason it works without this
+# from server_gui import WindowSettings	# For some reason it works without this
 from testcode import ServerProtocolTest
 
 # One server can use one or more different protocols at the same time.
@@ -20,28 +22,28 @@ class Server:
 		#
 
 		# Read configuration:
-		config = Config()
-		config.load(filename_config)
+		self.config = Config()
+		self.config.load(filename_config)
 
 		# Initialize protocol(s):
 
-		# if config.parameters[frn]
-		self.frn = ServerProtocolFrn("Test server", "localhost", 10024)
-		# self.frn = ServerProtocolFrn(config.parameters[frn_name, frn_address, frn_port])
+		if self.config.parameters["frn_autostart"]:
+			self.frn = ServerProtocolFrn(self.config.parameters["frn_name"], self.config.parameters["frn_port"])
+			# self.frn = ServerProtocolFrn(config.parameters[frn_name, frn_address, frn_port])
 
-		# if config.parameters[eqso]
-		self.eqso = ServerProtocolEqso("Test server", "localhost", 5000)
-		# Eqso protocol is now accepting connections
+		if self.config.parameters["eqso_autostart"]:
+			self.eqso = ServerProtocolEqso(self.config.parameters["eqso_name"], self.config.parameters["eqso_port"])
+			# Eqso protocol is now accepting connections
 
-		# if config.parameters[echolink]
-		self.echolink = ServerProtocolEcholink("Test server", "localhost", 5200)
-		# Echolink protocol is now accepting connections
+		if self.config.parameters["echolink_autostart"]:
+			self.echolink = ServerProtocolEcholink(self.config.parameters["echolink_name"], self.config.parameters["echolink_port"])
+			# Echolink protocol is now accepting connections
 
-		# if config.parameters[pyhamp]
-		self.pyhamp = ServerProtocolPyhamp("Test server", "localhost", 2000)
-		# Pyhamp protocol is now accepting connections
+		if self.config.parameters["pyham_autostart"]:
+			self.pyham = ServerProtocolPyham(self.config.parameters["pyham_name"], self.config.parameters["pyham_port"])
+			# Pyham protocol is now accepting connections
 
-		self.test = ServerProtocolTest("Test server", "localhost", 3000)
+		self.test = ServerProtocolTest("Test server", 3000)
 		# Test protocol is now accepting connections
 
 	def run(self):
@@ -49,7 +51,7 @@ class Server:
 		#self.frn.run()		# Frn protocol is now accepting connections
 		#self.echolink.run()	# Echolink protocol is now accepting connections
 		#self.eqso.run()		# Eqso protocol is now accepting connections
-		#self.pyhamp.run()	# Pyhamp protocol is now accepting connections
+		#self.pyham.run()	# Pyham protocol is now accepting connections
 		self.test.run()		# Test protocol is now accepting connections
 
 	def stop(self):
@@ -69,14 +71,34 @@ class ServerWx(Server):
 		else:
 			self.app = wx.App(None)		# Without separate log console window
 		self.mainwindow = WindowMain(parent=None)
+		self.mainwindow.set_main(self)
 
 	def run(self):
 		log("Starting server (wx).")
-		self.frn.run()		# Frn protocol is now accepting connections
-		self.echolink.run()	# Echolink protocol is now accepting connections
-		self.eqso.run()		# Eqso protocol is now accepting connections
-		self.pyhamp.run()	# Pyhamp protocol is now accepting connections
+		if self.config.parameters["frn_autostart"] == "on" and self.frn.run():
+			self.mainwindow.staticText_FrnState.SetLabel("Running")			# Frn protocol is now accepting connections
+		if self.config.parameters["echolink_autostart"] == "on" and self.echolink.run():
+			self.mainwindow.staticText_EcholinkState.SetLabel("Running")	# Echolink protocol is now accepting connections
+		if self.config.parameters["eqso_autostart"] == "on" and self.eqso.run():
+			self.mainwindow.staticText_EqsoState.SetLabel("Running")		# Eqso protocol is now accepting connections
+		if self.config.parameters["pyham_autostart"] == "on" and self.pyham.run():
+			self.mainwindow.staticText_PyhamState.SetLabel("Running")		# Pyham protocol is now accepting connections
 		#self.test.run()	# Test protocol is now accepting connections
+
+		# Update main window text fields:
+		self.mainwindow.textCtrl_EqsoName.SetValue(self.config.parameters["eqso_name"])
+		self.mainwindow.textCtrl_EqsoPort.SetValue(self.config.parameters["eqso_port"])
+		self.mainwindow.textCtrl_EcholinkName.SetValue(self.config.parameters["echolink_name"])
+		self.mainwindow.textCtrl_EcholinkPort.SetValue(self.config.parameters["echolink_port"])
+		self.mainwindow.textCtrl_FrnName.SetValue(self.config.parameters["frn_name"])
+		self.mainwindow.textCtrl_FrnPort.SetValue(self.config.parameters["frn_port"])
+		self.mainwindow.textCtrl_PyhamName.SetValue(self.config.parameters["pyham_name"])
+		self.mainwindow.textCtrl_PyhamPort.SetValue(self.config.parameters["pyham_port"])
+		# Disable Apply buttons until user changes the values:
+		self.mainwindow.button_EqsoApply.Enable(False)
+		self.mainwindow.button_EcholinkApply.Enable(False)
+		self.mainwindow.button_FrnApply.Enable(False)
+		self.mainwindow.button_PyhamApply.Enable(False)
 		# Show main window:
 		self.mainwindow.Show()
 		# Execute GUI:

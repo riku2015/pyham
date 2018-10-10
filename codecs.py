@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+# Routines for packing and unpacking audio data
+# Note: This may require C(++)
+
 class GSM:
 	def __init__(self):
 		pass
@@ -16,6 +19,14 @@ class WAV:
 	def __init__(self):
 		pass
 
-class Flac:
-	def __init__(self):
-		pass
+#class Flac:
+#	def __init__(self):
+#		pass
+
+#class Ogg:
+#	def __init__(self):
+#		pass
+
+#class Mp3:
+#	def __init__(self):
+#		pass

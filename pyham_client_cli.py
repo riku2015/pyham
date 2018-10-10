@@ -4,9 +4,13 @@
 # Command line interface without wxWidgets
 
 # Commands:
+# connect, disconnect, nick, description
 
-line = ""
+class ClientCLI:
+	def __init__(self, filename):
+		line = ""
 
-while line != "quit":
-	line = input("Prompt: ")
-	print (line)
+		while line != "quit":
+		line = input("Prompt: ")
+		# TODO: parse command
+		#print (line)

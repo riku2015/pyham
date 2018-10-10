@@ -45,7 +45,8 @@ class Log:
 	def gethistory():
 		return this.history
 
-def error(parent, message, caption='Error'):
+def error(parent, message, caption='ERROR'):
+	# TODO: CLI version
 	log("ERROR: " + message)
 	dialogError = wx.MessageDialog(parent, "ERROR:\n" + message, caption, wx.OK | wx.ICON_WARNING)
 	dialogError.ShowModal()

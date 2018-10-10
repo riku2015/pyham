@@ -9,14 +9,19 @@
 # 	integer
 # 	string
 # 	boolean:
-# 		0/1, true/false, on/off, enabled/disabled
+# 		1/0, true/false, on/off, enabled/disabled
+
+# TODO:
+# make everything lower case
+# 1/0, True/False
+# parse value arrays (for presets)
 
 from log import log
 from os.path import isfile
 
 class Config():
 	def __init__(self):
-		self.parameters= {}
+		self.parameters = {}
 
 	def load(self, filename):
 		# Read file and parse values into self.parameters
@@ -68,6 +73,9 @@ class Config():
 		except Exception as e:
 			error(self, "while saving config file: " + str(e))
 
-	def __str__():
-		# Return current parameters
-		return "TODO"
+	def __str__(self):
+		# Return current parameter array as text
+		string = ""
+		for key in self.parameters:
+			string += (key + " = " + self.parameters[key] + "\n")
+		return string
