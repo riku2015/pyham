@@ -14,6 +14,8 @@ Both are to be compatible with [eQSO](https://en.wikipedia.org/wiki/Radio_over_I
 ### Software requirements
 This program requires [Python](https://www.python.org/) 3.x to be installed. Mandatory.
 
+GUI is made with [wxFormBuilder](https://github.com/wxFormBuilder/wxFormBuilder) and is saved in files **client_gui.fbp** and **server_gui.fbp**. Not mandatory but recommended if you're changing the program.
+
 **Python modules:**
 
 [PyAudio](https://pypi.org/project/PyAudio/) is required for sound. Mandatory.
