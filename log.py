@@ -8,6 +8,7 @@ import wx
 # - Logging options: stdout, stderr, file, window...
 # - Set filename from command line parameter
 # - Verbose, normal and quiet mode
+# - If separate console window, append old log messages before creating wx client, to it
 
 def log(text, filename = None):
 	# Format text with timestamp:
@@ -46,8 +47,8 @@ class Log:
 		return this.history
 
 def error(parent, message, caption='ERROR'):
-	# TODO: CLI version
+	# TODO:
 	log("ERROR: " + message)
-	dialogError = wx.MessageDialog(parent, "ERROR:\n" + message, caption, wx.OK | wx.ICON_WARNING)
-	dialogError.ShowModal()
-	dialogError.Destroy()
+	#dialogError = wx.MessageDialog(parent, "ERROR:\n" + message, caption, wx.OK | wx.ICON_WARNING)
+	#dialogError.ShowModal()
+	#dialogError.Destroy()

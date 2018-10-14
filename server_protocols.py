@@ -34,8 +34,14 @@ class ServerProtocol():
 		log(self.name + ": Incoming connection from --- to port ---.")
 
 	def disconnect(self):
+		self.socket.shutdown()
+		self.socket.close()
 		log(self.name + ": Disconnected.")
-		
+
+	def stop(self):
+		log("Stopping " + self.name)
+		self.disconnect()
+
 	def send(self, data):
 		log("Sending data.")
 		totalsent = 0
@@ -51,27 +57,27 @@ class ServerProtocol():
 		bytes_received = 0
 		while bytes_recd < MSGLEN:
 			chunk = self.sock.recv(min(MSGLEN - bytes_received, 2048))
-			if chunk == '':
+			if chunk == b'':
 				error(self, "while receiving via socket: " + str(e))
 				#raise Runtimeerror(self, "Error: broken socket while receiving.")
 			chunks.append(chunk)
 			bytes_received += len(chunk)
-		return ''.join(chunks)
+		return b''.join(chunks)
 
 	def run(self):
 		result = False
 		if self.bind():
 			log(self.name + ": Accepting connections.")
 			result = True
-		#while True:
+		while True:
 			# Accept connections from outside
-			#(clientsocket, address) = self.socket.accept()
+			(clientsocket, address) = self.socket.accept()
 			#self.socket.accept()
-			#log("Incoming client connection.")
+			log("Incoming client connection.")
 
 			# Make thread for connection:
-			# ct = client_thread(clientsocket)
-			# ct.run()
+			ct = client_thread(clientsocket)
+			ct.run()
 		return result
 
 	def set_rooms(rooms):
@@ -88,6 +94,7 @@ class ServerProtocolPyham(ServerProtocol):
 	def __init__(self, name, port):
 		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "PYHAM"
+		self.version = "0.05"
 		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
 
 	def connect(self):
@@ -161,5 +168,3 @@ class ServerProtocolFrn(ServerProtocol):
 	def send(self, data):
 		#self.socket.send(data)
 		log("Sending data.")
-
-# from testcode import ServerProtocolTest

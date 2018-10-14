@@ -56,5 +56,3 @@ class ClientWx(Client):
 		# Execute GUI:
 		self.app.MainLoop()
 
-	def connect(self):
-		pass

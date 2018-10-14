@@ -6,7 +6,6 @@ from server_protocols import *
 from server_gui import WindowMain
 # from server_gui import WindowStats	# For some reason it works without this
 # from server_gui import WindowSettings	# For some reason it works without this
-from testcode import ServerProtocolTest
 
 # One server can use one or more different protocols at the same time.
 # Only one instance of a certain protocol can be used within one server at the same time.
@@ -19,7 +18,7 @@ class Server:
 		self.filename_config = filename_config
 
 		# Defaults if not given in config file:
-		#
+		# TODO
 
 		# Read configuration:
 		self.config = Config()
@@ -27,32 +26,28 @@ class Server:
 
 		# Initialize protocol(s):
 
-		if self.config.parameters["frn_autostart"]:
+		if self.config.parameters["frn_enabled"]:
 			self.frn = ServerProtocolFrn(self.config.parameters["frn_name"], self.config.parameters["frn_port"])
-			# self.frn = ServerProtocolFrn(config.parameters[frn_name, frn_address, frn_port])
 
-		if self.config.parameters["eqso_autostart"]:
+		if self.config.parameters["eqso_enabled"]:
 			self.eqso = ServerProtocolEqso(self.config.parameters["eqso_name"], self.config.parameters["eqso_port"])
-			# Eqso protocol is now accepting connections
 
-		if self.config.parameters["echolink_autostart"]:
+		if self.config.parameters["echolink_enabled"]:
 			self.echolink = ServerProtocolEcholink(self.config.parameters["echolink_name"], self.config.parameters["echolink_port"])
-			# Echolink protocol is now accepting connections
 
-		if self.config.parameters["pyham_autostart"]:
+		if self.config.parameters["pyham_enabled"]:
 			self.pyham = ServerProtocolPyham(self.config.parameters["pyham_name"], self.config.parameters["pyham_port"])
-			# Pyham protocol is now accepting connections
-
-		self.test = ServerProtocolTest("Test server", 3000)
-		# Test protocol is now accepting connections
 
 	def run(self):
 		log("Starting server.")
-		#self.frn.run()		# Frn protocol is now accepting connections
-		#self.echolink.run()	# Echolink protocol is now accepting connections
-		#self.eqso.run()		# Eqso protocol is now accepting connections
-		#self.pyham.run()	# Pyham protocol is now accepting connections
-		self.test.run()		# Test protocol is now accepting connections
+		if self.config.parameters["frn_enabled"] == "on":
+			self.frn.run()			# Frn protocol is now accepting connections
+		if self.config.parameters["echolink_enabled"] == "on":
+			self.echolink.run()		# Echolink protocol is now accepting connections
+		if self.config.parameters["eqso_enabled"] == "on":
+			self.eqso.run()			# Eqso protocol is now accepting connections
+		if self.config.parameters["pyham_enabled"] == "on":
+			self.pyham.run()		# Pyham protocol is now accepting connections
 
 	def stop(self):
 		log("Server stopped.")
@@ -75,15 +70,14 @@ class ServerWx(Server):
 
 	def run(self):
 		log("Starting server (wx).")
-		if self.config.parameters["frn_autostart"] == "on" and self.frn.run():
+		if self.config.parameters["frn_enabled"] == "on" and self.frn.run():
 			self.mainwindow.staticText_FrnState.SetLabel("Running")			# Frn protocol is now accepting connections
-		if self.config.parameters["echolink_autostart"] == "on" and self.echolink.run():
+		if self.config.parameters["echolink_enabled"] == "on" and self.echolink.run():
 			self.mainwindow.staticText_EcholinkState.SetLabel("Running")	# Echolink protocol is now accepting connections
-		if self.config.parameters["eqso_autostart"] == "on" and self.eqso.run():
+		if self.config.parameters["eqso_enabled"] == "on" and self.eqso.run():
 			self.mainwindow.staticText_EqsoState.SetLabel("Running")		# Eqso protocol is now accepting connections
-		if self.config.parameters["pyham_autostart"] == "on" and self.pyham.run():
+		if self.config.parameters["pyham_enabled"] == "on" and self.pyham.run():
 			self.mainwindow.staticText_PyhamState.SetLabel("Running")		# Pyham protocol is now accepting connections
-		#self.test.run()	# Test protocol is now accepting connections
 
 		# Update main window text fields:
 		self.mainwindow.textCtrl_EqsoName.SetValue(self.config.parameters["eqso_name"])
@@ -107,5 +101,3 @@ class ServerWx(Server):
 	def stop(self):
 		log("Server (wx) stopped.")
 
-	def test(self):
-		log("test")

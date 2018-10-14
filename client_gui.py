@@ -71,7 +71,31 @@ class WindowSettings(FrameSettings):
 		else:
 			self.main.config.parameters["transmit_roger"] = "off"
 
-		self.main.config.parameters["path_recording"] = self.textCtrl_RecordingPath.GetValue()
+		if self.checkBox_RecordRoger.GetValue():
+			self.main.config.parameters["record_roger"] = "on"
+		else:
+			self.main.config.parameters["record_roger"] = "off"
+		
+		if self.checkBox_RecordConnect.GetValue():
+			self.main.config.parameters["record_connect"] = "on"
+		else:
+			self.main.config.parameters["record_connect"] = "off"
+
+		if self.checkBox_RecordDisconnect.GetValue():
+			self.main.config.parameters["record_disconnect"] = "on"
+		else:
+			self.main.config.parameters["record_disconnect"] = "off"
+
+		self.main.config.parameters["volume_speaker"] = str(self.spinCtrl_Speaker.GetValue())
+		self.main.config.parameters["volume_mic"] = str(self.spinCtrl_Mic.GetValue())
+
+		self.main.config.parameters["recording_path"] = self.textCtrl_RecordingPath.GetValue()
+		if self.choice_Format.GetSelection() == 0:
+			self.main.config.parameters["recording_format"] = "wav"
+		elif self.choice_Format.GetSelection() == 1:
+			self.main.config.parameters["recording_format"] = "mp3"
+		elif self.choice_Format.GetSelection() == 2:
+			self.main.config.parameters["recording_format"] = "flac"
 	
 	def click_ok( self, event ):
 		self.apply_changes()
@@ -110,10 +134,8 @@ class WindowMain(FrameMain):
 
 			# Record and stream audio to server:
 			self.recorder = Recorder(self)
-			self.recorder.running = True
 			self.recorder.start()
 			self.audiostreamer = Audiostreamer(self)
-			self.audiostreamer.running = True
 			self.audiostreamer.start()
 
 		except Exception as e:
@@ -126,14 +148,13 @@ class WindowMain(FrameMain):
 		try:
 			log("PTT button released, end recording to server.")
 
-			self.audiostreamer.running = False
 			# Set PTT button color to green:
 			self.button_Ptt.SetBackgroundColour(wx.Colour(186, 216, 200))
 			self.button_Ptt.SetLabel("Push To Talk")
 
 			# Stop recording thread:
-			self.audiostreamer.stop()
 			self.recorder.stop()
+			self.audiostreamer.stop()
 
 		except Exception as e:
 			error(str(e))
@@ -176,44 +197,37 @@ class WindowMain(FrameMain):
 		pass
 
 	def click_connect(self, event):
-		if len(self.textCtrl_Server.GetValue()) > 0:
-			if self.textCtrl_Port.GetValue().isdigit():
-				#try:
-					# Connect to server
-					# (disconnect current connection before trying to make a new connection)
+		if self.button_Connect.GetLabel() == "Connect":		# We are connecting
+			if len(self.textCtrl_Server.GetValue()) > 0:
+				if self.textCtrl_Port.GetValue().isdigit():
 					
-					if self.button_Connect.GetLabel() == "Connect":
-						# Make connection:
-						protocol = self.choice_Protocol.GetSelection()
-						if protocol == 0:
-							self.protocol = ClientProtocolEcholink(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-						elif protocol == 1:
-							self.protocol = ClientProtocolEqso(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-						elif protocol == 2:
-							self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-						elif protocol == 3:
-							self.protocol = ClientProtocolPyham(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
-						log(str(protocol))
-						self.protocol.connect()
-						self.protocol.send(b"")
-						
-						# If successfully connected:
-						#play_sound("sound.wav")
-						self.button_Connect.SetLabel("Disconnect")
-					else:
-						# If successfully disconnected:
-						self.button_Connect.SetLabel("Connect")
-						log("Disconnected.")
-
-					#log("Connected to server.")
-					#log("Disconnect from server.")
-				#except Exception as e:
-					#error(self, "while connecting to server: " + str(e))
-					#log('Error while disconnecting from server: ' + str(e))
+					# Make connection:
+					protocol = self.choice_Protocol.GetSelection()
+					if protocol == 0:
+						self.protocol = ClientProtocolEcholink(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+					elif protocol == 1:
+						self.protocol = ClientProtocolEqso(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+					elif protocol == 2:
+						self.protocol = ClientProtocolFrn(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+					elif protocol == 3:
+						self.protocol = ClientProtocolPyham(self.textCtrl_Server.GetValue(), int(self.textCtrl_Port.GetValue()))
+					self.protocol.connect()
+					#self.protocol.send(b"")
+					
+					# If successfully connected:
+					if self.main.config.parameters["soundfile_connect"] != None:
+						play_sound(self.main.config.parameters["soundfile_connect"])
+					self.button_Connect.SetLabel("Disconnect")
+				else:
+					error(self, "Invalid port.")
 			else:
-				error(self, "Invalid port.")
-		else:
-			error(self, "Invalid server address.")
+				error(self, "Invalid server address.")
+		else:		# We are disconnecting
+			self.protocol.disconnect()
+			# If successfully disconnected:
+			if self.main.config.parameters["soundfile_disconnect"] != None:
+				play_sound(self.main.config.parameters["soundfile_disconnect"])
+				self.button_Connect.SetLabel("Connect")
 
 	def click_send(self, event):
 		try:
@@ -227,16 +241,17 @@ class WindowMain(FrameMain):
 		except Exception as e:
 			self.recordingtodisc = False
 		if self.recordingtodisc:
-			# TODO: Stop recording
+			# Stop recording:
+			# self.recorder.stop()
 			# Set discrecorder button color to red:
 			self.button_Discrecorder.SetBackgroundColour(wx.Colour(216, 186, 200))
 			self.button_Discrecorder.SetLabel("Recording...")
 		else:
-			# TODO: Start recording
-			# Set discrecorder button color to green:
-			self.button_Discrecorder.SetBackgroundColour(wx.Colour(186, 216, 200))
+			# Start recording:
+			# self.recorder.start()
+			# Set discrecorder button color to normal:
+			self.button_Discrecorder.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNFACE))
 			self.button_Discrecorder.SetLabel("Record to disc")
-
 
 
 	def click_settings(self, event):
@@ -253,25 +268,49 @@ class WindowMain(FrameMain):
 		self.settingswindow.textCtrl_Callsign.SetValue(self.main.config.parameters["callsign"])
 		if self.main.config.parameters["play_roger"] == "on":
 			self.settingswindow.checkBox_PlayRoger.SetValue(True)
-		if self.main.config.parameters["play_roger"] == "off":
+		elif self.main.config.parameters["play_roger"] == "off":
 			self.settingswindow.checkBox_PlayRoger.SetValue(False)
 		
 		if self.main.config.parameters["play_connect"] == "on":
 			self.settingswindow.checkBox_PlayConnect.SetValue(True)
-		if self.main.config.parameters["play_connect"] == "off":
+		elif self.main.config.parameters["play_connect"] == "off":
 			self.settingswindow.checkBox_PlayConnect.SetValue(False)
 		
 		if self.main.config.parameters["play_disconnect"] == "on":
 			self.settingswindow.checkBox_PlayDisconnect.SetValue(True)
-		if self.main.config.parameters["play_disconnect"] == "off":
+		elif self.main.config.parameters["play_disconnect"] == "off":
 			self.settingswindow.checkBox_PlayDisconnect.SetValue(False)
 		
 		if self.main.config.parameters["transmit_roger"] == "on":
 			self.settingswindow.checkBox_TransmitRoger.SetValue(True)
-		if self.main.config.parameters["transmit_roger"] == "off":
+		elif self.main.config.parameters["transmit_roger"] == "off":
 			self.settingswindow.checkBox_TransmitRoger.SetValue(False)
 
-		self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["path_recording"])
+		if self.main.config.parameters["record_roger"] == "on":
+			self.settingswindow.checkBox_RecordRoger.SetValue(True)
+		elif self.main.config.parameters["record_roger"] == "off":
+			self.settingswindow.checkBox_RecordRoger.SetValue(False)
+
+		if self.main.config.parameters["record_connect"] == "on":
+			self.settingswindow.checkBox_RecordConnect.SetValue(True)
+		elif self.main.config.parameters["record_connect"] == "off":
+			self.settingswindow.checkBox_RecordConnect.SetValue(False)
+
+		if self.main.config.parameters["record_disconnect"] == "on":
+			self.settingswindow.checkBox_RecordDisconnect.SetValue(True)
+		elif self.main.config.parameters["record_disconnect"] == "off":
+			self.settingswindow.checkBox_RecordDisconnect.SetValue(False)
+
+		self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recording_path"])
+		if self.main.config.parameters["recording_format"] == "wav":
+			self.settingswindow.choice_Format.SetSelection(0)
+		elif self.main.config.parameters["recording_format"] == "mp3":
+			self.settingswindow.choice_Format.SetSelection(1)
+		elif self.main.config.parameters["recording_format"] == "flac":
+			self.settingswindow.choice_Format.SetSelection(2)
+
+		self.settingswindow.spinCtrl_Speaker.SetValue(self.main.config.parameters["volume_speaker"])
+		self.settingswindow.spinCtrl_Mic.SetValue(self.main.config.parameters["volume_mic"])
 
 		self.settingswindow.Show()
 

@@ -11,7 +11,9 @@ from log import log
 
 # import codecs
 
-# TODO: get rid of wx in this file
+# TODO:
+# get rid of wx in this file
+# Play / transmit: roger beep, connect and disconnect sounds
 
 audio = pyaudio.PyAudio()
 
@@ -43,6 +45,7 @@ class Recorder(threading.Thread):
 		self.running = False
 
 	def run(self):
+		self.running = True
 		FORMAT = pyaudio.paInt16
 		CHANNELS = 2
 		RATE = 44100
@@ -91,6 +94,7 @@ class Audiostreamer(threading.Thread):
 		self.buffer = []
 
 	def run(self):
+		self.running = True
 		# Overrides Thread.run. Don't call this directly its called internally when you call Thread.start().
 
 		# If error:

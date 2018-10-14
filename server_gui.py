@@ -8,6 +8,7 @@
 import wx
 from log import log
 from server_gui_fbp import FrameMain, FrameSettings, FrameStats
+from server_protocols import ServerProtocolEqso
 
 class WindowStats(FrameStats):
 	def __init__(self,parent):
@@ -27,39 +28,51 @@ class WindowSettings(FrameSettings):
 		self.main.config.parameters["echolink_name"] = self.textCtrl_EcholinkName.GetValue()
 		self.main.config.parameters["echolink_port"] = self.textCtrl_EcholinkPort.GetValue()
 		if self.checkBox_EcholinkAutostart.GetValue():
-			self.main.config.parameters["echolink_autostart"] = "on"
+			self.main.config.parameters["echolink_enabled"] = "on"
 		else:
-			self.main.config.parameters["echolink_autostart"] = "off"
+			self.main.config.parameters["echolink_enabled"] = "off"
 		
 		self.main.config.parameters["eqso_name"] = self.textCtrl_EqsoName.GetValue()
 		self.main.config.parameters["eqso_port"] = self.textCtrl_EqsoPort.GetValue()
 		if self.checkBox_EqsoAutostart.GetValue():
-			self.main.config.parameters["eqso_autostart"] = "on"
+			self.main.config.parameters["eqso_enabled"] = "on"
 		else:
-			self.main.config.parameters["eqso_autostart"] = "off"
+			self.main.config.parameters["eqso_enabled"] = "off"
 
 		self.main.config.parameters["frn_name"] = self.textCtrl_FrnName.GetValue()
 		self.main.config.parameters["frn_port"] = self.textCtrl_FrnPort.GetValue()
 		if self.checkBox_FrnAutostart.GetValue():
-			self.main.config.parameters["frn_autostart"] = "on"
+			self.main.config.parameters["frn_enabled"] = "on"
 		else:
-			self.main.config.parameters["frn_autostart"] = "off"
+			self.main.config.parameters["frn_enabled"] = "off"
 
 		self.main.config.parameters["pyham_name"] = self.textCtrl_PyhamName.GetValue()
 		self.main.config.parameters["pyham_port"] = self.textCtrl_PyhamPort.GetValue()
 		if self.checkBox_PyhamAutostart.GetValue():
-			self.main.config.parameters["pyham_autostart"] = "on"
+			self.main.config.parameters["pyham_enabled"] = "on"
 		else:
-			self.main.config.parameters["pyham_autostart"] = "off"
+			self.main.config.parameters["pyham_enabled"] = "off"
 
 		if self.checkBox_Autosave.GetValue():
 			self.main.config.parameters["autosave"] = "on"
 		else:
 			self.main.config.parameters["autosave"] = "off"
 
-		self.main.config.parameters["path_recording"] = self.textCtrl_RecordingPath.GetValue()
+		self.main.config.parameters["recording_path"] = self.textCtrl_RecordingPath.GetValue()
+		if self.choice_Format.GetSelection() == 0:
+			self.main.config.parameters["recording_format"] = "wav"
+		elif self.choice_Format.GetSelection() == 1:
+			self.main.config.parameters["recording_format"] = "mp3"
+		elif self.choice_Format.GetSelection() == 2:
+			self.main.config.parameters["recording_format"] = "flac"
+
+		self.main.config.parameters["max_connections"] = self.textCtrl_MaxConnections.GetValue()
+
+		# TODO: Rooms
+		# self.main.config.parameters[] =
 
 		# TODO: PTT trigger value
+		# self.main.config.parameters[] =
 
 	def click_recordingpath( self, event):
 		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
@@ -123,7 +136,15 @@ class WindowMain(FrameMain):
 			elif self.main.config.parameters["autosave"] == "off":
 				self.settingswindow.checkBox_Autosave.SetValue(False)
 
-			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["path_recording"])
+			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recording_path"])
+			if self.main.config.parameters["recording_format"] == "wav":
+				self.settingswindow.choice_Format.SetSelection(0)
+			elif self.main.config.parameters["recording_format"] == "mp3":
+				self.settingswindow.choice_Format.SetSelection(1)
+			elif self.main.config.parameters["recording_format"] == "flac":
+				self.settingswindow.choice_Format.SetSelection(2)
+
+			self.settingswindow.textCtrl_MaxConnections.SetValue(self.main.config.parameters["max_connections"])
 
 		self.settingswindow.Show()
 
@@ -158,12 +179,14 @@ class WindowMain(FrameMain):
 
 	def click_eqso_start( self, event ):
 		if self.button_EqsoStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
-			#self.eqso.run()
+			if self.main.eqso != None:
+				self.main.eqso = ServerProtocolEqso(self.textCtrl_EqsoName.GetValue(), self.textCtrl_EqsoPort.GetValue())
+			self.main.eqso.run()
 			# If successfully started:
 			self.button_EqsoStart.SetLabel("Stop")
 			self.staticText_EqsoState.SetLabel("Running")
 		else:
-			#self.eqso.disconnect()
+			self.main.eqso.close()
 			# If successfully Stopped:
 			self.button_EqsoStart.SetLabel("Start")
 			self.staticText_EqsoState.SetLabel("Stopped")
@@ -173,12 +196,12 @@ class WindowMain(FrameMain):
 
 	def click_echolink_start( self, event ):
 		if self.button_EcholinkStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
-			#self.echolink.run()
+			self.main.echolink.run()
 			# If successfully started:
 			self.button_EcholinkStart.SetLabel("Stop")
 			self.staticText_EcholinkState.SetLabel("Running")
 		else:
-			#self.echolink.disconnect()
+			self.echolink.close()
 			# If successfully Stopped:
 			self.button_EcholinkStart.SetLabel("Start")
 			self.staticText_EcholinkState.SetLabel("Stopped")
@@ -188,12 +211,12 @@ class WindowMain(FrameMain):
 
 	def click_frn_start( self, event ):
 		if self.button_FrnStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
-			#self.frn.run()
+			self.main.frn.run()
 			# If successfully started:
 			self.button_FrnStart.SetLabel("Stop")
 			self.staticText_FrnState.SetLabel("Running")
 		else:
-			#self.frn.disconnect()
+			self.frn.close()
 			# If successfully Stopped:
 			self.button_FrnStart.SetLabel("Start")
 			self.staticText_FrnState.SetLabel("Stopped")
@@ -203,12 +226,12 @@ class WindowMain(FrameMain):
 
 	def click_pyham_start( self, event ):
 		if self.button_PyhamStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
-			#self.pyham.run()
+			self.main.pyham.run()
 			# If successfully started:
 			self.button_PyhamStart.SetLabel("Stop")
 			self.staticText_PyhamState.SetLabel("Running")
 		else:
-			#self.pyham.disconnect()
+			self.pyham.close()
 			# If successfully Stopped:
 			self.button_PyhamStart.SetLabel("Start")
 			self.staticText_PyhamState.SetLabel("Stopped")

@@ -1,5 +1,5 @@
 # pyham server config file template/example/help
-
+config_version = 0.05
 device_speaker = default
 device_mic = default
 device_ptt = /dev/xxx
@@ -10,7 +10,8 @@ volume_connect = 50
 volume_disconnect = 50
 
 # Disk recorder path:
-path_recording = .
+recording_path = .
+recording_format = wav
 
 # Protocols:
 	# name

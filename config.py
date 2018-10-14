@@ -12,11 +12,11 @@
 # 		1/0, true/false, on/off, enabled/disabled
 
 # TODO:
-# make everything lower case
-# 1/0, True/False
+# on/off, 1/0, true/false (ignore case in value)
 # parse value arrays (for presets)
+# accessors to values (with defaults if missing from config file)
 
-from log import log
+from log import log, error
 from os.path import isfile
 
 class Config():
@@ -65,10 +65,6 @@ class Config():
 				for key in self.parameters:
 					file.write(key + " = " + self.parameters[key] + "\n")
 					linecount += 1
-					#log(key, value)
-					# Iterate trough all variables
-					# line = "variable = value"
-					#log("Error while saving config file.")
 				log(str(linecount) + " lines wrote to config file.")
 		except Exception as e:
 			error(self, "while saving config file: " + str(e))

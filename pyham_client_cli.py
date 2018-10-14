@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Pyham CLI
-# Command line interface without wxWidgets
+# Command line interface without wxWidgets, with ncurses and without
 
 # Commands:
 # connect, disconnect, nick, description

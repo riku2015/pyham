@@ -4,6 +4,14 @@
 ## HAM Radio with Python
 *This pair of programs is under development and no working version is released yet.*
 
+Current versions:
+
+Server - 0.014
+
+Client - 0.018
+
+Protocol - 0.05
+
 ### About
 The server program connects distant HAM radios together trough the Internet, thus giving them more range / coverage. The computer needs to be connected to real HAM radio hardware. Instructions are coming later...
 
@@ -64,4 +72,4 @@ You'll find commented configuration file templates in files **pyham_client.conf.
 
 ![alt text](http://titanix.net/~japek/pyham-client-0001.png)
 
-Client v. 0.001 (GNU/Linux)
+Client (wx) v. 0.001 (GNU/Linux)

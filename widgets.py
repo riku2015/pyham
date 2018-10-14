@@ -1,10 +1,18 @@
 #!/usr/bin/python
 
+# TODO: console/ncurses versions
+
 # VU
 # VU meter for volume
 
 class VU:
 	def __init__(self):
+		pass
+
+	def setvalue(self, value):
+		pass
+
+	def draw(self):
 		pass
 
 # Scope

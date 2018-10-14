@@ -1,12 +1,14 @@
 # pyham client config file template/example/help
 
+config_version = 0.05
+
 # Presets
 #	[name, address, port, protocol, reconnect]
 
 presets = [
 	["Test server 1 (Echolink)", "localhost", 5200, echolink, true]
-	["Test server 2 (Eqso)", "localhost", 5000, eqso, true]
-	["Test server 3 (Frn)", "localhost", 10024, frn, true]
+	["Test server 2 (eQSO)", "localhost", 5000, eqso, true]
+	["Test server 3 (FRN)", "localhost", 10024, frn, true]
 	["Test server 4 (Pyham)", "localhost", 0, pyham, true]
 ]
 
@@ -16,7 +18,7 @@ autoconnect_preset = Test server 4 (Pyham)
 autoconnect_room = Test room 1
 
 callsign = Nick
-description = Test user
+description = Test
 
 device_speaker = default
 device_mic = default
@@ -31,11 +33,16 @@ soundfile_connect = connect.wav
 soundfile_disconnect = disconnect.wav
 
 # Disk recorder path:
-path_recording = .
+recording_path = .
+recording_format = wav
 
 play_roger = on
 play_connect = on
 play_disconnect = on
+
+record_roger = on
+record_connect = on
+record_disconnect = on
 
 transmit_roger = on
 

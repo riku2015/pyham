@@ -8,25 +8,28 @@ class GSM:
 		pass
 
 	def encode(self):
-		# return unpacked audio data
+		# return packed audio data
 		pass
 
 	def decode(self):
-		# return packed audio data
+		# return unpacked audio data
 		pass
 
 class WAV:
 	def __init__(self):
+		#self.rate = 44100
+		#self.bits = 16
+		#self.channels = 1 # mono
 		pass
 
-#class Flac:
+#class FLAC:
 #	def __init__(self):
 #		pass
 
-#class Ogg:
+#class OGG:
 #	def __init__(self):
 #		pass
 
-#class Mp3:
+#class MP3:
 #	def __init__(self):
 #		pass
