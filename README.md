@@ -34,14 +34,10 @@ GUI is made with [wxFormBuilder](https://github.com/wxFormBuilder/wxFormBuilder)
 
 [wxPython](https://pypi.org/project/wxPython/) is required for graphical interface. Not mandatory if using command line interface.
 
-[ncurses]() is required for interactive text terminal interface. Not mandatory if using single line command interface.
-
 ## How to install required libraries
 > pip install pyaudio
 >
 > pip install wx
->
-> pip install curses
 
 Or use some other tool to install Python modules/libraries/packages called 'wx' and 'pyaudio'.
 
