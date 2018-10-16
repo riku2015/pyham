@@ -2,9 +2,6 @@
 
 # client windows
 
-# TODO:
-# - Scalable widgets (different font size for low res & high res etc.)
-
 import wx
 from log import *
 from audio import *
@@ -21,7 +18,7 @@ class WindowSettings(FrameSettings):
 		# Used to access Client (parent) object's variables/functions
 		self.main = main
 
-	def click_recordingpath( self, event):
+	def click_recorderpath( self, event):
 		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
 			if dirDialog.ShowModal() == wx.ID_CANCEL:
 				return
@@ -46,7 +43,7 @@ class WindowSettings(FrameSettings):
 			self.textCtrl_FileDisconnect.SetValue(fileDialog.GetPath())
 
 	def apply_changes(self):
-		# Apply changes
+		# Apply changes to config
 		self.main.config.parameters["soundfile_roger"] = self.textCtrl_FileRoger.GetValue()
 		self.main.config.parameters["soundfile_connect"] = self.textCtrl_FileConnect.GetValue()
 		self.main.config.parameters["soundfile_disconnect"] = self.textCtrl_FileDisconnect.GetValue()
@@ -89,13 +86,13 @@ class WindowSettings(FrameSettings):
 		self.main.config.parameters["volume_speaker"] = str(self.spinCtrl_Speaker.GetValue())
 		self.main.config.parameters["volume_mic"] = str(self.spinCtrl_Mic.GetValue())
 
-		self.main.config.parameters["recording_path"] = self.textCtrl_RecordingPath.GetValue()
+		self.main.config.parameters["recorder_path"] = self.textCtrl_RecordingPath.GetValue()
 		if self.choice_Format.GetSelection() == 0:
-			self.main.config.parameters["recording_format"] = "wav"
+			self.main.config.parameters["recorder_format"] = "wav"
 		elif self.choice_Format.GetSelection() == 1:
-			self.main.config.parameters["recording_format"] = "mp3"
+			self.main.config.parameters["recorder_format"] = "mp3"
 		elif self.choice_Format.GetSelection() == 2:
-			self.main.config.parameters["recording_format"] = "flac"
+			self.main.config.parameters["recorder_format"] = "flac"
 	
 	def click_ok( self, event ):
 		self.apply_changes()
@@ -119,6 +116,8 @@ class WindowMain(FrameMain):
 		self.audiostreamer = Audiostreamer(self)
 		self.recorder = Recorder(self)
 		self.recordingtodisc = False	# TODO: Get from config, use Recorder class variable instead of this
+		# TODO:
+		# - insert extra widgets into form (VU meters etc.)
 
 	def set_main(self, main):
 		# Used to access Client (parent) object's variables/functions
@@ -250,7 +249,7 @@ class WindowMain(FrameMain):
 			# Start recording:
 			# self.recorder.start()
 			# Set discrecorder button color to normal:
-			self.button_Discrecorder.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNFACE))
+			self.button_Discrecorder.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNFACE))	# FIXME: Wrong color - so is wx.SYS_COLOUR_WINDOW
 			self.button_Discrecorder.SetLabel("Record to disc")
 
 
@@ -301,12 +300,12 @@ class WindowMain(FrameMain):
 		elif self.main.config.parameters["record_disconnect"] == "off":
 			self.settingswindow.checkBox_RecordDisconnect.SetValue(False)
 
-		self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recording_path"])
-		if self.main.config.parameters["recording_format"] == "wav":
+		self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recorder_path"])
+		if self.main.config.parameters["recorder_format"] == "wav":
 			self.settingswindow.choice_Format.SetSelection(0)
-		elif self.main.config.parameters["recording_format"] == "mp3":
+		elif self.main.config.parameters["recorder_format"] == "mp3":
 			self.settingswindow.choice_Format.SetSelection(1)
-		elif self.main.config.parameters["recording_format"] == "flac":
+		elif self.main.config.parameters["recorder_format"] == "flac":
 			self.settingswindow.choice_Format.SetSelection(2)
 
 		self.settingswindow.spinCtrl_Speaker.SetValue(self.main.config.parameters["volume_speaker"])

@@ -1,0 +1,35 @@
+Protocols
+
+Pyham
+	commands:
+		<GR>						get rooms
+		<JR>roomname</JR>			join room
+		<D>							disconnect
+		<GV>						get server version
+		<SV>version</SV>			send client version
+		<SC>callsign</SC>			send callsign
+		<SD>description</SD>		send description
+		<SA>						send audio
+		<GA>						get audio
+
+Eqso
+	commands:
+		CT:							KIINTEE
+		<VX>2014003</VX>			KIINTEE
+		<EA>joku@ei.ole</EA>		Toistaseksi annetaan olla KIINTEE
+		<PW>jotain</PW>				Toistaseksi kiintea
+		<ON>Nick</ON>				Kutsu tahan
+		<CL>2</CL>					KIINTEE TOISTASEKS
+		<BC>PC Only</BC>			KIINTEE toistaseks
+		<DS>Pyham Cient Test</DS>	Paikkakunta kommentti ym tama
+		<NN>Finland</NN>			KIINTEE TOISTASEKSI
+		<CT>test</CT>				kaupunki, KIINTEE TOISTASEKSI 
+		#<NT>Suomen EQSO</NT>		HUONE Aloitushuone tuo toistaseksi
+		<NT>FINLAND</NT>			HUONE Aloitushuone tuo toistaseksi
+		\n							rivinvaihto viimeiseen muuten ei kuittaa sockki
+
+Frn
+	commands:
+
+Echolink
+	commands:

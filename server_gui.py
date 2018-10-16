@@ -2,9 +2,6 @@
 
 # server windows
 
-# TODO:
-# - Scalable widgets (different font size for low res & high res etc.)
-
 import wx
 from log import log
 from server_gui_fbp import FrameMain, FrameSettings, FrameStats
@@ -23,7 +20,7 @@ class WindowSettings(FrameSettings):
 		self.main = main
 
 	def apply_changes(self):
-		# Apply changes
+		# Apply changes to config
 
 		self.main.config.parameters["echolink_name"] = self.textCtrl_EcholinkName.GetValue()
 		self.main.config.parameters["echolink_port"] = self.textCtrl_EcholinkPort.GetValue()
@@ -58,13 +55,20 @@ class WindowSettings(FrameSettings):
 		else:
 			self.main.config.parameters["autosave"] = "off"
 
-		self.main.config.parameters["recording_path"] = self.textCtrl_RecordingPath.GetValue()
+		self.main.config.parameters["recorder_path"] = self.textCtrl_RecordingPath.GetValue()
 		if self.choice_Format.GetSelection() == 0:
-			self.main.config.parameters["recording_format"] = "wav"
+			self.main.config.parameters["recorder_format"] = "wav"
 		elif self.choice_Format.GetSelection() == 1:
-			self.main.config.parameters["recording_format"] = "mp3"
+			self.main.config.parameters["recorder_format"] = "mp3"
 		elif self.choice_Format.GetSelection() == 2:
-			self.main.config.parameters["recording_format"] = "flac"
+			self.main.config.parameters["recorder_format"] = "flac"
+
+		if self.choice_Overlap.GetSelection() == 0:
+			self.main.config.parameters["overlap"] = "discard"
+		elif self.choice_Overlap.GetSelection() == 1:
+			self.main.config.parameters["overlap"] = "mix"
+		elif self.choice_Overlap.GetSelection() == 2:
+			self.main.config.parameters["overlap"] = "queue"
 
 		self.main.config.parameters["max_connections"] = self.textCtrl_MaxConnections.GetValue()
 
@@ -74,7 +78,7 @@ class WindowSettings(FrameSettings):
 		# TODO: PTT trigger value
 		# self.main.config.parameters[] =
 
-	def click_recordingpath( self, event):
+	def click_recorderpath( self, event):
 		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
 			if dirDialog.ShowModal() == wx.ID_CANCEL:
 				return
@@ -136,13 +140,20 @@ class WindowMain(FrameMain):
 			elif self.main.config.parameters["autosave"] == "off":
 				self.settingswindow.checkBox_Autosave.SetValue(False)
 
-			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recording_path"])
-			if self.main.config.parameters["recording_format"] == "wav":
+			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recorder_path"])
+			if self.main.config.parameters["recorder_format"] == "wav":
 				self.settingswindow.choice_Format.SetSelection(0)
-			elif self.main.config.parameters["recording_format"] == "mp3":
+			elif self.main.config.parameters["recorder_format"] == "mp3":
 				self.settingswindow.choice_Format.SetSelection(1)
-			elif self.main.config.parameters["recording_format"] == "flac":
+			elif self.main.config.parameters["recorder_format"] == "flac":
 				self.settingswindow.choice_Format.SetSelection(2)
+
+			if self.main.config.parameters["overlap"] == "discard":
+				self.settingswindow.choice_Overlap.SetSelection(0)
+			elif self.main.config.parameters["overlap"] == "mix":
+				self.settingswindow.choice_Overlap.SetSelection(1)
+			elif self.main.config.parameters["overlap"] == "queue":
+				self.settingswindow.choice_Overlap.SetSelection(2)
 
 			self.settingswindow.textCtrl_MaxConnections.SetValue(self.main.config.parameters["max_connections"])
 
@@ -153,10 +164,6 @@ class WindowMain(FrameMain):
 
 	def click_save( self, event ):
 		log("Saved.")
-
-	def click_log( self, event ):
-		# Show log window
-		pass
 
 	def click_allow( self, event ):
 		log("Allow.")
@@ -172,7 +179,6 @@ class WindowMain(FrameMain):
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
 		self.statswindow.Show()
-		pass
 
 	def click_eqso_apply( self, event ):
 		self.button_EqsoApply.Enable(False)
@@ -217,7 +223,7 @@ class WindowMain(FrameMain):
 			self.staticText_FrnState.SetLabel("Running")
 		else:
 			self.frn.close()
-			# If successfully Stopped:
+			# If successfully stopped:
 			self.button_FrnStart.SetLabel("Start")
 			self.staticText_FrnState.SetLabel("Stopped")
 

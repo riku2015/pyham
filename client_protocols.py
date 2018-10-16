@@ -26,16 +26,6 @@ class ClientProtocol:
 		pass
 
 # ProtocolPyham
-# commands:
-# <GR> get rooms
-# <JR>roomname</JR> join room
-# <D> disconnect
-# <GV> get server version
-# <SV>version</SV> send client version
-# <SC>callsign</SC> send callsign
-# <SD>description</SD> send description
-# <SA> send audio
-# <GA> get audio
 
 class ClientProtocolPyham(ClientProtocol):
 	def __init__(self, address, port):
@@ -71,15 +61,15 @@ class ClientProtocolPyham(ClientProtocol):
 		self.disconnect()
 
 	def disconnect(self):
-		self.send(b"<d>")
+		self.send(b"<D>")
 		ClientProtocol.disconnect(self)
 
 	def get_version(self):
-		self.send(b"<gv>")
+		self.send(b"<GV>")
 		# return version
 
 	def send_version(self):
-		self.send(b"<sv>" + self.version + "</sv>")
+		self.send(b"<SV>" + self.version + "</SV>")
 
 # ProtocolEqso
 
@@ -210,5 +200,3 @@ class ClientProtocolFrn(ClientProtocol):
 
 	def send_version(self):
 		pass
-
-# from testcode import ClientProtocolTest

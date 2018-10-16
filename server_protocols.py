@@ -3,6 +3,10 @@
 import socket
 from log import log
 
+# TODO:
+# - Count total data sent / received (for statistics)
+# - Count network errors (for statistics)
+
 class ServerProtocol():
 	def __init__(self, name, port):
 		self.binded = False
@@ -10,6 +14,9 @@ class ServerProtocol():
 		self.port = port
 		self.protocolname = "NONE"
 		self.rooms = []
+		self.sentbytes = 0
+		self.receivedbytes = 0
+		self.errors = 0
 
 	def bind(self):
 		log("Binding to port " + self.port + " as '" + self.name + "' using " + self.protocolname + "...")

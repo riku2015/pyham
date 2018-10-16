@@ -5,15 +5,33 @@ import time
 import threading
 
 import pyaudio
-import wave
 
 from log import log
 
-# import codecs
+import wave
+#import codecs
 
 # TODO:
-# get rid of wx in this file
-# Play / transmit: roger beep, connect and disconnect sounds
+# - Get rid of wx in this file
+# - Play / transmit: roger beep, connect and disconnect sounds
+# - Mix sounds together, adjust volume, detect volume (for VU etc.)
+
+'''
+
+p = pyaudio.PyAudio()
+for i in range(p.get_device_count()):
+	print p.get_device_info_by_index(i)
+
+WAVE_OUTPUT_FILENAME = "test.wav"
+# Save to file:
+#waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+#waveFile.setnchannels(CHANNELS)
+#waveFile.setsampwidth(self.audio.get_sample_size(FORMAT))
+#waveFile.setframerate(RATE)
+#waveFile.writeframes(b''.join(frames))
+#waveFile.close()
+
+'''
 
 audio = pyaudio.PyAudio()
 

@@ -17,11 +17,11 @@ import wx.xrc
 class FrameMain ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client 0.018", pos = wx.DefaultPosition, size = wx.Size( 780,540 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL, name = u"pyham" )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Client 0.020", pos = wx.DefaultPosition, size = wx.Size( 780,540 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL, name = u"pyham" )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
-		fgSizer21 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer21 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer21.AddGrowableCol( 0 )
 		fgSizer21.AddGrowableRow( 0 )
 		fgSizer21.SetFlexibleDirection( wx.BOTH )
@@ -578,8 +578,8 @@ class FrameSettings ( wx.Frame ):
 		self.textCtrl_RecordingPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer321.Add( self.textCtrl_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.button_RecordingPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer321.Add( self.button_RecordingPath, 0, wx.ALL, 5 )
+		self.button_RecorderPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.button_RecorderPath, 0, wx.ALL, 5 )
 		
 		
 		fgSizer30.Add( fgSizer321, 1, wx.EXPAND, 5 )
@@ -851,7 +851,7 @@ class FrameSettings ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.button_RecordingPath.Bind( wx.EVT_BUTTON, self.click_recordingpath )
+		self.button_RecorderPath.Bind( wx.EVT_BUTTON, self.click_recorderpath )
 		self.button_FileRoger.Bind( wx.EVT_BUTTON, self.click_fileroger )
 		self.button_FileConnect.Bind( wx.EVT_BUTTON, self.click_fileconnect )
 		self.button_FileDisconnect.Bind( wx.EVT_BUTTON, self.click_filedisconnect )
@@ -864,7 +864,7 @@ class FrameSettings ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
-	def click_recordingpath( self, event ):
+	def click_recorderpath( self, event ):
 		event.Skip()
 	
 	def click_fileroger( self, event ):

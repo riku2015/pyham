@@ -12,10 +12,12 @@
 # 		1/0, true/false, on/off, enabled/disabled
 
 # TODO:
-# on/off, 1/0, true/false (ignore case in value)
-# parse value arrays (for presets)
-# accessors to values (with defaults if missing from config file)
+# - on/off, 1/0, true/false (case insensitive)
+# - Parse value arrays (for presets)
+# - Accessors to values (with defaults if missing from config file)
+# - Use configparser library
 
+#import configparser
 from log import log, error
 from os.path import isfile
 
@@ -57,7 +59,7 @@ class Config():
 
 	def save(self, filename):
 		# Generate config file from self.parameters
-		# TODO: Create new config file template with comments
+		# TODO: preserve comments, newlines, indents etc.
 		log("Saving config file '" + filename + "'...")
 		try:
 			with open(filename, "w") as file:

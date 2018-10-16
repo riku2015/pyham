@@ -1,0 +1,15 @@
+TODO:
+(general items here, more TODO items in .py files)
+
+- Correct use of 'parent' variable in classes, instead of set_main() function
+- Multiple languages / localization
+- Threading for network, audio and UI
+- Log command line parameters and config variables
+- CLI client and server without wxWidgets GUI, with interactive ncurses ui, and as a daemon/service backend + command based frontend
+- Scalable wx widgets (different font size for low res & high res etc.)
+- Website / homepage
+- Do not require Python modules that are not needed
+- Native Windows executable with installer
+- Keyboard key (space) as PTT button without character repeating loop while holding down
+- Status bar
+- Lag meter

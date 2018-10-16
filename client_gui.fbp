@@ -48,7 +48,7 @@
             <property name="size">780,540</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; forward_declare</property>
-            <property name="title">Pyham Client 0.018</property>
+            <property name="title">Pyham Client 0.020</property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>
             <property name="window_name">pyham</property>
@@ -103,7 +103,7 @@
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
             <object class="wxFlexGridSizer" expanded="1">
-                <property name="cols">2</property>
+                <property name="cols">1</property>
                 <property name="flexible_direction">wxBOTH</property>
                 <property name="growablecols">0</property>
                 <property name="growablerows">0</property>
@@ -6455,7 +6455,7 @@
                                                         <property name="minimize_button">0</property>
                                                         <property name="minimum_size"></property>
                                                         <property name="moveable">1</property>
-                                                        <property name="name">button_RecordingPath</property>
+                                                        <property name="name">button_RecorderPath</property>
                                                         <property name="pane_border">1</property>
                                                         <property name="pane_position"></property>
                                                         <property name="pane_size"></property>
@@ -6484,7 +6484,7 @@
                                                         <event name="OnAux2DClick"></event>
                                                         <event name="OnAux2Down"></event>
                                                         <event name="OnAux2Up"></event>
-                                                        <event name="OnButtonClick">click_recordingpath</event>
+                                                        <event name="OnButtonClick">click_recorderpath</event>
                                                         <event name="OnChar"></event>
                                                         <event name="OnCharHook"></event>
                                                         <event name="OnEnterWindow"></event>

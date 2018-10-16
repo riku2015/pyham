@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-# TODO:
-# - CLI client without wxWidgets GUI
-
 import wx
 
 from log import log
 from client_gui import WindowMain
 # from client_gui import WindowSettings	# For some reason it works without this
 from config import Config
+
+# Client
+# Client with command interface
 
 class Client:
 	def __init__(self, filename_config):
@@ -20,6 +20,9 @@ class Client:
 
 	def run(self):
 		pass
+
+# ClientWx
+# Client with wxWidgets GUI
 
 class ClientWx(Client):
 	def __init__(self, filename_config, makeconsole):
@@ -48,7 +51,6 @@ class ClientWx(Client):
 			# self.mainwindow.choice_Speaker.Append()
 			# self.mainwindow.choice_Mic.Append()
 
-
 	def run(self):
 		log("Starting client.")
 		# Show main window:
@@ -56,3 +58,20 @@ class ClientWx(Client):
 		# Execute GUI:
 		self.app.MainLoop()
 
+
+import terminalgui
+
+# ClientCurses
+# Client with Curses TUI
+
+# Commands:
+# connect, disconnect, nick, description, talkon, talkoff, set, get, join, part, save
+
+class ClientCurses:
+	def __init__(self, filename):
+		line = ""
+
+		while line != "quit":
+			line = input("Prompt: ")
+			# TODO: parse command
+			#print (line)

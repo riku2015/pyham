@@ -17,11 +17,11 @@ import wx.xrc
 class FrameMain ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server 0.014", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server 0.016", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
-		fgSizer_Main = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer_Main = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Main.AddGrowableCol( 0 )
 		fgSizer_Main.AddGrowableRow( 0 )
 		fgSizer_Main.SetFlexibleDirection( wx.BOTH )
@@ -37,15 +37,11 @@ class FrameMain ( wx.Frame ):
 		
 		self.panel_MainButtons = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
 		fgSizer_MainButtons = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer_MainButtons.AddGrowableRow( 3 )
 		fgSizer_MainButtons.SetFlexibleDirection( wx.BOTH )
 		fgSizer_MainButtons.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.button_Settings = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Settings", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_MainButtons.Add( self.button_Settings, 0, wx.ALL, 5 )
-		
-		self.button_Log = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Log", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer_MainButtons.Add( self.button_Log, 0, wx.ALL, 5 )
 		
 		self.button_Stats = wx.Button( self.panel_MainButtons, wx.ID_ANY, u"Stats", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_MainButtons.Add( self.button_Stats, 0, wx.ALL, 5 )
@@ -393,7 +389,6 @@ class FrameMain ( wx.Frame ):
 		
 		# Connect Events
 		self.button_Settings.Bind( wx.EVT_BUTTON, self.click_settings )
-		self.button_Log.Bind( wx.EVT_BUTTON, self.click_log )
 		self.button_Stats.Bind( wx.EVT_BUTTON, self.click_stats )
 		self.button_Quit.Bind( wx.EVT_BUTTON, self.click_quit )
 		self.button_Ban.Bind( wx.EVT_BUTTON, self.click_ban )
@@ -420,9 +415,6 @@ class FrameMain ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def click_settings( self, event ):
-		event.Skip()
-	
-	def click_log( self, event ):
 		event.Skip()
 	
 	def click_stats( self, event ):
@@ -482,7 +474,7 @@ class FrameMain ( wx.Frame ):
 class FrameSettings ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server - Settings", pos = wx.DefaultPosition, size = wx.Size( 520,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server - Settings", pos = wx.DefaultPosition, size = wx.Size( 520,720 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -695,8 +687,13 @@ class FrameSettings ( wx.Frame ):
 		
 		fgSizer36 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer36.AddGrowableCol( 1 )
+		fgSizer36.AddGrowableRow( 0 )
 		fgSizer36.SetFlexibleDirection( wx.BOTH )
 		fgSizer36.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		fgSizer46 = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer46.SetFlexibleDirection( wx.BOTH )
+		fgSizer46.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.panel_Devices = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Devices = wx.FlexGridSizer( 0, 1, 0, 0 )
@@ -753,10 +750,36 @@ class FrameSettings ( wx.Frame ):
 		self.panel_Devices.SetSizer( fgSizer_Devices )
 		self.panel_Devices.Layout()
 		fgSizer_Devices.Fit( self.panel_Devices )
-		fgSizer36.Add( self.panel_Devices, 1, wx.EXPAND |wx.ALL, 5 )
+		fgSizer46.Add( self.panel_Devices, 1, wx.ALL, 5 )
+		
+		self.panel_Overlap = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer47 = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer47.AddGrowableCol( 0 )
+		fgSizer47.SetFlexibleDirection( wx.BOTH )
+		fgSizer47.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.m_staticText51 = wx.StaticText( self.panel_Overlap, wx.ID_ANY, u"When clients overlap:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText51.Wrap( -1 )
+		
+		fgSizer47.Add( self.m_staticText51, 0, wx.ALL, 5 )
+		
+		choice_OverlapChoices = [ u"Discard latecomers", u"Mix sounds", u"Queue" ]
+		self.choice_Overlap = wx.Choice( self.panel_Overlap, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_OverlapChoices, 0 )
+		self.choice_Overlap.SetSelection( 0 )
+		fgSizer47.Add( self.choice_Overlap, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		self.panel_Overlap.SetSizer( fgSizer47 )
+		self.panel_Overlap.Layout()
+		fgSizer47.Fit( self.panel_Overlap )
+		fgSizer46.Add( self.panel_Overlap, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		
+		fgSizer36.Add( fgSizer46, 1, wx.EXPAND, 5 )
 		
 		fgSizer38 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer38.AddGrowableCol( 0 )
+		fgSizer38.AddGrowableRow( 2 )
 		fgSizer38.SetFlexibleDirection( wx.BOTH )
 		fgSizer38.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -849,8 +872,8 @@ class FrameSettings ( wx.Frame ):
 		self.textCtrl_RecordingPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer321.Add( self.textCtrl_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
 		
-		self.button_RecordingPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer321.Add( self.button_RecordingPath, 0, wx.ALL, 5 )
+		self.button_RecorderPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.button_RecorderPath, 0, wx.ALL, 5 )
 		
 		
 		fgSizer30.Add( fgSizer321, 1, wx.EXPAND, 5 )
@@ -881,6 +904,7 @@ class FrameSettings ( wx.Frame ):
 		self.panel_Rooms = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer42 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer42.AddGrowableCol( 0 )
+		fgSizer42.AddGrowableRow( 1 )
 		fgSizer42.SetFlexibleDirection( wx.BOTH )
 		fgSizer42.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -962,7 +986,7 @@ class FrameSettings ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.button_RecordingPath.Bind( wx.EVT_BUTTON, self.click_recordingpath )
+		self.button_RecorderPath.Bind( wx.EVT_BUTTON, self.click_recorderpath )
 		self.button_Save.Bind( wx.EVT_BUTTON, self.click_save )
 		self.button_Cancel.Bind( wx.EVT_BUTTON, self.click_cancel )
 		self.button_OK.Bind( wx.EVT_BUTTON, self.click_ok )
@@ -972,7 +996,7 @@ class FrameSettings ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
-	def click_recordingpath( self, event ):
+	def click_recorderpath( self, event ):
 		event.Skip()
 	
 	def click_save( self, event ):
@@ -992,36 +1016,70 @@ class FrameSettings ( wx.Frame ):
 class FrameStats ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server - Statistics", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server - Statistics", pos = wx.DefaultPosition, size = wx.Size( 320,160 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
+		fgSizer45 = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer45.AddGrowableCol( 0 )
+		fgSizer45.AddGrowableRow( 0 )
+		fgSizer45.SetFlexibleDirection( wx.BOTH )
+		fgSizer45.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.m_scrolledWindow3 = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
+		self.m_scrolledWindow3.SetScrollRate( 5, 5 )
 		fgSizer_Main = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer_Main.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Main.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Connections = wx.StaticText( self, wx.ID_ANY, u"Connections:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Connections = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Connections:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Connections.Wrap( -1 )
 		
 		fgSizer_Main.Add( self.staticText_Connections, 0, wx.ALL, 5 )
 		
-		self.m_staticText34 = wx.StaticText( self, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText34 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText34.Wrap( -1 )
 		
 		fgSizer_Main.Add( self.m_staticText34, 0, wx.ALL, 5 )
 		
-		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"Other stats:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText35 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network errors:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText35.Wrap( -1 )
 		
 		fgSizer_Main.Add( self.m_staticText35, 0, wx.ALL, 5 )
 		
-		self.m_staticText36 = wx.StaticText( self, wx.ID_ANY, u"N/A", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText36 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText36.Wrap( -1 )
 		
 		fgSizer_Main.Add( self.m_staticText36, 0, wx.ALL, 5 )
 		
+		self.m_staticText47 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network speed:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText47.Wrap( -1 )
 		
-		self.SetSizer( fgSizer_Main )
+		fgSizer_Main.Add( self.m_staticText47, 0, wx.ALL, 5 )
+		
+		self.m_staticText48 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0 KB/s / 0 KB/s", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText48.Wrap( -1 )
+		
+		fgSizer_Main.Add( self.m_staticText48, 0, wx.ALL, 5 )
+		
+		self.m_staticText49 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network data:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText49.Wrap( -1 )
+		
+		fgSizer_Main.Add( self.m_staticText49, 0, wx.ALL, 5 )
+		
+		self.m_staticText50 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0 KB / 0 KB", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText50.Wrap( -1 )
+		
+		fgSizer_Main.Add( self.m_staticText50, 0, wx.ALL, 5 )
+		
+		
+		self.m_scrolledWindow3.SetSizer( fgSizer_Main )
+		self.m_scrolledWindow3.Layout()
+		fgSizer_Main.Fit( self.m_scrolledWindow3 )
+		fgSizer45.Add( self.m_scrolledWindow3, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( fgSizer45 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )

@@ -7,14 +7,8 @@
 # --configfile path/file.conf
 # --logfile path/file.log
 
-# TODO:
-# - Keyboard key (space) as PTT button without character repeating loop while holding down
-# - Translate to different languages / Localization
-# - Status bar (with log display)
-# - Log command line parameters and config variables
-
 programName = "Pyham Client"
-programVersion = "0.018"
+programVersion = "0.020"
 filename_config = "pyham_client.conf"
 filename_log = "pyham_client.log"
 
@@ -29,6 +23,7 @@ parser.add_argument('-c', '--configfile', help='use this configuration file')
 parser.add_argument('-l', '--logfile', help='log to this file')
 parser.add_argument('-n', '--nogui', action='store_true', help='start without wxWidgets GUI')
 parser.add_argument('-t', '--terminal', action='store_true', help='start with separate console window (when using GUI)')
+parser.add_argument('-v', '--verbose', action='store_true', help='log more details')
 
 args = parser.parse_args()
 if args.configfile != None:

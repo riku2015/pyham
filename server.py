@@ -11,7 +11,7 @@ from server_gui import WindowMain
 # Only one instance of a certain protocol can be used within one server at the same time.
 
 # Server
-# Server with no user interface
+# Server with command interface
 
 class Server:
 	def __init__(self, filename_config):
@@ -51,6 +51,23 @@ class Server:
 
 	def stop(self):
 		log("Server stopped.")
+
+import terminalgui
+
+# ServerCurses
+# Server with Curses TUI
+
+# Commands:
+# start, stop, ban, unban, set, get, createroom, deleteroom, save
+
+class ServerCurses:
+	def __init__(self, filename):
+		line = ""
+
+		while line != "quit":
+			line = input("Prompt: ")
+			# TODO: parse command
+			#print (line)
 
 import wx
 

@@ -5,10 +5,12 @@ from datetime import datetime
 import wx
 
 # TODO:
-# - Logging options: stdout, stderr, file, window...
+# - Logging options: stdout, stderr, file, window... (errors to stderr and regular messages to stdout by default)
 # - Set filename from command line parameter
 # - Verbose, normal and quiet mode
 # - If separate console window, append old log messages before creating wx client, to it
+# - History as array
+# - Get rid of wx in this file
 
 def log(text, filename = None):
 	# Format text with timestamp:
@@ -52,3 +54,5 @@ def error(parent, message, caption='ERROR'):
 	#dialogError = wx.MessageDialog(parent, "ERROR:\n" + message, caption, wx.OK | wx.ICON_WARNING)
 	#dialogError.ShowModal()
 	#dialogError.Destroy()
+	# Some other error message:
+	# wxMessageBox('This text goes somewhere', 'This text goes somewhere too', wxOK | wxICON_EXCLAMATION)
