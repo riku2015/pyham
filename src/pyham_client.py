@@ -9,7 +9,7 @@
 
 programName = "Pyham Client"
 programVersion = "0.020"
-filename_config = "pyham_client.conf"
+filename_config = "../conf/pyham_client.conf"
 filename_log = "pyham_client.log"
 
 import sys

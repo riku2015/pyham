@@ -10,7 +10,7 @@
 
 programName = "Pyham Server"
 programVersion = "0.016"
-filename_config = "pyham_server.conf"
+filename_config = "../conf/pyham_server.conf"
 filename_log = "pyham_server.log"
 
 import sys
