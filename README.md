@@ -77,23 +77,23 @@ Configuration can be changed and saved at runtime. It is saved in files **pyham_
 You'll find commented configuration file templates in files **pyham_client.conf.template** and **pyham_server.conf.template**. 
 
 #### Screenshots
-![alt text](pyham-client-0020-wx-windows.png)
+![alt text](http://titanix.net/~japek/pyham-client-0020-wx-windows.png)
 
 Client (wx) v. 0.020 (Windows 10)
 
-![alt text](pyham-client-settings-0020-wx-windows.png)
+![alt text](http://titanix.net/~japek/pyham-client-settings-0020-wx-windows.png)
 
 Client (wx) v. 0.020 (Windows 10)
 
-![alt text](pyham-server-0016-wx-windows.png)
+![alt text](http://titanix.net/~japek/pyham-server-0016-wx-windows.png)
 
 Server (wx) v. 0.016 (GNU/Linux)
 
-![alt text](pyham-server-settings-0016-wx-windows.png)
+![alt text](http://titanix.net/~japek/pyham-server-settings-0016-wx-windows.png)
 
 Server (wx) v. 0.016 (GNU/Linux)
 
-![alt text](pyham-server-stats-0016-wx-windows.png)
+![alt text](http://titanix.net/~japek/pyham-server-stats-0016-wx-windows.png)
 
 Server (wx) v. 0.016 (GNU/Linux)
 
