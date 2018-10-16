@@ -78,20 +78,30 @@ You'll find commented configuration file templates in files **pyham_client.conf.
 
 #### Screenshots
 **Client (wx) v. 0.020 (Windows 10)**
+
 ![alt text](http://titanix.net/~japek/pyham-client-0020-wx-windows.png)
 
+
 **Client (wx) v. 0.020 (Windows 10)**
+
 ![alt text](http://titanix.net/~japek/pyham-client-settings-0020-wx-windows.png)
 
+
 **Server (wx) v. 0.016 (Windows 10)**
+
 ![alt text](http://titanix.net/~japek/pyham-server-0016-wx-windows.png)
 
+
 **Server (wx) v. 0.016 (Windows 10)**
+
 ![alt text](http://titanix.net/~japek/pyham-server-settings-0016-wx-windows.png)
 
+
 **Server (wx) v. 0.016 (Windows 10)**
+
 ![alt text](http://titanix.net/~japek/pyham-server-stats-0016-wx-windows.png)
 
-**Client (wx) v. 0.001 (GNU/Linux)**
-![alt text](http://titanix.net/~japek/pyham-client-0001.png)
 
+**Client (wx) v. 0.001 (GNU/Linux)**
+
+![alt text](http://titanix.net/~japek/pyham-client-0001.png)
