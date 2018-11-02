@@ -93,6 +93,7 @@ You'll find commented configuration file templates in files **pyham_client.conf.
 
 ![alt text](http://titanix.net/~japek/pyham-server-stats-0016-wx-windows.png)
 
+---
 
 ### Client (wx) v. 0.001 (GNU/Linux)
 
