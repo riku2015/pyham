@@ -9,7 +9,7 @@
 # --nogui
 
 programName = "Pyham Server"
-programVersion = "0.016"
+programVersion = "0.018"
 filename_config = "../conf/pyham_server.conf"
 filename_log = "pyham_server.log"
 

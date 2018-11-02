@@ -8,7 +8,7 @@
 # --logfile path/file.log
 
 programName = "Pyham Client"
-programVersion = "0.020"
+programVersion = "0.022"
 filename_config = "../conf/pyham_client.conf"
 filename_log = "pyham_client.log"
 

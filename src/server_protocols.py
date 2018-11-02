@@ -3,46 +3,46 @@
 import socket
 from log import log
 
-# TODO:
-# - Count total data sent / received (for statistics)
-# - Count network errors (for statistics)
-
 class ServerProtocol():
 	def __init__(self, name, port):
-		self.binded = False
+		self.__binded = False
 		self.name = name
 		self.port = port
 		self.protocolname = "NONE"
-		self.rooms = []
-		self.sentbytes = 0
-		self.receivedbytes = 0
-		self.errors = 0
+		self.__rooms = []
+		self.__sentbytes = 0
+		self.__receivedbytes = 0
+		self.__errors = 0
+
+	def is_binded(self):
+		return self.__binded
 
 	def bind(self):
 		log("Binding to port " + self.port + " as '" + self.name + "' using " + self.protocolname + "...")
 		try:
-			self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			self.socket.bind((socket.gethostname(), int(self.port)))
-			self.socket.listen(1)
+			self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			self.__socket.bind((socket.gethostname(), int(self.port)))
+			self.__socket.listen(1)
 			#self.accept()
-			self.binded = True
+			self.__binded = True
 		except Exception as e:
-			self.binded = False
+			self.__binded = False
 			log("Error while binding socket: " + str(e))
-		return self.binded
+		return self.__binded
 
 	def unbind(self):
 		# TODO
-		self.binded = False
+		self.__binded = False
 		# TODO: disconect all
 		#self.disconnect()
 
 	def connect(self):
 		log(self.name + ": Incoming connection from --- to port ---.")
+		self.send(b"<C>")
 
 	def disconnect(self):
-		self.socket.shutdown()
-		self.socket.close()
+		self.__socket.shutdown()
+		self.__socket.close()
 		log(self.name + ": Disconnected.")
 
 	def stop(self):
@@ -53,56 +53,55 @@ class ServerProtocol():
 		log("Sending data.")
 		totalsent = 0
 		while totalsent < MSGLEN:
-			sent = self.sock.send(data[totalsent:])
+			sent = self.__socket.send(data[totalsent:])
 			if sent == 0:
 				error(self, "while sending trough socket: " + str(e))
 				#raise Runtimeerror(self, "Error: broken socket while sending.")
 			totalsent = totalsent + sent
+		self.__sentbytes += totalsent
 
 	def receive(self):
 		chunks = []
 		bytes_received = 0
 		while bytes_recd < MSGLEN:
-			chunk = self.sock.recv(min(MSGLEN - bytes_received, 2048))
+			chunk = self.__socket.recv(min(MSGLEN - bytes_received, 2048))
 			if chunk == b'':
 				error(self, "while receiving via socket: " + str(e))
 				#raise Runtimeerror(self, "Error: broken socket while receiving.")
 			chunks.append(chunk)
 			bytes_received += len(chunk)
+		self.__receivedbytes += bytes_received
 		return b''.join(chunks)
 
 	def run(self):
-		result = False
 		if self.bind():
 			log(self.name + ": Accepting connections.")
-			result = True
+			self.__running = True
 		while True:
 			# Accept connections from outside
-			(clientsocket, address) = self.socket.accept()
-			#self.socket.accept()
+			(clientsocket, address) = self.__socket.accept()
+			#self.__socket.accept()
 			log("Incoming client connection.")
 
 			# Make thread for connection:
 			ct = client_thread(clientsocket)
 			ct.run()
-		return result
+		return self.__running
 
 	def set_rooms(rooms):
-		self.rooms = rooms
+		self.__rooms = rooms
 
 	def get_rooms():
-		return self.rooms
+		return self.__rooms
 
 # ProtocolPyham
-# Default port:
-# ?
 
 class ServerProtocolPyham(ServerProtocol):
 	def __init__(self, name, port):
 		ServerProtocol.__init__(self, name, port)
 		self.protocolname = "PYHAM"
-		self.version = "0.05"
-		self.rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
+		self.__version = "0.05"
+		self.__rooms = ["TESTROOM 1", "TESTROOM 2", "TESTROOM 3"]
 
 	def connect(self):
 		#ServerProtocol.connect(self)
@@ -121,8 +120,6 @@ class ServerProtocolPyham(ServerProtocol):
 		pass
 
 # ProtocolEqso
-# Default port:
-# 5000 ?
 
 class ServerProtocolEqso(ServerProtocol):
 	def __init__(self, name, port):
@@ -137,14 +134,10 @@ class ServerProtocolEqso(ServerProtocol):
 		log("Sending data.")
 
 	def disconnect(self):
-		self.socket.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
+		self.send("\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
 		log("Disconnected.")
 
 # ProtocolEcholink
-# Default ports:
-# 5198 UDP EchoLink VoIP Amateur Radio Software (Voice)
-# 5199 UDP EchoLink VoIP Amateur Radio Software (Voice)
-# 5200 TCP EchoLink VoIP Amateur Radio Software (Information)
 
 class ServerProtocolEcholink(ServerProtocol):
 	def __init__(self, name, port):
@@ -159,9 +152,6 @@ class ServerProtocolEcholink(ServerProtocol):
 		log("Sending data.")
 
 # ProtocolFrn
-# http://freeradionetwork.eu/frnprotocol.htm
-# Default port:
-# 10024 ?
 
 class ServerProtocolFrn(ServerProtocol):
 	def __init__(self, name, port):

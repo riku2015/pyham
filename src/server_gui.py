@@ -5,7 +5,7 @@
 import wx
 from log import log
 from server_gui_fbp import FrameMain, FrameSettings, FrameStats
-from server_protocols import ServerProtocolEqso
+from server_protocols import *
 
 class WindowStats(FrameStats):
 	def __init__(self,parent):
@@ -55,13 +55,16 @@ class WindowSettings(FrameSettings):
 		else:
 			self.main.config.parameters["autosave"] = "off"
 
-		self.main.config.parameters["recorder_path"] = self.textCtrl_RecordingPath.GetValue()
+		self.main.config.parameters["recorder_path"] = self.textCtrl_RecorderPath.GetValue()
 		if self.choice_Format.GetSelection() == 0:
 			self.main.config.parameters["recorder_format"] = "wav"
 		elif self.choice_Format.GetSelection() == 1:
 			self.main.config.parameters["recorder_format"] = "mp3"
 		elif self.choice_Format.GetSelection() == 2:
 			self.main.config.parameters["recorder_format"] = "flac"
+
+		self.main.config.parameters["volume_speaker"] = str(self.spinCtrl_Speaker.GetValue())
+		self.main.config.parameters["volume_mic"] = str(self.spinCtrl_Mic.GetValue())
 
 		if self.choice_Overlap.GetSelection() == 0:
 			self.main.config.parameters["overlap"] = "discard"
@@ -82,7 +85,7 @@ class WindowSettings(FrameSettings):
 		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
 			if dirDialog.ShowModal() == wx.ID_CANCEL:
 				return
-			self.textCtrl_RecordingPath.SetValue(dirDialog.GetPath())
+			self.textCtrl_RecorderPath.SetValue(dirDialog.GetPath())
 
 	def click_ok( self, event ):
 		self.apply_changes()
@@ -118,49 +121,54 @@ class WindowMain(FrameMain):
 		if not self.settingswindow:
 			# Closes automatically when main window closes:
 			self.settingswindow = WindowSettings(self)
-			self.settingswindow.set_main(self.main)
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
 
-			# Update settings window text fields:
-			self.settingswindow.textCtrl_EqsoName.SetValue(self.main.config.parameters["eqso_name"])
-			self.settingswindow.textCtrl_EqsoPort.SetValue(self.main.config.parameters["eqso_port"])
+			self.settingswindow.set_main(self.main)
 
-			self.settingswindow.textCtrl_EcholinkName.SetValue(self.main.config.parameters["echolink_name"])
-			self.settingswindow.textCtrl_EcholinkPort.SetValue(self.main.config.parameters["echolink_port"])
-			
-			self.settingswindow.textCtrl_FrnName.SetValue(self.main.config.parameters["frn_name"])
-			self.settingswindow.textCtrl_FrnPort.SetValue(self.main.config.parameters["frn_port"])
-			
-			self.settingswindow.textCtrl_PyhamName.SetValue(self.main.config.parameters["pyham_name"])
-			self.settingswindow.textCtrl_PyhamPort.SetValue(self.main.config.parameters["pyham_port"])
-			
-			if self.main.config.parameters["autosave"] == "on":
-				self.settingswindow.checkBox_Autosave.SetValue(True)
-			elif self.main.config.parameters["autosave"] == "off":
-				self.settingswindow.checkBox_Autosave.SetValue(False)
+		# Set from config:
+		self.settingswindow.textCtrl_EqsoName.SetValue(self.main.config.parameters["eqso_name"])
+		self.settingswindow.textCtrl_EqsoPort.SetValue(self.main.config.parameters["eqso_port"])
 
-			self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recorder_path"])
-			if self.main.config.parameters["recorder_format"] == "wav":
-				self.settingswindow.choice_Format.SetSelection(0)
-			elif self.main.config.parameters["recorder_format"] == "mp3":
-				self.settingswindow.choice_Format.SetSelection(1)
-			elif self.main.config.parameters["recorder_format"] == "flac":
-				self.settingswindow.choice_Format.SetSelection(2)
+		self.settingswindow.textCtrl_EcholinkName.SetValue(self.main.config.parameters["echolink_name"])
+		self.settingswindow.textCtrl_EcholinkPort.SetValue(self.main.config.parameters["echolink_port"])
+		
+		self.settingswindow.textCtrl_FrnName.SetValue(self.main.config.parameters["frn_name"])
+		self.settingswindow.textCtrl_FrnPort.SetValue(self.main.config.parameters["frn_port"])
+		
+		self.settingswindow.textCtrl_PyhamName.SetValue(self.main.config.parameters["pyham_name"])
+		self.settingswindow.textCtrl_PyhamPort.SetValue(self.main.config.parameters["pyham_port"])
+		
+		if self.main.config.parameters["autosave"] == "on":
+			self.settingswindow.checkBox_Autosave.SetValue(True)
+		elif self.main.config.parameters["autosave"] == "off":
+			self.settingswindow.checkBox_Autosave.SetValue(False)
 
-			if self.main.config.parameters["overlap"] == "discard":
-				self.settingswindow.choice_Overlap.SetSelection(0)
-			elif self.main.config.parameters["overlap"] == "mix":
-				self.settingswindow.choice_Overlap.SetSelection(1)
-			elif self.main.config.parameters["overlap"] == "queue":
-				self.settingswindow.choice_Overlap.SetSelection(2)
+		self.settingswindow.textCtrl_RecorderPath.SetValue(self.main.config.parameters["recorder_path"])
+		if self.main.config.parameters["recorder_format"] == "wav":
+			self.settingswindow.choice_Format.SetSelection(0)
+		elif self.main.config.parameters["recorder_format"] == "mp3":
+			self.settingswindow.choice_Format.SetSelection(1)
+		elif self.main.config.parameters["recorder_format"] == "flac":
+			self.settingswindow.choice_Format.SetSelection(2)
 
-			self.settingswindow.textCtrl_MaxConnections.SetValue(self.main.config.parameters["max_connections"])
+		self.settingswindow.spinCtrl_Speaker.SetValue(self.main.config.parameters["volume_speaker"])
+		self.settingswindow.spinCtrl_Mic.SetValue(self.main.config.parameters["volume_mic"])
+
+		if self.main.config.parameters["overlap"] == "discard":
+			self.settingswindow.choice_Overlap.SetSelection(0)
+		elif self.main.config.parameters["overlap"] == "mix":
+			self.settingswindow.choice_Overlap.SetSelection(1)
+		elif self.main.config.parameters["overlap"] == "queue":
+			self.settingswindow.choice_Overlap.SetSelection(2)
+
+		self.settingswindow.textCtrl_MaxConnections.SetValue(self.main.config.parameters["max_connections"])
 
 		self.settingswindow.Show()
+		self.settingswindow.Raise()
 
-	def click_load( self, event ):
-		log("Load.")
+	#def click_load( self, event ):
+	#	log("Load.")
 
 	def click_save( self, event ):
 		log("Saved.")
@@ -179,14 +187,15 @@ class WindowMain(FrameMain):
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
 		self.statswindow.Show()
+		self.statswindow.Raise()
 
 	def click_eqso_apply( self, event ):
 		self.button_EqsoApply.Enable(False)
 
 	def click_eqso_start( self, event ):
 		if self.button_EqsoStart.GetLabel() == "Start":		# TODO: Get from class boolean variable
-			if self.main.eqso != None:
-				self.main.eqso = ServerProtocolEqso(self.textCtrl_EqsoName.GetValue(), self.textCtrl_EqsoPort.GetValue())
+			#if self.main.eqso != None:
+			#	self.main.eqso = ServerProtocolEqso(self.textCtrl_EqsoName.GetValue(), self.textCtrl_EqsoPort.GetValue())
 			self.main.eqso.run()
 			# If successfully started:
 			self.button_EqsoStart.SetLabel("Stop")

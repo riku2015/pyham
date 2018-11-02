@@ -8,8 +8,6 @@ from audio import *
 from client_protocols import *
 from client_gui_fbp import FrameMain, FrameSettings
 
-from testcode import *
-
 class WindowSettings(FrameSettings):
 	def __init__(self,parent):
 		FrameSettings.__init__(self,parent)
@@ -22,7 +20,7 @@ class WindowSettings(FrameSettings):
 		with wx.DirDialog(self, "Choose recording folder", style=wx.DD_DIR_MUST_EXIST) as dirDialog:
 			if dirDialog.ShowModal() == wx.ID_CANCEL:
 				return
-			self.textCtrl_RecordingPath.SetValue(dirDialog.GetPath())
+			self.textCtrl_RecorderPath.SetValue(dirDialog.GetPath())
 		
 	def click_fileroger( self, event ):
 		with wx.FileDialog(self, "Choose sound file", wildcard="WAV files (*.wav)|*.wav", style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
@@ -83,16 +81,16 @@ class WindowSettings(FrameSettings):
 		else:
 			self.main.config.parameters["record_disconnect"] = "off"
 
-		self.main.config.parameters["volume_speaker"] = str(self.spinCtrl_Speaker.GetValue())
-		self.main.config.parameters["volume_mic"] = str(self.spinCtrl_Mic.GetValue())
-
-		self.main.config.parameters["recorder_path"] = self.textCtrl_RecordingPath.GetValue()
+		self.main.config.parameters["recorder_path"] = self.textCtrl_RecorderPath.GetValue()
 		if self.choice_Format.GetSelection() == 0:
 			self.main.config.parameters["recorder_format"] = "wav"
 		elif self.choice_Format.GetSelection() == 1:
 			self.main.config.parameters["recorder_format"] = "mp3"
 		elif self.choice_Format.GetSelection() == 2:
 			self.main.config.parameters["recorder_format"] = "flac"
+
+		self.main.config.parameters["volume_speaker"] = str(self.spinCtrl_Speaker.GetValue())
+		self.main.config.parameters["volume_mic"] = str(self.spinCtrl_Mic.GetValue())
 	
 	def click_ok( self, event ):
 		self.apply_changes()
@@ -257,9 +255,11 @@ class WindowMain(FrameMain):
 		if not self.settingswindow:
 			# Closes automatically when main window closes:
 			self.settingswindow = WindowSettings(self)
-			self.settingswindow.set_main(self.main)
 			# Persistent when main window closes:
 			#self.settingswindow = Settingswindow(None)
+
+			self.settingswindow.set_main(self.main)
+
 		# Set from config:
 		self.settingswindow.textCtrl_FileRoger.SetValue(self.main.config.parameters["soundfile_roger"])
 		self.settingswindow.textCtrl_FileConnect.SetValue(self.main.config.parameters["soundfile_connect"])
@@ -300,7 +300,7 @@ class WindowMain(FrameMain):
 		elif self.main.config.parameters["record_disconnect"] == "off":
 			self.settingswindow.checkBox_RecordDisconnect.SetValue(False)
 
-		self.settingswindow.textCtrl_RecordingPath.SetValue(self.main.config.parameters["recorder_path"])
+		self.settingswindow.textCtrl_RecorderPath.SetValue(self.main.config.parameters["recorder_path"])
 		if self.main.config.parameters["recorder_format"] == "wav":
 			self.settingswindow.choice_Format.SetSelection(0)
 		elif self.main.config.parameters["recorder_format"] == "mp3":
@@ -312,6 +312,7 @@ class WindowMain(FrameMain):
 		self.settingswindow.spinCtrl_Mic.SetValue(self.main.config.parameters["volume_mic"])
 
 		self.settingswindow.Show()
+		self.settingswindow.Raise()
 
 	def volume_speaker(self, event):
 		log("Speaker volume: " + str(self.slider_Speaker.Value))

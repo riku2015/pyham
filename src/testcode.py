@@ -19,15 +19,17 @@ class Test_Soundlooper:
 		# TODO
 
 	def run(self):
+		self.__playing = True
 		self.__index += 1
 		self.stream()
 
 	def stop(self):
-		pass
+		self.__playing = False
 
 	def stream(self):
 		# Send data to client
 		pass
 
 	def reset(self):
+		self.__playing = True
 		self.__index = 0

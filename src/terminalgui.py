@@ -2,6 +2,16 @@
 
 # curses terminal user interface with widgets such as buttons etc.
 
+class Input():
+	def __init__(self):
+		self.__value = None
+
+	def get_value(self):
+		return self.__value
+
+	def set_value(self, value):
+		self.__value = value
+
 class Window():
 	def __init__(self):
 		pass
@@ -45,3 +55,6 @@ class Chooser():
 
 	def set_item(index, value):
 		self.items[index] = value
+
+	def get_item():
+		return self.selecteditem

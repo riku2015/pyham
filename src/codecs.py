@@ -4,11 +4,10 @@
 # Note: This may require C(++)
 
 class Soundformat():
-	def __init__(self):
-		#self.rate = 44100
-		#self.bits = 16
-		#self.channels = 1 # mono
-		pass
+	def __init__(self, rate=0, bits=0, channels=0):
+		self.rate = rate
+		self.bits = bits
+		self.channels = channels	# 1 = mono, 2 = stereo
 
 class GSM(Soundformat):
 	def __init__(self):

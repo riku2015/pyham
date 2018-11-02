@@ -13,3 +13,4 @@ TODO:
 - Keyboard key (space) as PTT button without character repeating loop while holding down
 - Status bar
 - Lag meter
+- PEP 8 compliance (https://www.python.org/dev/peps/pep-0008/)

@@ -28,14 +28,14 @@ def log(text, filename = None):
 class Log:
 	def __init__(self, filename):
 		self.filename = filename
-		self.history = ""
+		self.__history = []
 
 	def write(text):
 		# Format text with timestamp:
 		string = "[" + datetime.now().strftime('%Y/%m/%d %H:%M:%S') + "] " + text
 
 		# Add to history:
-		self.history += text + "\n"	# TODO: List object
+		self.__history.extend(text)
 
 		# Print to console:
 		print >>sys.stderr, string
@@ -45,8 +45,8 @@ class Log:
 			with open(filename, "a") as logfile:
 				logfile.write(string + "\n")
 
-	def gethistory():
-		return this.history
+	def get_history():
+		return this.__history
 
 def error(parent, message, caption='ERROR'):
 	# TODO:

@@ -13,8 +13,8 @@ class Widget(wx.Window):
 		self.parent = parent
 
 	def set_size(self, width, height):
-		self.width = width
-		self.height = height
+		self.__width = width
+		self.__height = height
 
 class VU(Widget):
 	def __init__(self, parent):
@@ -22,32 +22,35 @@ class VU(Widget):
 		#self.Bind(wx.EVT_SIZE, self.OnSize)
 		#self.Bind(wx.EVT_PAINT, self.OnPaint)
 
+	def reset(self):
+		self.__value = None
+
 	def set_value(self, value):
-		self.value = value
+		self.__value = value
 
 	def draw(self):
 		dc.SetBrush(wx.Brush(wx.BLACK, wx.SOLID))
 		dc.Clear()
-		for x in range(self.width / 100 * self.value):
-			if x < self.width * 0.5:
+		for x in range(self.__width / 100 * self.__value):	# Maybe we should use floats instead of ints?
+			if x < self.__width * 0.5:
 				color = wx.Colour(0, 200, 0)	# Green
-			elif x < self.width * 0.75:
+			elif x < self.__width * 0.75:
 				color = wx.Colour(200, 200, 0)	# Yellow
-			elif x <= self.width:
+			elif x <= self.__width:
 				color = wx.Colour(200, 0, 0)	# Red
 		dc.SetBrush(wx.Brush(color, wx.SOLID))
 		dc.SetPen(wx.Pen(wx.BLUE, 1, wx.SOLID))
 		dc.DrawRectangle(2, 2, 20, 20)
 
 	def OnSize(self, event):
-		self.pixbuf = wx.Bitmap(self.width, self.height)
+		self.__pixbuf = wx.Bitmap(self.__width, self.__height)
 		memdc = wx.MemoryDC()
-		memdc.SelectObject(self.pixbuf)
+		memdc.SelectObject(self.__pixbuf)
 		self.draw()
 
 	def OnPaint(self, event):
 		dc = wx.PaintDC(self)
-		dc.DrawBitmap(self.pixbuf, 0, 0, True)
+		dc.DrawBitmap(self.__pixbuf, 0, 0, True)
 
 # Scope
 # Graphical scope for sound
@@ -56,7 +59,13 @@ class Scope(Widget):
 	def __init__(self):
 		pass
 
-	def draw(self, sound_data):
+	def reset(self):
+		self.__data = None
+
+	def set_value(self, value):
+		self.__value = value
+
+	def draw(self):
 		pass
 
 	def OnSize(self, event):
@@ -71,9 +80,13 @@ class Scope(Widget):
 class Spectrum(Widget):
 	def __init__(self):
 		#self.solid = False;		# Draw only outline if false, draw area between value and zero if true
+		#self.__data = None
 		pass
 
-	def draw(self, sound_data):
+	def set_value(self, value):
+		self.__value = value	# TODO: Append to self.__data and cycle old value out
+
+	def draw(self):
 		pass
 
 	def OnSize(self, event):
@@ -89,7 +102,10 @@ class HistoryGraph(Widget):
 	def __init__(self):
 		pass
 
-	def draw(self, sound_data):
+	def set_value(self, value):
+		self.__value = value
+
+	def draw(self):
 		pass
 
 	def OnSize(self, event):
@@ -105,7 +121,13 @@ class PointerGauge(Widget):
 	def __init__(self):
 		pass
 
-	def draw(self, sound_data):
+	def set_value(self, value):
+		self.__value = value
+
+	def draw(self):
+		# needle_center =
+		# needle_point = sin()
+		# draw line from needle_center to needle_point
 		pass
 
 	def OnSize(self, event):

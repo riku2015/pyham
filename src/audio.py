@@ -59,11 +59,14 @@ def play_sound(filename):
 class Recorder(threading.Thread):
 	def __init__(self, parent):
 		threading.Thread.__init__(self)
-		self._parent = parent
-		self.running = False
+		self.parent = parent
+		self.__running = False
+
+	def isrunning(self):
+		return self.__running
 
 	def run(self):
-		self.running = True
+		self.__running = True
 		FORMAT = pyaudio.paInt16
 		CHANNELS = 2
 		RATE = 44100
@@ -76,7 +79,7 @@ class Recorder(threading.Thread):
 
 		frames = []
 
-		while self.running:
+		while self.__running:
 			for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 				data = stream.read(CHUNK)
 				frames.append(data)
@@ -90,7 +93,7 @@ class Recorder(threading.Thread):
 		#audio.terminate()
 
 	def stop(self):
-		self.running = False
+		self.__running = False
 
 class EventAudiostreamerError(wx.PyCommandEvent):
 	def __init__(self, etype, eid, value=None):
@@ -108,11 +111,14 @@ class Audiostreamer(threading.Thread):
 		"""
 		threading.Thread.__init__(self)
 		self._parent = parent
-		self.running = False
+		self.__running = False
 		self.buffer = []
 
+	def isrunning(self):
+		return self.__running
+
 	def run(self):
-		self.running = True
+		self.__running = True
 		# Overrides Thread.run. Don't call this directly its called internally when you call Thread.start().
 
 		# If error:
@@ -120,7 +126,7 @@ class Audiostreamer(threading.Thread):
 		#wx.PostEvent(self._parent, evt)
 
 		timecounter = 0
-		while self.running:
+		while self.__running:
 			time.sleep(1)
 			log("Streamed.")
 
@@ -130,4 +136,4 @@ class Audiostreamer(threading.Thread):
 			# TODO: Roger beep (optional)
 
 	def stop(self):
-		self.running = False
+		self.__running = False

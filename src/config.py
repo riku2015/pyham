@@ -14,16 +14,17 @@
 # TODO:
 # - on/off, 1/0, true/false (case insensitive)
 # - Parse value arrays (for presets)
-# - Accessors to values (with defaults if missing from config file)
+# - Accessors to values
 # - Use configparser library
+# - Try to create new config file (with folders) during save if file does not exist before
 
 #import configparser
 from log import log, error
 from os.path import isfile
 
 class Config():
-	def __init__(self):
-		self.parameters = {}
+	def __init__(self, parameters={}):
+		self.parameters = parameters
 
 	def load(self, filename):
 		# Read file and parse values into self.parameters

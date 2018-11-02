@@ -17,7 +17,7 @@ import wx.xrc
 class FrameMain ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server 0.016", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Pyham Server 0.018", pos = wx.DefaultPosition, size = wx.Size( 800,700 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		
@@ -29,13 +29,13 @@ class FrameMain ( wx.Frame ):
 		
 		self.scrolledWindow_Main = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
 		self.scrolledWindow_Main.SetScrollRate( 5, 5 )
-		fgSizer_MainScrolled = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer_MainScrolled.AddGrowableCol( 1 )
-		fgSizer_MainScrolled.AddGrowableRow( 0 )
-		fgSizer_MainScrolled.SetFlexibleDirection( wx.BOTH )
-		fgSizer_MainScrolled.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		fgSizer_Main_Scrolled = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer_Main_Scrolled.AddGrowableCol( 1 )
+		fgSizer_Main_Scrolled.AddGrowableRow( 0 )
+		fgSizer_Main_Scrolled.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Main_Scrolled.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_MainButtons = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SUNKEN )
+		self.panel_MainButtons = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer_MainButtons = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_MainButtons.SetFlexibleDirection( wx.BOTH )
 		fgSizer_MainButtons.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -53,7 +53,7 @@ class FrameMain ( wx.Frame ):
 		self.panel_MainButtons.SetSizer( fgSizer_MainButtons )
 		self.panel_MainButtons.Layout()
 		fgSizer_MainButtons.Fit( self.panel_MainButtons )
-		fgSizer_MainScrolled.Add( self.panel_MainButtons, 1, wx.ALL|wx.EXPAND, 5 )
+		fgSizer_Main_Scrolled.Add( self.panel_MainButtons, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		fgSizer_ = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer_.AddGrowableCol( 0 )
@@ -121,7 +121,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Protocols.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Protocols.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Echolink = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_RAISED )
+		self.panel_Echolink = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer_Echolink = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Echolink.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Echolink.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -183,7 +183,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Echolink.Fit( self.panel_Echolink )
 		fgSizer_Protocols.Add( self.panel_Echolink, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.panel_Eqso = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_RAISED )
+		self.panel_Eqso = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer_Eqso = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Eqso.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Eqso.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -245,7 +245,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Eqso.Fit( self.panel_Eqso )
 		fgSizer_Protocols.Add( self.panel_Eqso, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.panel_Frn = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_RAISED )
+		self.panel_Frn = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer_Frn = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Frn.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Frn.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -307,7 +307,7 @@ class FrameMain ( wx.Frame ):
 		fgSizer_Frn.Fit( self.panel_Frn )
 		fgSizer_Protocols.Add( self.panel_Frn, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.Panel_Pyhamp = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_RAISED )
+		self.Panel_Pyhamp = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
 		fgSizer_Pyhamp = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Pyhamp.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Pyhamp.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -373,12 +373,12 @@ class FrameMain ( wx.Frame ):
 		fgSizer_.Add( fgSizer_Protocols, 1, wx.EXPAND, 5 )
 		
 		
-		fgSizer_MainScrolled.Add( fgSizer_, 1, wx.EXPAND, 5 )
+		fgSizer_Main_Scrolled.Add( fgSizer_, 1, wx.EXPAND, 5 )
 		
 		
-		self.scrolledWindow_Main.SetSizer( fgSizer_MainScrolled )
+		self.scrolledWindow_Main.SetSizer( fgSizer_Main_Scrolled )
 		self.scrolledWindow_Main.Layout()
-		fgSizer_MainScrolled.Fit( self.scrolledWindow_Main )
+		fgSizer_Main_Scrolled.Fit( self.scrolledWindow_Main )
 		fgSizer_Main.Add( self.scrolledWindow_Main, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
@@ -484,21 +484,21 @@ class FrameSettings ( wx.Frame ):
 		fgSizer_Main.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Main.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.scrolledWindow_Main = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
-		self.scrolledWindow_Main.SetScrollRate( 5, 5 )
-		fgSizer21 = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer21.AddGrowableCol( 0 )
-		fgSizer21.AddGrowableRow( 1 )
-		fgSizer21.SetFlexibleDirection( wx.BOTH )
-		fgSizer21.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.scrolledWindow_Settings = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
+		self.scrolledWindow_Settings.SetScrollRate( 5, 5 )
+		fgSizer_Settings_Scrolled = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer_Settings_Scrolled.AddGrowableCol( 0 )
+		fgSizer_Settings_Scrolled.AddGrowableRow( 1 )
+		fgSizer_Settings_Scrolled.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Settings_Scrolled.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		fgSizer24 = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer24.AddGrowableCol( 0 )
-		fgSizer24.AddGrowableCol( 1 )
-		fgSizer24.SetFlexibleDirection( wx.BOTH )
-		fgSizer24.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		fgSizer_Servers = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer_Servers.AddGrowableCol( 0 )
+		fgSizer_Servers.AddGrowableCol( 1 )
+		fgSizer_Servers.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Servers.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.m_panel7 = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.m_panel7 = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer32 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer32.AddGrowableCol( 0 )
 		fgSizer32.SetFlexibleDirection( wx.BOTH )
@@ -542,9 +542,9 @@ class FrameSettings ( wx.Frame ):
 		self.m_panel7.SetSizer( fgSizer32 )
 		self.m_panel7.Layout()
 		fgSizer32.Fit( self.m_panel7 )
-		fgSizer24.Add( self.m_panel7, 1, wx.ALL|wx.EXPAND, 5 )
+		fgSizer_Servers.Add( self.m_panel7, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_panel71 = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.m_panel71 = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer251 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer251.AddGrowableCol( 0 )
 		fgSizer251.SetFlexibleDirection( wx.BOTH )
@@ -588,9 +588,9 @@ class FrameSettings ( wx.Frame ):
 		self.m_panel71.SetSizer( fgSizer251 )
 		self.m_panel71.Layout()
 		fgSizer251.Fit( self.m_panel71 )
-		fgSizer24.Add( self.m_panel71, 1, wx.EXPAND |wx.ALL, 5 )
+		fgSizer_Servers.Add( self.m_panel71, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_panel711 = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.m_panel711 = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer2511 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer2511.AddGrowableCol( 0 )
 		fgSizer2511.SetFlexibleDirection( wx.BOTH )
@@ -634,9 +634,9 @@ class FrameSettings ( wx.Frame ):
 		self.m_panel711.SetSizer( fgSizer2511 )
 		self.m_panel711.Layout()
 		fgSizer2511.Fit( self.m_panel711 )
-		fgSizer24.Add( self.m_panel711, 1, wx.EXPAND |wx.ALL, 5 )
+		fgSizer_Servers.Add( self.m_panel711, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_panel712 = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.m_panel712 = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer2512 = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer2512.AddGrowableCol( 0 )
 		fgSizer2512.SetFlexibleDirection( wx.BOTH )
@@ -680,10 +680,10 @@ class FrameSettings ( wx.Frame ):
 		self.m_panel712.SetSizer( fgSizer2512 )
 		self.m_panel712.Layout()
 		fgSizer2512.Fit( self.m_panel712 )
-		fgSizer24.Add( self.m_panel712, 1, wx.EXPAND |wx.ALL, 5 )
+		fgSizer_Servers.Add( self.m_panel712, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
-		fgSizer21.Add( fgSizer24, 1, wx.EXPAND, 5 )
+		fgSizer_Settings_Scrolled.Add( fgSizer_Servers, 1, wx.EXPAND, 5 )
 		
 		fgSizer36 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer36.AddGrowableCol( 1 )
@@ -695,7 +695,7 @@ class FrameSettings ( wx.Frame ):
 		fgSizer46.SetFlexibleDirection( wx.BOTH )
 		fgSizer46.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Devices = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.panel_Devices = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Devices = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Devices.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Devices.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -752,26 +752,26 @@ class FrameSettings ( wx.Frame ):
 		fgSizer_Devices.Fit( self.panel_Devices )
 		fgSizer46.Add( self.panel_Devices, 1, wx.ALL, 5 )
 		
-		self.panel_Overlap = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
-		fgSizer47 = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer47.AddGrowableCol( 0 )
-		fgSizer47.SetFlexibleDirection( wx.BOTH )
-		fgSizer47.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.panel_Overlap = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer_Overlap = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer_Overlap.AddGrowableCol( 0 )
+		fgSizer_Overlap.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Overlap.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.m_staticText51 = wx.StaticText( self.panel_Overlap, wx.ID_ANY, u"When clients overlap:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText51.Wrap( -1 )
 		
-		fgSizer47.Add( self.m_staticText51, 0, wx.ALL, 5 )
+		fgSizer_Overlap.Add( self.m_staticText51, 0, wx.ALL, 5 )
 		
 		choice_OverlapChoices = [ u"Discard latecomers", u"Mix sounds", u"Queue" ]
 		self.choice_Overlap = wx.Choice( self.panel_Overlap, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, choice_OverlapChoices, 0 )
 		self.choice_Overlap.SetSelection( 0 )
-		fgSizer47.Add( self.choice_Overlap, 0, wx.ALL|wx.EXPAND, 5 )
+		fgSizer_Overlap.Add( self.choice_Overlap, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		
-		self.panel_Overlap.SetSizer( fgSizer47 )
+		self.panel_Overlap.SetSizer( fgSizer_Overlap )
 		self.panel_Overlap.Layout()
-		fgSizer47.Fit( self.panel_Overlap )
+		fgSizer_Overlap.Fit( self.panel_Overlap )
 		fgSizer46.Add( self.panel_Overlap, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
@@ -788,7 +788,7 @@ class FrameSettings ( wx.Frame ):
 		fgSizer43.SetFlexibleDirection( wx.BOTH )
 		fgSizer43.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.panel_Ptt = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
+		self.panel_Ptt = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL|wx.BORDER_SIMPLE )
 		fgSizer_Ptt = wx.FlexGridSizer( 0, 1, 0, 0 )
 		fgSizer_Ptt.SetFlexibleDirection( wx.BOTH )
 		fgSizer_Ptt.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -811,18 +811,18 @@ class FrameSettings ( wx.Frame ):
 		fgSizer_Ptt.Fit( self.panel_Ptt )
 		fgSizer43.Add( self.panel_Ptt, 0, wx.ALL, 5 )
 		
-		self.m_panel13 = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
-		fgSizer39 = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer39.AddGrowableCol( 0 )
-		fgSizer39.SetFlexibleDirection( wx.BOTH )
-		fgSizer39.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.m_panel13 = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer_MaxConnections = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer_MaxConnections.AddGrowableCol( 0 )
+		fgSizer_MaxConnections.SetFlexibleDirection( wx.BOTH )
+		fgSizer_MaxConnections.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.m_staticText_MaxConnections = wx.StaticText( self.m_panel13, wx.ID_ANY, u"Maximum connections", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText_MaxConnections.Wrap( -1 )
 		
 		self.m_staticText_MaxConnections.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
-		fgSizer39.Add( self.m_staticText_MaxConnections, 0, wx.ALL, 5 )
+		fgSizer_MaxConnections.Add( self.m_staticText_MaxConnections, 0, wx.ALL, 5 )
 		
 		fgSizer40 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer40.AddGrowableCol( 0 )
@@ -840,43 +840,43 @@ class FrameSettings ( wx.Frame ):
 		fgSizer40.Add( self.m_staticText44, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT|wx.ALL, 5 )
 		
 		
-		fgSizer39.Add( fgSizer40, 1, wx.EXPAND, 5 )
+		fgSizer_MaxConnections.Add( fgSizer40, 1, wx.EXPAND, 5 )
 		
 		
-		self.m_panel13.SetSizer( fgSizer39 )
+		self.m_panel13.SetSizer( fgSizer_MaxConnections )
 		self.m_panel13.Layout()
-		fgSizer39.Fit( self.m_panel13 )
+		fgSizer_MaxConnections.Fit( self.m_panel13 )
 		fgSizer43.Add( self.m_panel13, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		fgSizer38.Add( fgSizer43, 1, wx.EXPAND, 5 )
 		
-		self.panel_RecordingPath = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
-		fgSizer30 = wx.FlexGridSizer( 3, 1, 0, 0 )
-		fgSizer30.AddGrowableCol( 0 )
-		fgSizer30.SetFlexibleDirection( wx.BOTH )
-		fgSizer30.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.panel_RecordingPath = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer_Recorder = wx.FlexGridSizer( 3, 1, 0, 0 )
+		fgSizer_Recorder.AddGrowableCol( 0 )
+		fgSizer_Recorder.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Recorder.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.staticText_RecordingPath = wx.StaticText( self.panel_RecordingPath, wx.ID_ANY, u"Recording path", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_RecordingPath.Wrap( -1 )
 		
 		self.staticText_RecordingPath.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
-		fgSizer30.Add( self.staticText_RecordingPath, 0, wx.ALL, 5 )
+		fgSizer_Recorder.Add( self.staticText_RecordingPath, 0, wx.ALL, 5 )
 		
 		fgSizer321 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer321.AddGrowableCol( 0 )
 		fgSizer321.SetFlexibleDirection( wx.BOTH )
 		fgSizer321.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.textCtrl_RecordingPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer321.Add( self.textCtrl_RecordingPath, 0, wx.ALL|wx.EXPAND, 5 )
+		self.textCtrl_RecorderPath = wx.TextCtrl( self.panel_RecordingPath, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer321.Add( self.textCtrl_RecorderPath, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		self.button_RecorderPath = wx.Button( self.panel_RecordingPath, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer321.Add( self.button_RecorderPath, 0, wx.ALL, 5 )
 		
 		
-		fgSizer30.Add( fgSizer321, 1, wx.EXPAND, 5 )
+		fgSizer_Recorder.Add( fgSizer321, 1, wx.EXPAND, 5 )
 		
 		fgSizer41 = wx.FlexGridSizer( 0, 2, 0, 0 )
 		fgSizer41.SetFlexibleDirection( wx.BOTH )
@@ -893,31 +893,31 @@ class FrameSettings ( wx.Frame ):
 		fgSizer41.Add( self.choice_Format, 0, wx.ALL, 5 )
 		
 		
-		fgSizer30.Add( fgSizer41, 1, wx.EXPAND, 5 )
+		fgSizer_Recorder.Add( fgSizer41, 1, wx.EXPAND, 5 )
 		
 		
-		self.panel_RecordingPath.SetSizer( fgSizer30 )
+		self.panel_RecordingPath.SetSizer( fgSizer_Recorder )
 		self.panel_RecordingPath.Layout()
-		fgSizer30.Fit( self.panel_RecordingPath )
+		fgSizer_Recorder.Fit( self.panel_RecordingPath )
 		fgSizer38.Add( self.panel_RecordingPath, 1, wx.EXPAND |wx.ALL, 5 )
 		
-		self.panel_Rooms = wx.Panel( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
-		fgSizer42 = wx.FlexGridSizer( 0, 1, 0, 0 )
-		fgSizer42.AddGrowableCol( 0 )
-		fgSizer42.AddGrowableRow( 1 )
-		fgSizer42.SetFlexibleDirection( wx.BOTH )
-		fgSizer42.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.panel_Rooms = wx.Panel( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE|wx.TAB_TRAVERSAL )
+		fgSizer_Rooms = wx.FlexGridSizer( 0, 1, 0, 0 )
+		fgSizer_Rooms.AddGrowableCol( 0 )
+		fgSizer_Rooms.AddGrowableRow( 1 )
+		fgSizer_Rooms.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Rooms.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.m_staticText46 = wx.StaticText( self.panel_Rooms, wx.ID_ANY, u"Rooms", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText46.Wrap( -1 )
 		
 		self.m_staticText46.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString ) )
 		
-		fgSizer42.Add( self.m_staticText46, 0, wx.ALL, 5 )
+		fgSizer_Rooms.Add( self.m_staticText46, 0, wx.ALL, 5 )
 		
 		listBox_RoomsChoices = []
 		self.listBox_Rooms = wx.ListBox( self.panel_Rooms, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, listBox_RoomsChoices, 0 )
-		fgSizer42.Add( self.listBox_Rooms, 0, wx.ALL|wx.EXPAND, 5 )
+		fgSizer_Rooms.Add( self.listBox_Rooms, 0, wx.ALL|wx.EXPAND, 5 )
 		
 		fgSizer44 = wx.FlexGridSizer( 0, 3, 0, 0 )
 		fgSizer44.AddGrowableCol( 0 )
@@ -936,48 +936,48 @@ class FrameSettings ( wx.Frame ):
 		fgSizer44.Add( self.button_Add, 0, wx.ALL, 5 )
 		
 		
-		fgSizer42.Add( fgSizer44, 1, wx.EXPAND, 5 )
+		fgSizer_Rooms.Add( fgSizer44, 1, wx.EXPAND, 5 )
 		
 		
-		self.panel_Rooms.SetSizer( fgSizer42 )
+		self.panel_Rooms.SetSizer( fgSizer_Rooms )
 		self.panel_Rooms.Layout()
-		fgSizer42.Fit( self.panel_Rooms )
+		fgSizer_Rooms.Fit( self.panel_Rooms )
 		fgSizer38.Add( self.panel_Rooms, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
 		fgSizer36.Add( fgSizer38, 1, wx.EXPAND, 5 )
 		
 		
-		fgSizer21.Add( fgSizer36, 1, wx.EXPAND, 5 )
+		fgSizer_Settings_Scrolled.Add( fgSizer36, 1, wx.EXPAND, 5 )
 		
-		self.m_staticline1 = wx.StaticLine( self.scrolledWindow_Main, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
-		fgSizer21.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
+		self.m_staticline1 = wx.StaticLine( self.scrolledWindow_Settings, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
+		fgSizer_Settings_Scrolled.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
 		
 		fgSizer_BottomWidgets = wx.FlexGridSizer( 0, 4, 0, 0 )
 		fgSizer_BottomWidgets.AddGrowableCol( 1 )
 		fgSizer_BottomWidgets.SetFlexibleDirection( wx.BOTH )
 		fgSizer_BottomWidgets.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.button_Save = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_Save = wx.Button( self.scrolledWindow_Settings, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.button_Save, 0, wx.ALL, 5 )
 		
-		self.checkBox_Autosave = wx.CheckBox( self.scrolledWindow_Main, wx.ID_ANY, u"Autosave on quit", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.checkBox_Autosave = wx.CheckBox( self.scrolledWindow_Settings, wx.ID_ANY, u"Autosave on quit", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.checkBox_Autosave, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.button_Cancel = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_Cancel = wx.Button( self.scrolledWindow_Settings, wx.ID_ANY, u"Cancel", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.button_Cancel, 0, wx.ALL, 5 )
 		
-		self.button_OK = wx.Button( self.scrolledWindow_Main, wx.ID_ANY, u"OK", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.button_OK = wx.Button( self.scrolledWindow_Settings, wx.ID_ANY, u"OK", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer_BottomWidgets.Add( self.button_OK, 0, wx.ALL, 5 )
 		
 		
-		fgSizer21.Add( fgSizer_BottomWidgets, 1, wx.EXPAND, 5 )
+		fgSizer_Settings_Scrolled.Add( fgSizer_BottomWidgets, 1, wx.EXPAND, 5 )
 		
 		
-		self.scrolledWindow_Main.SetSizer( fgSizer21 )
-		self.scrolledWindow_Main.Layout()
-		fgSizer21.Fit( self.scrolledWindow_Main )
-		fgSizer_Main.Add( self.scrolledWindow_Main, 1, wx.EXPAND |wx.ALL, 5 )
+		self.scrolledWindow_Settings.SetSizer( fgSizer_Settings_Scrolled )
+		self.scrolledWindow_Settings.Layout()
+		fgSizer_Settings_Scrolled.Fit( self.scrolledWindow_Settings )
+		fgSizer_Main.Add( self.scrolledWindow_Settings, 1, wx.EXPAND |wx.ALL, 5 )
 		
 		
 		self.SetSizer( fgSizer_Main )
@@ -1026,57 +1026,57 @@ class FrameStats ( wx.Frame ):
 		fgSizer45.SetFlexibleDirection( wx.BOTH )
 		fgSizer45.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.m_scrolledWindow3 = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
-		self.m_scrolledWindow3.SetScrollRate( 5, 5 )
-		fgSizer_Main = wx.FlexGridSizer( 0, 2, 0, 0 )
-		fgSizer_Main.SetFlexibleDirection( wx.BOTH )
-		fgSizer_Main.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.scrolledWindow_Stats = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL )
+		self.scrolledWindow_Stats.SetScrollRate( 5, 5 )
+		fgSizer_Stats_Scrolled = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer_Stats_Scrolled.SetFlexibleDirection( wx.BOTH )
+		fgSizer_Stats_Scrolled.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
-		self.staticText_Connections = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Connections:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.staticText_Connections = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"Connections:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.staticText_Connections.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.staticText_Connections, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.staticText_Connections, 0, wx.ALL, 5 )
 		
-		self.m_staticText34 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText34 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText34.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText34, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText34, 0, wx.ALL, 5 )
 		
-		self.m_staticText35 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network errors:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText35 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"Network errors:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText35.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText35, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText35, 0, wx.ALL, 5 )
 		
-		self.m_staticText36 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText36 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"0", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText36.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText36, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText36, 0, wx.ALL, 5 )
 		
-		self.m_staticText47 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network speed:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText47 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"Network speed:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText47.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText47, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText47, 0, wx.ALL, 5 )
 		
-		self.m_staticText48 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0 KB/s / 0 KB/s", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText48 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"0 KB/s / 0 KB/s", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText48.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText48, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText48, 0, wx.ALL, 5 )
 		
-		self.m_staticText49 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"Network data:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText49 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"Network data:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText49.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText49, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText49, 0, wx.ALL, 5 )
 		
-		self.m_staticText50 = wx.StaticText( self.m_scrolledWindow3, wx.ID_ANY, u"0 KB / 0 KB", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText50 = wx.StaticText( self.scrolledWindow_Stats, wx.ID_ANY, u"0 KB / 0 KB", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText50.Wrap( -1 )
 		
-		fgSizer_Main.Add( self.m_staticText50, 0, wx.ALL, 5 )
+		fgSizer_Stats_Scrolled.Add( self.m_staticText50, 0, wx.ALL, 5 )
 		
 		
-		self.m_scrolledWindow3.SetSizer( fgSizer_Main )
-		self.m_scrolledWindow3.Layout()
-		fgSizer_Main.Fit( self.m_scrolledWindow3 )
-		fgSizer45.Add( self.m_scrolledWindow3, 1, wx.ALL|wx.EXPAND, 5 )
+		self.scrolledWindow_Stats.SetSizer( fgSizer_Stats_Scrolled )
+		self.scrolledWindow_Stats.Layout()
+		fgSizer_Stats_Scrolled.Fit( self.scrolledWindow_Stats )
+		fgSizer45.Add( self.scrolledWindow_Stats, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		self.SetSizer( fgSizer45 )

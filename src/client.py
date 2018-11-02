@@ -14,8 +14,39 @@ class Client:
 	def __init__(self, filename_config):
 		self.filename_config = filename_config
 
-		# Read configuration:
-		self.config = Config()
+		# Read configuration and give default values if absent:
+		self.config = Config(
+			parameters = {
+				"config_version": "0.10",
+				"presets": [],
+				"autoconnect": "on",
+				"autoconnect_preset": "",
+				"autoconnect_room": "",
+				"callsign": "Nick",
+				"description": "",
+				"device_speaker": "default",
+				"device_mic": "default",
+				"device_ptt": "ui",
+				"soundfile_roger": "../audio/roger.wav",
+				"soundfile_connect": "../audio/connect.wav",
+				"soundfile_disconnect": "../audio/disconnect.wav",
+				"recorder_path": "../recordings",
+				"recorder_format": "wav",
+				"record_roger": "on",
+				"record_connect": "on",
+				"record_disconnect": "on",
+				"overlap": "discard",
+				"play_roger": "on",
+				"play_connect": "on",
+				"play_disconnect": "on",
+				"transmit_roger": "on",
+				"volume_speaker": "50",
+				"volume_mic": "50",
+				"volume_roger": "50",
+				"volume_connect": "50",
+				"volume_disconnect": "50"
+			}
+		)
 		self.config.load(filename_config)
 
 	def run(self):
@@ -65,13 +96,40 @@ import terminalgui
 # Client with Curses TUI
 
 # Commands:
-# connect, disconnect, nick, description, talkon, talkoff, set, get, join, part, save
+# get, set, connect, disconnect, talkon, talkoff, join, part, save
+# Parameters:
+# nick, description
+# TODO: one or two letter aliases for commands
 
-class ClientCurses:
+class ClientCurses(Client):
 	def __init__(self, filename):
 		line = ""
 
 		while line != "quit":
+			error = False
 			line = input("Prompt: ")
-			# TODO: parse command
-			#print (line)
+			# Parse command:
+			l = line.split(" ")		# TODO: may have multiple spaces, tabs etc.
+			if l[0] == "get":
+				if len(l[1]) < 1:
+					error = True
+			elif l[0] == "set":
+				if len(l[1]) < 1:
+					error = True
+			elif l[0] == "connect":
+				pass
+			elif l[0] == "disconnect":
+				pass
+			elif l[0] == "talkon":
+				pass
+			elif l[0] == "talkoff":
+				pass
+			elif l[0] == "join":
+				if len(l[1]) < 1:
+					error = True
+			elif l[0] == "part":
+				pass
+			elif l[0] == "save":
+				pass
+			if error:
+				print ("Syntax error")

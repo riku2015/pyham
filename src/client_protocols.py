@@ -8,22 +8,26 @@ class ClientProtocol:
 		self.protocolname = "NONE"
 		self.address = address
 		self.port = port
-		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.__receivedbytes = 0
+		self.__errors = 0
+		self.__running = False
 
 	def connect(self):
-		self.socket.connect((self.address, self.port))	# NOTE: Port as integer, not string
+		self.__socket.connect((self.address, self.port))	# NOTE: Port as integer, not string
 		log(self.protocolname + ": Connected to " + self.address + " at port " + str(self.port) + ".")
 
 	def disconnect(self):
 		#self.socket.shutdown()
-		self.socket.close()
+		self.__socket.close()
 
 	def send(self, data):
-		self.socket.send(data)
+		self.__socket.send(data)
 		# log("Error: cannot send trough socket.")
 
-	def receive(self):
-		pass
+	def receive(self, length):
+		# length as amount of bytes
+		return self.__socket.recv(length)
 
 # ProtocolPyham
 
@@ -49,11 +53,11 @@ class ClientProtocolPyham(ClientProtocol):
 
 	def connect(self):
 		ClientProtocol.connect(self)
-		self.send(b"<INIT>1234567890")	# NOTE: Port as integer, not string
+		self.send(b"<C>")
 		amount_received = 0
 		amount_expected = 16
 		while amount_received < amount_expected:
-			data = self.socket.recv(1)
+			data = self.__socket.recv(1)
 			#data = self.socket.recv(1)
 			amount_received += len(data)
 			log('received "%s"' % data)
@@ -61,7 +65,7 @@ class ClientProtocolPyham(ClientProtocol):
 		self.disconnect()
 
 	def disconnect(self):
-		self.send(b"<D>")
+		self.send(b"<DC>")
 		ClientProtocol.disconnect(self)
 
 	def get_version(self):
@@ -79,33 +83,33 @@ class ClientProtocolEqso(ClientProtocol):
 		self.protocolname = "EQSO"
 
 	def send(self, data):
-		#self.socket.send(data)
+		#self.__socket.send(data)
 
 		# TODO: Send the whole thing at once (if works):
-		self.socket.send(b"CT:")						# KIINTEE
-		self.socket.send(b"<VX>2014003</VX>")			# KIINTEE
-		self.socket.send(b"<EA>joku@ei.ole</EA>")		# Toistaseksi annetaan olla KIINTEE
-		self.socket.send(b"<PW>jotain</PW>")			# Toistaseksi kiintea
-		self.socket.send(b"<ON>Pyham</ON>")				# Kutsu tahan
-		self.socket.send(b"<CL>2</CL>")					# KIINTEE TOISTASEKS
-		self.socket.send(b"<BC>PC Only</BC>")			# KIINTEE toistaseks
-		self.socket.send(b"<DS>Pyham Cient Test</DS>")	# Paikkakunta kommentti ym tama
-		self.socket.send(b"<NN>Finland</NN>")			# KIINTEE TOISTASEKSI
-		self.socket.send(b"<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
-		#self.socket.send(b"<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
-		self.socket.send(b"<NT>FINLAND</NT>")			# HUONE Aloitushuone tuo toistaseksi
-		self.socket.send(b"\n")							# rivinvaihto viimeiseen muuten ei kuittaa sockki
+		self.send(b"CT:")							# KIINTEE
+		self.send(b"<VX>2014003</VX>")				# KIINTEE
+		self.send(b"<EA>joku@ei.ole</EA>")			# Toistaseksi annetaan olla KIINTEE
+		self.send(b"<PW>jotain</PW>")				# Toistaseksi kiintea
+		self.send(b"<ON>Pyham</ON>")				# Kutsu tahan
+		self.send(b"<CL>2</CL>")					# KIINTEE TOISTASEKS
+		self.send(b"<BC>PC Only</BC>")				# KIINTEE toistaseks
+		self.send(b"<DS>Pyham Cient Test</DS>")	# Paikkakunta kommentti ym tama
+		self.send(b"<NN>Finland</NN>")				# KIINTEE TOISTASEKSI
+		self.send(b"<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
+		#self.__socket.send(b"<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
+		self.send(b"<NT>FINLAND</NT>")				# HUONE Aloitushuone tuo toistaseksi
+		self.send(b"\n")							# rivinvaihto viimeiseen muuten ei kuittaa sockki
 		# odotetaan vastausta serverista, jos vastausta on enemman kun 1 merkki/bitti mika onkaa niin silloin lahettaa RX tilaan
 		# Tama pitaisi korjata, ettkun serveri lahettaa OK niin se on ok..
 		amount_received = 0
 		amount_expected = 1
 
 		while amount_received < amount_expected:
-			data = self.socket.recv(256)
+			data = self.receive(256)
 			#data = self.socket.recv(1)
 			amount_received += len(data)
 			log('received "%s"' % data)
-			self.socket.send(b"\RX0")
+			self.send(b"\RX0")
 
 	def send_audio(data):
 		pass
@@ -166,7 +170,6 @@ class ClientProtocolEcholink(ClientProtocol):
 		pass
 
 # ProtocolFrn
-# http://freeradionetwork.eu/frnprotocol.htm
 
 class ClientProtocolFrn(ClientProtocol):
 	def __init__(self, address, port):
@@ -177,7 +180,7 @@ class ClientProtocolFrn(ClientProtocol):
 		ClientProtocol.connect(self)
 
 	def disconnect(self):
-		self.socket.send(b"\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
+		self.send(b"\x03") #lahetetaan random kakkaa servulle.. ei vie tie millai disconectataan
 		ClientProtocol.disconnect(self)
 
 	def send(self, data):

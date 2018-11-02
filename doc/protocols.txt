@@ -1,19 +1,30 @@
 Protocols
 
 Pyham
-	commands:
+	Default port:
+		?
+	Client tokens:
 		<GR>						get rooms
 		<JR>roomname</JR>			join room
-		<D>							disconnect
+		<C>							connect
+		<DC>						disconnect
 		<GV>						get server version
 		<SV>version</SV>			send client version
 		<SC>callsign</SC>			send callsign
 		<SD>description</SD>		send description
 		<SA>						send audio
 		<GA>						get audio
+	Server tokens:
+
+	General:
+		When a token is sent, the other peer should answer with the same token.
+		Then data will be read/written until end token arrives.
+		The ending token is then sent by the other peer also.
 
 Eqso
-	commands:
+	Default port:
+		5000 ?
+	Client tokens:
 		CT:							KIINTEE
 		<VX>2014003</VX>			KIINTEE
 		<EA>joku@ei.ole</EA>		Toistaseksi annetaan olla KIINTEE
@@ -27,9 +38,20 @@ Eqso
 		#<NT>Suomen EQSO</NT>		HUONE Aloitushuone tuo toistaseksi
 		<NT>FINLAND</NT>			HUONE Aloitushuone tuo toistaseksi
 		\n							rivinvaihto viimeiseen muuten ei kuittaa sockki
+	Server tokens:
 
 Frn
-	commands:
+	Documentation:
+		http://freeradionetwork.eu/frnprotocol.htm
+	Default port:
+		10024 ?
+	Client tokens:
+	Server tokens:
 
 Echolink
-	commands:
+	Default ports:
+		5198 UDP EchoLink VoIP Amateur Radio Software (Voice)
+		5199 UDP EchoLink VoIP Amateur Radio Software (Voice)
+		5200 TCP EchoLink VoIP Amateur Radio Software (Information)
+	Client tokens:
+	Server tokens:

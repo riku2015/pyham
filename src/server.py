@@ -20,8 +20,42 @@ class Server:
 		# Defaults if not given in config file:
 		# TODO
 
-		# Read configuration:
-		self.config = Config()
+		# Read configuration and give default values if absent:
+		self.config = Config(
+			parameters = {
+				"config_version": "0.10",
+				"autosave": "off",
+				"device_speaker": "",
+				"device_mic": "",
+				"device_ptt": "",
+				"volume_speaker": "50",
+				"volume_mic": "50",
+				"volume_roger": "50",
+				"volume_connect": "50",
+				"volume_disconnect": "50",
+				"recorder_path": "../recordings",
+				"recorder_format": "wav",
+				"overlap": "discard",
+				"pyham_enabled": "off",
+				"pyham_name": "",
+				"pyham_port": "2000",
+				"eqso_enabled": "off",
+				"eqso_name": "",
+				"eqso_port": "5000",
+				"frn_enabled": "off",
+				"frn_name": "",
+				"frn_port": "10024",
+				"echolink_enabled": "off",
+				"echolink_name": "",
+				"echolink_port": "5198",
+				"rooms": "[]",
+				"max_connections": "-1",
+				"allowed_hosts": "[]",
+				"allowed_ips": "[]",
+				"banned_hosts": "[]",
+				"banned_ips": "[]"
+			}
+		)
 		self.config.load(filename_config)
 
 		# Initialize protocol(s):
@@ -58,16 +92,16 @@ import terminalgui
 # Server with Curses TUI
 
 # Commands:
-# start, stop, ban, unban, set, get, createroom, deleteroom, save
+# get, set, start, stop, ban, unban, createroom, deleteroom, save
+# Parameters:
+#
 
-class ServerCurses:
+class ServerCurses(Server):
 	def __init__(self, filename):
 		line = ""
 
 		while line != "quit":
 			line = input("Prompt: ")
-			# TODO: parse command
-			#print (line)
 
 import wx
 
@@ -117,4 +151,3 @@ class ServerWx(Server):
 
 	def stop(self):
 		log("Server (wx) stopped.")
-
