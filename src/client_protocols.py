@@ -184,7 +184,33 @@ class ClientProtocolFrn(ClientProtocol):
 		ClientProtocol.disconnect(self)
 
 	def send(self, data):
-		pass
+		#self.__socket.send(data)
+
+		# TODO: Send the whole thing at once (if works):
+		self.send(b"CT:")							# KIINTEE
+		self.send(b"<VX>2014003</VX>")				# KIINTEE
+		self.send(b"<EA>joku@ei.ole</EA>")			# Toistaseksi annetaan olla KIINTEE
+		self.send(b"<PW>jotain</PW>")				# Toistaseksi kiintea
+		self.send(b"<ON>Pyham</ON>")				# Kutsu tahan
+		self.send(b"<CL>2</CL>")					# KIINTEE TOISTASEKS
+		self.send(b"<BC>PC Only</BC>")				# KIINTEE toistaseks
+		self.send(b"<DS>Pyham Cient Test</DS>")	# Paikkakunta kommentti ym tama
+		self.send(b"<NN>Finland</NN>")				# KIINTEE TOISTASEKSI
+		self.send(b"<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
+		#self.__socket.send(b"<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
+		self.send(b"<NT>FINLAND</NT>")				# HUONE Aloitushuone tuo toistaseksi
+		self.send(b"\n")							# rivinvaihto viimeiseen muuten ei kuittaa sockki
+		# odotetaan vastausta serverista, jos vastausta on enemman kun 1 merkki/bitti mika onkaa niin silloin lahettaa RX tilaan
+		# Tama pitaisi korjata, ettkun serveri lahettaa OK niin se on ok..
+		amount_received = 0
+		amount_expected = 1
+		
+		while amount_received < amount_expected:
+			data = self.receive(256)
+			#data = self.socket.recv(1)
+			amount_received += len(data)
+			log('received "%s"' % data)
+			self.send(b"\RX0")
 
 	def send_audio(data):
 		pass
