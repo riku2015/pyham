@@ -88,19 +88,19 @@ class ClientProtocolPyham(ClientProtocol):
 # ProtocolEqso
 
 class ClientProtocolEqso(ClientProtocol):
-	def eqsolooppi(self): 								# EQSO Looppi säijessä
+	def eqsolooppi(self): 							# EQSO Looppi säijessä
 		print 'Aloitetaan saije eqso juttuliini'
 		while True:
-			global eqso_stop 							# tappamiskäsky
+			global eqso_stop 					# tappamiskäsky
 			if eqso_stop:
 				print 'Eqso saije lopetetaan..'
 				break
-			data = self.socket.recv(1) 					# luetaan eka bitti joka on eka numero hexana
+			data = self.socket.recv(1) 				# luetaan eka bitti joka on eka numero hexana
 			datav = binascii.hexlify(data)				# muuta hexaksi
-			dataservusta = datav[:2]					# luetaan kuitenki vain kaksi merkkiä
-			if dataservusta == '0c': 					# synkronointi, jos clientti ei vastaa tähän, niin disconnect
+			dataservusta = datav[:2]				# luetaan kuitenki vain kaksi merkkiä
+			if dataservusta == '0c': 				# synkronointi, jos clientti ei vastaa tähän, niin disconnect
 				print >>sys.stderr, 'Syncron'			# debug
-				self.socket.send("\x0c")				# vastataan syncronointi signaaliin
+				self.socket.send("\x0c")			# vastataan syncronointi signaaliin
 		
 		return
 	
@@ -130,7 +130,7 @@ class ClientProtocolEqso(ClientProtocol):
 	def connect(self):
 		#ClientProtocol.connect(self) 				# KORJAA PRESET LISTA ET TATA VOI KAYTTAA
 		print 'yhdistyy eqso serveriin'
-		self.socket.connect(("10.0.3.104", 5001)) 	#pyhammis KORJAAMINUT
+		self.socket.connect(("10.0.3.104", 5001)) 		#pyhammis KORJAAMINUT
 		self.socket.sendall("\x0D")
 		self.socket.sendall("\x0A\xd4\x00\x00\x00")
 		amount_received = 0
@@ -146,13 +146,13 @@ class ClientProtocolEqso(ClientProtocol):
 				self.socket.sendall("\x15")
 				time.sleep(2)
 				print 'connectoidaan'
-				channel = 'FINLAND'		#pyhammis KORJAAMINUT
-				nick = 'PYHAMKoe'		#pyhammis KORJAAMINUT
-				comment = 'mooi'		#pyhammis KORJAAMINUT
+				channel = 'FINLAND'			#pyhammis KORJAAMINUT
+				nick = 'PYHAMKoe'			#pyhammis KORJAAMINUT
+				comment = 'mooi'			#pyhammis KORJAAMINUT
 				# eqso protokolla, ekat numerot liittyy client versioon, viimeinen numero ennen kommenttia on merkkien maara mita on kontassa.
 				tavara=("\xd4\x00\x00\x00\x9c\xbf\x8a\x9a\x1A")+(struct.pack("B{}s".format(len(nick)), len(nick), nick))+(struct.pack("B{}s".format(len(channel)), len(channel), channel))+("\x04")+comment+("\x00")
 				self.socket.send(tavara)
-				amount_received = 10 	# break ei vaan toimi tääl, pakko purkkavirittää tälläin
+				amount_received = 10 			# break ei vaan toimi tääl, pakko purkkavirittää tälläin
 		print 'connectoitu.'
 		
 		global eqso_stop
@@ -227,19 +227,19 @@ class ClientProtocolFrn(ClientProtocol):
 		#self.__socket.send(data)
 
 		# TODO: Send the whole thing at once (if works):
-		self.send(b"CT:")							# KIINTEE
+		self.send(b"CT:")					# KIINTEE
 		self.send(b"<VX>2014003</VX>")				# KIINTEE
 		self.send(b"<EA>joku@ei.ole</EA>")			# Toistaseksi annetaan olla KIINTEE
 		self.send(b"<PW>jotain</PW>")				# Toistaseksi kiintea
 		self.send(b"<ON>Pyham</ON>")				# Kutsu tahan
-		self.send(b"<CL>2</CL>")					# KIINTEE TOISTASEKS
+		self.send(b"<CL>2</CL>")				# KIINTEE TOISTASEKS
 		self.send(b"<BC>PC Only</BC>")				# KIINTEE toistaseks
-		self.send(b"<DS>Pyham Cient Test</DS>")	# Paikkakunta kommentti ym tama
+		self.send(b"<DS>Pyham Cient Test</DS>")			# Paikkakunta kommentti ym tama
 		self.send(b"<NN>Finland</NN>")				# KIINTEE TOISTASEKSI
 		self.send(b"<CT>test</CT>")				# kaupunki, #KIINTEE TOISTASEKSI 
 		#self.__socket.send(b"<NT>Suomen EQSO</NT>")		# HUONE Aloitushuone tuo toistaseksi
 		self.send(b"<NT>FINLAND</NT>")				# HUONE Aloitushuone tuo toistaseksi
-		self.send(b"\n")							# rivinvaihto viimeiseen muuten ei kuittaa sockki
+		self.send(b"\n")					# rivinvaihto viimeiseen muuten ei kuittaa sockki
 		# odotetaan vastausta serverista, jos vastausta on enemman kun 1 merkki/bitti mika onkaa niin silloin lahettaa RX tilaan
 		# Tama pitaisi korjata, ettkun serveri lahettaa OK niin se on ok..
 		amount_received = 0
